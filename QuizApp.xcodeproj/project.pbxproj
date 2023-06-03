@@ -13,6 +13,7 @@
 		0EDD08A42A2A0B4E00FF282B /* QuizApp.xcdatamodeld in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08A22A2A0B4E00FF282B /* QuizApp.xcdatamodeld */; };
 		0EDD08A62A2A0B5000FF282B /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0EDD08A52A2A0B5000FF282B /* Assets.xcassets */; };
 		0EDD08A92A2A0B5000FF282B /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0EDD08A72A2A0B5000FF282B /* LaunchScreen.storyboard */; };
+		0EDD08B72A2B5DBB00FF282B /* UIColor+Extantions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08B62A2B5DBB00FF282B /* UIColor+Extantions.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -24,6 +25,7 @@
 		0EDD08A52A2A0B5000FF282B /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0EDD08A82A2A0B5000FF282B /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0EDD08AA2A2A0B5000FF282B /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		0EDD08B62A2B5DBB00FF282B /* UIColor+Extantions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+Extantions.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -56,6 +58,7 @@
 		0EDD08982A2A0B4E00FF282B /* QuizApp */ = {
 			isa = PBXGroup;
 			children = (
+				0EDD08B52A2B5DA200FF282B /* Core */,
 				0EDD08B32A2B217C00FF282B /* App */,
 				0EDD08B12A2B214200FF282B /* Scenes */,
 				0EDD08B02A2B211700FF282B /* Resource */,
@@ -105,6 +108,14 @@
 				0EDD089D2A2A0B4E00FF282B /* LoginViewController.swift */,
 			);
 			path = Login;
+			sourceTree = "<group>";
+		};
+		0EDD08B52A2B5DA200FF282B /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				0EDD08B62A2B5DBB00FF282B /* UIColor+Extantions.swift */,
+			);
+			path = Core;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -181,6 +192,7 @@
 				0EDD089A2A2A0B4E00FF282B /* AppDelegate.swift in Sources */,
 				0EDD08A42A2A0B4E00FF282B /* QuizApp.xcdatamodeld in Sources */,
 				0EDD089C2A2A0B4E00FF282B /* SceneDelegate.swift in Sources */,
+				0EDD08B72A2B5DBB00FF282B /* UIColor+Extantions.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
