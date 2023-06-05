@@ -8,6 +8,7 @@
 import UIKit
 
 class LoginViewController: UIViewController {
+    let homeViewController = HomeViewController()
     
     private lazy var firstView: UIImageView = {
         let firstView = UIImageView()
@@ -76,18 +77,12 @@ class LoginViewController: UIViewController {
     }
     
     @objc func startButtonTapped() {
-        UIView.animate(withDuration: 0.3, animations: {
-            self.startButton.transform = CGAffineTransform(scaleX: 1.2, y: 1.2)
-        }, completion: { _ in
-            UIView.animate(withDuration: 0.3) {
-                self.startButton.transform = CGAffineTransform.identity
-            }
-        })
+        self.navigationController?.pushViewController(homeViewController, animated: true)
     }
     
     func setupFirstViewConstraints() {
         NSLayoutConstraint.activate([
-            firstView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 44),
+            firstView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 18),
             firstView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             firstView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             firstView.bottomAnchor.constraint(equalTo: view.centerYAnchor),
@@ -119,8 +114,8 @@ class LoginViewController: UIViewController {
     
     func textConstraints() {
         NSLayoutConstraint.activate([
-            text.leadingAnchor.constraint(equalTo: firstView.leadingAnchor, constant: 20),
-            text.trailingAnchor.constraint(equalTo: firstView.trailingAnchor, constant: -20),
+            text.leadingAnchor.constraint(equalTo: firstView.leadingAnchor, constant: 80),
+            text.trailingAnchor.constraint(equalTo: firstView.trailingAnchor, constant: -89),
             text.topAnchor.constraint(equalTo: firstView.topAnchor, constant: 20),
             //text.bottomAnchor.constraint(equalTo: firstView.bottomAnchor, constant: 40)
         ])
@@ -128,7 +123,7 @@ class LoginViewController: UIViewController {
     
     func firstViewImageConstraints() {
         NSLayoutConstraint.activate([
-            firstViewImage.topAnchor.constraint(equalTo: text.bottomAnchor, constant: 20),
+            firstViewImage.topAnchor.constraint(equalTo: text.bottomAnchor, constant: 34),
             firstViewImage.leadingAnchor.constraint(equalTo: firstView.leadingAnchor, constant: 20),
             firstViewImage.trailingAnchor.constraint(equalTo: firstView.trailingAnchor, constant: -20),
             firstViewImage.bottomAnchor.constraint(equalTo: firstView.bottomAnchor, constant: 16)
