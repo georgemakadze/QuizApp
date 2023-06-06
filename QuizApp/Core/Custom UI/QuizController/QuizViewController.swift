@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class QuizController: UIViewController {
+class QuizViewController: UIViewController {
     private var tableView: UITableView!
     
     private lazy var questionBackground: UIImageView = {
@@ -31,7 +31,15 @@ class QuizController: UIViewController {
         questionLabel.translatesAutoresizingMaskIntoConstraints = false
         questionBackground.addSubview(questionLabel)
         return questionLabel
-        
+    }()
+    
+    private lazy var nextButton: UIButton = {
+        let nextButton = UIButton()
+        nextButton.setImage(UIImage(named: "Next"), for: .normal)
+        // daklikeba
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(nextButton)
+        return nextButton
     }()
     
     let answers: [QuestionItem] = [
@@ -48,6 +56,7 @@ class QuizController: UIViewController {
         setupTableView()
         tableViewConstraints()
         questionLabelConstraints()
+        nextButtonConstraints()
     }
     
     func setupTableView() {
@@ -63,8 +72,16 @@ class QuizController: UIViewController {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: questionBackground.bottomAnchor, constant: 74),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -280)
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+        ])
+    }
+    
+    func nextButtonConstraints() {
+        NSLayoutConstraint.activate([
+            nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            nextButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 64),
+            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -160)
         ])
     }
     
@@ -90,7 +107,7 @@ class QuizController: UIViewController {
     }
 }
 
-extension QuizController: UITableViewDataSource {
+extension QuizViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         return answers.count
     }
@@ -103,7 +120,7 @@ extension QuizController: UITableViewDataSource {
     }
 }
 
-extension QuizController: UITableViewDelegate {
+extension QuizViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let cellHeight: CGFloat = 60
         let distanceBetweenCells: CGFloat = 12

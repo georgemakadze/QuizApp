@@ -1,5 +1,5 @@
 //
-//  DetailViewController.swift
+//  GPADetailViewController.swift
 //  QuizApp
 //
 //  Created by Giorgi Makadze on 06.06.2023.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class DetailViewController: UIViewController {
+class GPADetailViewController: UIViewController {
     
     private var tableView: UITableView!
     

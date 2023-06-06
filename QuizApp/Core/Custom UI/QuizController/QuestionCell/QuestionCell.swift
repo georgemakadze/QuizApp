@@ -22,7 +22,6 @@ class QuestionCell: UITableViewCell {
     private lazy var answerLabel: UILabel = {
         let answerLabel = UILabel()
         answerLabel.backgroundColor = .clear
-//        questionLabel.text = "aaaaaaaaaa"
         answerLabel.font = .systemFont(ofSize: 16)
         answerLabel.textColor = .black
         answerLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -66,5 +65,4 @@ class QuestionCell: UITableViewCell {
     func configure(with question: QuestionItem) {
         answerLabel.text = question.answer
        }
-
 }

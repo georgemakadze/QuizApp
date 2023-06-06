@@ -11,16 +11,14 @@ import UIKit
 class HomeViewController: UIViewController {
     
     private var tableView: UITableView!
-    let detailViewController = DetailViewController()
-    let quizController = QuizController()
     
-    private lazy var scoreView: UIView = {
-        let scoreView = UIView()
-        scoreView.backgroundColor = UIColor(hex: "537FE7")
-        scoreView.layer.cornerRadius = 26
-        scoreView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(scoreView)
-        return scoreView
+    private lazy var scoreHeaderView: UIView = {
+        let scoreHeaderView = UIView()
+        scoreHeaderView.backgroundColor = UIColor(hex: "537FE7")
+        scoreHeaderView.layer.cornerRadius = 26
+        scoreHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(scoreHeaderView)
+        return scoreHeaderView
     }()
     
     private lazy var gpaView: UIView = {
@@ -28,61 +26,61 @@ class HomeViewController: UIViewController {
         gpaView.backgroundColor = UIColor(hex: "6B91EA")
         gpaView.layer.cornerRadius = 14
         gpaView.translatesAutoresizingMaskIntoConstraints = false
-        scoreView.addSubview(gpaView)
+        scoreHeaderView.addSubview(gpaView)
         return gpaView
     }()
     
-    private lazy var gpaText: UILabel = {
-        let gpaText = UILabel()
-        gpaText.text = "GPA -"
-        gpaText.font = .systemFont(ofSize: 16)
-        gpaText.backgroundColor = .clear
-        gpaText.textColor = .white
-        gpaText.translatesAutoresizingMaskIntoConstraints = false
-        gpaView.addSubview(gpaText)
-        return gpaText
+    private lazy var gpaTextLabel: UILabel = {
+        let gpaTextLabel = UILabel()
+        gpaTextLabel.text = "GPA -"
+        gpaTextLabel.font = .systemFont(ofSize: 16)
+        gpaTextLabel.backgroundColor = .clear
+        gpaTextLabel.textColor = .white
+        gpaTextLabel.translatesAutoresizingMaskIntoConstraints = false
+        gpaView.addSubview(gpaTextLabel)
+        return gpaTextLabel
     }()
     
-    private lazy var gpaScore: UILabel = {
-        var gpaScore = UILabel()
-        gpaScore.text = "1.0"
-        gpaScore.font = .systemFont(ofSize: 16)
-        gpaScore.backgroundColor = .clear
-        gpaScore.textColor = UIColor(hex: "FFD24C")
-        gpaScore.translatesAutoresizingMaskIntoConstraints = false
-        gpaView.addSubview(gpaScore)
-        return gpaScore
+    private lazy var gpaScoreLabel: UILabel = {
+        var gpaScoreLabel = UILabel()
+        gpaScoreLabel.text = "1.0"
+        gpaScoreLabel.font = .systemFont(ofSize: 16)
+        gpaScoreLabel.backgroundColor = .clear
+        gpaScoreLabel.textColor = UIColor(hex: "FFD24C")
+        gpaScoreLabel.translatesAutoresizingMaskIntoConstraints = false
+        gpaView.addSubview(gpaScoreLabel)
+        return gpaScoreLabel
     }()
     
-    private lazy var detailedText: UILabel = {
-        let detailedText = UILabel()
-        detailedText.text = "დეტალურად"
-        detailedText.font = .systemFont(ofSize: 16)
-        detailedText.textColor = .white
-        detailedText.backgroundColor = .clear
-        detailedText.translatesAutoresizingMaskIntoConstraints = false
-        scoreView.addSubview(detailedText)
-        return detailedText
+    private lazy var scoreViewDetailLabel: UILabel = {
+        let scoreViewDetailLabel = UILabel()
+        scoreViewDetailLabel.text = "დეტალურად"
+        scoreViewDetailLabel.font = .systemFont(ofSize: 16)
+        scoreViewDetailLabel.textColor = .white
+        scoreViewDetailLabel.backgroundColor = .clear
+        scoreViewDetailLabel.translatesAutoresizingMaskIntoConstraints = false
+        scoreHeaderView.addSubview(scoreViewDetailLabel)
+        return scoreViewDetailLabel
     }()
     
-    private lazy var detailedButton: UIButton = {
-        let detailedButton = UIButton()
-        detailedButton.setImage(UIImage(named: "Polygon"), for: .normal)
-        detailedButton.addTarget(self, action: #selector(detailedButtonTapped),  for: .touchUpInside)
-        detailedButton.translatesAutoresizingMaskIntoConstraints = false
-        scoreView.addSubview(detailedButton)
-        return detailedButton
+    private lazy var scoreViewDetailButton: UIButton = {
+        let scoreViewDetailButton = UIButton()
+        scoreViewDetailButton.setImage(UIImage(named: "Polygon"), for: .normal)
+        scoreViewDetailButton.addTarget(self, action: #selector(detailedButtonTapped),  for: .touchUpInside)
+        scoreViewDetailButton.translatesAutoresizingMaskIntoConstraints = false
+        scoreHeaderView.addSubview(scoreViewDetailButton)
+        return scoreViewDetailButton
     }()
     
-    private lazy var chooseText: UILabel = {
-        let chooseText = UILabel()
-        chooseText.text = "აირჩიე საგანი"
-        chooseText.textColor = .black
-        chooseText.font = .systemFont(ofSize: 16)
-        chooseText.backgroundColor = .clear
-        chooseText.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(chooseText)
-        return chooseText
+    private lazy var chooseSubjectLabel: UILabel = {
+        let chooseSubjectLabel = UILabel()
+        chooseSubjectLabel.text = "აირჩიე საგანი"
+        chooseSubjectLabel.textColor = .black
+        chooseSubjectLabel.font = .systemFont(ofSize: 16)
+        chooseSubjectLabel.backgroundColor = .clear
+        chooseSubjectLabel.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(chooseSubjectLabel)
+        return chooseSubjectLabel
     }()
     
     let subjects: [Subject] = [
@@ -95,23 +93,25 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        scoreViewConstraints()
-        gpaViewConstrains()
-        gpaTextConstraints()
-        gpaScoreConstraints()
-        detailedTextConstraints()
-        detailedButtonConstraints()
-        chooseTextConstraints()
+        setupScoreHeaderViewConstraints()
+        setupGpaViewConstrains()
+        setupGpaTextLabelConstraints()
+        setupGpaScoreLabelConstraints()
+        setupScoreViewDetailLabelConstraints()
+        setupScoreViewDetailButtonConstraints()
+        setupChooseSubjectLabelConstraints()
         setupTableView()
         tableViewConstraints()
     }
     
     @objc func detailedButtonTapped() {
+        let detailViewController = GPADetailViewController()
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
     
     func setupTableView() {
         tableView = UITableView()
+        tableView.separatorStyle = .none //samiveze
         tableView.dataSource = self
         tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -121,81 +121,80 @@ class HomeViewController: UIViewController {
     
     func tableViewConstraints() {
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: chooseText.bottomAnchor),
+            tableView.topAnchor.constraint(equalTo: chooseSubjectLabel.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -52)
         ])
     }
     
-    func scoreViewConstraints() {
+    func setupScoreHeaderViewConstraints() {
         NSLayoutConstraint.activate([
-            scoreView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            scoreView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            scoreView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            scoreView.widthAnchor.constraint(equalToConstant: 344),
-            scoreView.heightAnchor.constraint(equalToConstant: 76)
+            scoreHeaderView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
+            scoreHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            scoreHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            scoreHeaderView.widthAnchor.constraint(equalToConstant: 344),
+            scoreHeaderView.heightAnchor.constraint(equalToConstant: 76)
         ])
     }
     
-    func gpaViewConstrains() {
+    func setupGpaViewConstrains() {
         NSLayoutConstraint.activate([
-            gpaView.topAnchor.constraint(equalTo: scoreView.topAnchor, constant: 16),
-            gpaView.bottomAnchor.constraint(equalTo: scoreView.bottomAnchor, constant: -16),
-            gpaView.leadingAnchor.constraint(equalTo: scoreView.leadingAnchor, constant: 18),
+            gpaView.topAnchor.constraint(equalTo: scoreHeaderView.topAnchor, constant: 16),
+            gpaView.bottomAnchor.constraint(equalTo: scoreHeaderView.bottomAnchor, constant: -16),
+            gpaView.leadingAnchor.constraint(equalTo: scoreHeaderView.leadingAnchor, constant: 18),
             gpaView.widthAnchor.constraint(equalToConstant: 88),
             gpaView.heightAnchor.constraint(equalToConstant: 40)
         ])
     }
     
-    func gpaTextConstraints() {
+    func setupGpaTextLabelConstraints() {
         NSLayoutConstraint.activate([
-            gpaText.topAnchor.constraint(equalTo: gpaView.topAnchor, constant: 6),
-            gpaText.bottomAnchor.constraint(equalTo: gpaView.bottomAnchor, constant: -6),
-            gpaText.leadingAnchor.constraint(equalTo: gpaView.leadingAnchor, constant: 10),
+            gpaTextLabel.topAnchor.constraint(equalTo: gpaView.topAnchor, constant: 6),
+            gpaTextLabel.bottomAnchor.constraint(equalTo: gpaView.bottomAnchor, constant: -6),
+            gpaTextLabel.leadingAnchor.constraint(equalTo: gpaView.leadingAnchor, constant: 10),
         ])
     }
     
-    func gpaScoreConstraints(){
+    func setupGpaScoreLabelConstraints(){
         NSLayoutConstraint.activate([
-            gpaScore.topAnchor.constraint(equalTo: gpaView.topAnchor, constant: 6),
-            gpaScore.bottomAnchor.constraint(equalTo: gpaView.bottomAnchor, constant: -6),
-            gpaScore.trailingAnchor.constraint(equalTo: gpaView.trailingAnchor, constant: -10),
-            gpaScore.leadingAnchor.constraint(equalTo: gpaText.trailingAnchor,constant: 2)
+            gpaScoreLabel.topAnchor.constraint(equalTo: gpaView.topAnchor, constant: 6),
+            gpaScoreLabel.bottomAnchor.constraint(equalTo: gpaView.bottomAnchor, constant: -6),
+            gpaScoreLabel.trailingAnchor.constraint(equalTo: gpaView.trailingAnchor, constant: -10),
+            gpaScoreLabel.leadingAnchor.constraint(equalTo: gpaTextLabel.trailingAnchor,constant: 2)
             
         ])
     }
     
-    func detailedTextConstraints() {
+    func setupScoreViewDetailLabelConstraints() {
         NSLayoutConstraint.activate([
-            detailedText.topAnchor.constraint(equalTo: scoreView.topAnchor, constant: 28),
-            detailedText.bottomAnchor.constraint(equalTo: scoreView.bottomAnchor, constant: -29),
+            scoreViewDetailLabel.topAnchor.constraint(equalTo: scoreHeaderView.topAnchor, constant: 28),
+            scoreViewDetailLabel.bottomAnchor.constraint(equalTo: scoreHeaderView.bottomAnchor, constant: -29),
         ])
     }
     
-    func  detailedButtonConstraints() {
+    func  setupScoreViewDetailButtonConstraints() {
         NSLayoutConstraint.activate([
-            detailedButton.topAnchor.constraint(equalTo: scoreView.topAnchor, constant: 30),
-            detailedButton.bottomAnchor.constraint(equalTo: scoreView.bottomAnchor, constant: -31),
-            detailedButton.trailingAnchor.constraint(equalTo: scoreView.trailingAnchor, constant: -34),
-            detailedButton.leadingAnchor.constraint(equalTo: detailedText.trailingAnchor, constant: 4)
+            scoreViewDetailButton.topAnchor.constraint(equalTo: scoreHeaderView.topAnchor, constant: 30),
+            scoreViewDetailButton.bottomAnchor.constraint(equalTo: scoreHeaderView.bottomAnchor, constant: -31),
+            scoreViewDetailButton.trailingAnchor.constraint(equalTo: scoreHeaderView.trailingAnchor, constant: -34),
+            scoreViewDetailButton.leadingAnchor.constraint(equalTo: scoreViewDetailLabel.trailingAnchor, constant: 4)
         ])
     }
     
-    func chooseTextConstraints() {
+    func setupChooseSubjectLabelConstraints() {
         NSLayoutConstraint.activate([
-            chooseText.topAnchor.constraint(equalTo: scoreView.bottomAnchor, constant: 32),
-            chooseText.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            chooseSubjectLabel.topAnchor.constraint(equalTo: scoreHeaderView.bottomAnchor, constant: 32),
+            chooseSubjectLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
         ])
     }
 }
 
 extension HomeViewController: SubjectCellDelegate {
     func didTapButton(in cell: SubjectCell) {
+        let quizController = QuizViewController()
         navigationController?.pushViewController(quizController, animated: true)
     }
-    
-    
 }
 
 extension HomeViewController: UITableViewDataSource {
@@ -211,7 +210,6 @@ extension HomeViewController: UITableViewDataSource {
         cell.delegate = self
         return cell
     }
-    
 }
 
 extension HomeViewController: UITableViewDelegate {
@@ -219,7 +217,6 @@ extension HomeViewController: UITableViewDelegate {
         let cellHeight: CGFloat = 106
         let distanceBetweenCells: CGFloat = 20
         let totalHeight = cellHeight + distanceBetweenCells
-        
         return totalHeight
     }
 }
