@@ -8,8 +8,12 @@
 import Foundation
 import UIKit
 
+//protocol SubjectCellDelegate: AnyObject {
+//    func didTapButton(in cell: SubjectCell)
+//}
+
 class SubjectCell: UITableViewCell {
-    
+   
     private lazy var containerView: UIView = {
         let containerView = UIView()
         containerView.backgroundColor = UIColor(hex: "F6F6F6")
@@ -59,6 +63,8 @@ class SubjectCell: UITableViewCell {
         return button
     }()
     
+//    weak var delegate: SubjectCellDelegate?
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setup()
@@ -79,7 +85,7 @@ class SubjectCell: UITableViewCell {
     }
     
     @objc func buttonTapped() {
-        
+//        delegate?.didTapButton(in: self)
     }
     
     func  containerViewConstraints() {

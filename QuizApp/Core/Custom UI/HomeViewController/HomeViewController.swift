@@ -11,6 +11,7 @@ import UIKit
 class HomeViewController: UIViewController {
     
     private var tableView: UITableView!
+    let detailViewController = DetailViewController()
     
     private lazy var scoreView: UIView = {
         let scoreView = UIView()
@@ -105,7 +106,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc func detailedButtonTapped() {
-        
+        self.navigationController?.pushViewController(detailViewController, animated: true)
     }
     
     func setupTableView() {
