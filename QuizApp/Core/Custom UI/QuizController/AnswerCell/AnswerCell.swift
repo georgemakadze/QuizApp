@@ -1,5 +1,5 @@
 //
-//  QuestionCell.swift
+//  AnswerCell.swift
 //  QuizApp
 //
 //  Created by Giorgi Makadze on 06.06.2023.
@@ -8,7 +8,7 @@
 import Foundation
 import UIKit
 
-class QuestionCell: UITableViewCell {
+class AnswerCell: UITableViewCell {
     
     private lazy var containerView: UIView = {
         let containerView = UIView()
@@ -33,18 +33,18 @@ class QuestionCell: UITableViewCell {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setup()
     }
-
+    
     required init?(coder: NSCoder) {
         super.init(coder: coder)
         setup()
     }
     
     func setup() {
-        containerViewConstraints()
-        answerLabelConstraints()
+        setupContainerViewConstraints()
+        setupAnswerLabelConstraints()
     }
     
-    func containerViewConstraints() {
+    func setupContainerViewConstraints() {
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 2),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
@@ -54,7 +54,7 @@ class QuestionCell: UITableViewCell {
         ])
     }
     
-    func answerLabelConstraints() {
+    func setupAnswerLabelConstraints() {
         NSLayoutConstraint.activate([
             answerLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 22),
             answerLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -22),
@@ -64,5 +64,5 @@ class QuestionCell: UITableViewCell {
     
     func configure(with question: QuestionItem) {
         answerLabel.text = question.answer
-       }
+    }
 }

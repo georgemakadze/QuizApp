@@ -64,7 +64,7 @@ class QuizViewController: UIViewController {
         tableView.delegate = self
         tableView.dataSource = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(QuestionCell.self, forCellReuseIdentifier: "QuestionCell")
+        tableView.register(AnswerCell.self, forCellReuseIdentifier: AnswerCell.reuseIdentifier)
         view.addSubview(tableView)
     }
     
@@ -113,7 +113,7 @@ extension QuizViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "QuestionCell", for: indexPath) as! QuestionCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: "AnswerCell", for: indexPath) as! AnswerCell
         let question = answers[indexPath.row]
         cell.configure(with: question)
         return cell

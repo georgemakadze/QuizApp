@@ -111,11 +111,11 @@ class HomeViewController: UIViewController {
     
     func setupTableView() {
         tableView = UITableView()
-        tableView.separatorStyle = .none //samiveze
+        tableView.separatorStyle = .none
         tableView.dataSource = self
         tableView.delegate = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(SubjectCell.self, forCellReuseIdentifier: "SubjectCell")
+        tableView.register(SubjectCell.self, forCellReuseIdentifier: SubjectCell.reuseIdentifier)
         view.addSubview(tableView)
     }
     

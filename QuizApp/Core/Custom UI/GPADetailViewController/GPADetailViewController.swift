@@ -32,14 +32,14 @@ class GPADetailViewController: UIViewController {
         return starImage
     }()
     
-    private lazy var noPointsImage: UIImageView = {
-        let noPointsImage = UIImageView()
-        noPointsImage.image = UIImage(named: "NoPoints")
-        noPointsImage.contentMode = .scaleAspectFill
-        noPointsImage.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(noPointsImage)
-        return noPointsImage
-    }()
+//    private lazy var noPointsImage: UIImageView = {
+//        let noPointsImage = UIImageView()
+//        noPointsImage.image = UIImage(named: "NoPoints")
+//        noPointsImage.contentMode = .scaleAspectFill
+//        noPointsImage.translatesAutoresizingMaskIntoConstraints = false
+//        view.addSubview(noPointsImage)
+//        return noPointsImage
+//    }()
     
     let subjects: [Subject] = [
             Subject(icon: "programming", name: "პროგრამირება", description: "აღწერა"),
@@ -53,30 +53,30 @@ class GPADetailViewController: UIViewController {
         view.backgroundColor = .white
         pointLabelConstraints()
         starImageConstraints()
-//        setupTableView()
-//        tableViewConstraints()
-        noPointsImageConstraints()
+        setupTableView()
+        tableViewConstraints()
+//        noPointsImageConstraints()
         
     }
     
-//    func setupTableView() {
-//        tableView = UITableView()
-//        //tableView.backgroundColor = .red
-//        tableView.dataSource = self
-//        tableView.delegate = self
-//        tableView.translatesAutoresizingMaskIntoConstraints = false
-//        tableView.register(SubjectCell.self, forCellReuseIdentifier: "SubjectCell")
-//        view.addSubview(tableView)
-//    }
+    func setupTableView() {
+        tableView = UITableView()
+        tableView.separatorStyle = .none
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(ScoreCell.self, forCellReuseIdentifier: ScoreCell.reuseIdentifier)
+        view.addSubview(tableView)
+    }
     
-//    func tableViewConstraints() {
-//        NSLayoutConstraint.activate([
-//            tableView.topAnchor.constraint(equalTo: pointLabel.bottomAnchor),
-//            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-//            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-//            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -52)
-//        ])
-//    }
+    func tableViewConstraints() {
+        NSLayoutConstraint.activate([
+            tableView.topAnchor.constraint(equalTo: pointLabel.bottomAnchor),
+            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -52)
+        ])
+    }
     
     
     func pointLabelConstraints() {
@@ -93,40 +93,37 @@ class GPADetailViewController: UIViewController {
         ])
     }
     
-    func noPointsImageConstraints() {
-        NSLayoutConstraint.activate([
-            noPointsImage.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            noPointsImage.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-        ])
-    }
+//    func noPointsImageConstraints() {
+//        NSLayoutConstraint.activate([
+//            noPointsImage.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+//            noPointsImage.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+//        ])
+//    }
 }
 
-//extension DetailViewController: UITableViewDataSource {
-//
-//    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-//           return subjects.count
-//       }
-//
-//       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-//           let cell = tableView.dequeueReusableCell(withIdentifier: "SubjectCell", for: indexPath) as! SubjectCell
-//           let subject = subjects[indexPath.row]
-//           cell.configure(with: subject)
-//           return cell
-//       }
-//
-//}
-//
-//extension DetailViewController: UITableViewDelegate {
-//
-//    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-//        let cellHeight: CGFloat = 106
-//        let distanceBetweenCells: CGFloat = 20
-//        let totalHeight = cellHeight + distanceBetweenCells
-//
-//        return totalHeight
-//    }
-//
-//}
+extension GPADetailViewController: UITableViewDataSource {
+
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+           return subjects.count
+       }
+
+       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+           let cell = tableView.dequeueReusableCell(withIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
+           let subject = subjects[indexPath.row]
+           cell.configure(with: subject)
+           return cell
+       }
+}
+
+extension GPADetailViewController: UITableViewDelegate {
+
+    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
+        let cellHeight: CGFloat = 106
+        let distanceBetweenCells: CGFloat = 20
+        let totalHeight = cellHeight + distanceBetweenCells
+        return totalHeight
+    }
+}
 
 
 

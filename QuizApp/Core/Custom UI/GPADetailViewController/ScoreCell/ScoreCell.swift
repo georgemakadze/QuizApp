@@ -1,18 +1,14 @@
 //
-//  SubjectCell.swift
+//  ScoreCell.swift
 //  QuizApp
 //
-//  Created by Giorgi Makadze on 05.06.2023.
+//  Created by Giorgi Makadze on 06.06.2023.
 //
 
 import Foundation
 import UIKit
 
-protocol SubjectCellDelegate: AnyObject {
-    func didTapButton(in cell: SubjectCell)
-}
-
-class SubjectCell: UITableViewCell {
+class ScoreCell: UITableViewCell {
     
     private lazy var containerView: UIView = {
         let containerView = UIView()
@@ -25,7 +21,6 @@ class SubjectCell: UITableViewCell {
     
     private lazy var iconImageView: UIImageView = {
         let iconImageView = UIImageView()
-        //iconImageView.image = UIImage(named: "Globe")
         iconImageView.contentMode = .scaleAspectFill
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(iconImageView)
@@ -34,7 +29,6 @@ class SubjectCell: UITableViewCell {
     
     private lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
-        //nameLabel.text = "გეორგაფია"
         nameLabel.font = .systemFont(ofSize: 16)
         nameLabel.backgroundColor = .clear
         nameLabel.textColor = .black
@@ -45,7 +39,6 @@ class SubjectCell: UITableViewCell {
     
     private lazy var descriptionLabel: UILabel = {
         let descriptionLabel = UILabel()
-        //descriptionLabel.text = "აღწერა"
         descriptionLabel.font = .systemFont(ofSize: 10)
         descriptionLabel.backgroundColor = .clear
         descriptionLabel.textColor = UIColor(hex: "B3B3B3")
@@ -54,13 +47,18 @@ class SubjectCell: UITableViewCell {
         return descriptionLabel
     }()
     
-    private lazy var button: UIButton = {
-        let button = UIButton()
-        button.setImage(UIImage(named: "cellbutton"), for: .normal)
-        button.addTarget(self, action: #selector(buttonTapped),  for: .touchUpInside)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(button)
-        return button
+    private lazy var scoreLabel: UILabel = {
+        let scoreLabel = UILabel()
+        scoreLabel.text = "1"
+        scoreLabel.textColor = .white
+        scoreLabel.font = .systemFont(ofSize: 16)
+        scoreLabel.textAlignment = .center
+        scoreLabel.layer.masksToBounds = true
+        scoreLabel.backgroundColor = UIColor(hex: "FFC44A")
+        scoreLabel.layer.cornerRadius = 22.5
+        scoreLabel.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(scoreLabel)
+        return scoreLabel
     }()
     
     weak var delegate: SubjectCellDelegate?
@@ -80,11 +78,7 @@ class SubjectCell: UITableViewCell {
         setupIconImageViewConstrains()
         setupNameLabelConstraints()
         setupDescriptionLabelConstraints()
-        setupButtonConstraints()
-    }
-    
-    @objc func buttonTapped() {
-        delegate?.didTapButton(in: self)
+        setupScoreLabelConstraints()
     }
     
     func  setupContainerViewConstraints() {
@@ -121,11 +115,13 @@ class SubjectCell: UITableViewCell {
         ])
     }
     
-    func setupButtonConstraints() {
+    func setupScoreLabelConstraints() {
         NSLayoutConstraint.activate([
-            button.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 30),
-            button.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -31),
-            button.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -29.5)
+            scoreLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 30),
+            scoreLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -31),
+            scoreLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -29.5),
+            scoreLabel.widthAnchor.constraint(equalToConstant: 45),
+            scoreLabel.heightAnchor.constraint(equalToConstant: 45)
         ])
     }
     

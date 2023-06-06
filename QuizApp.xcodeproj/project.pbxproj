@@ -19,8 +19,10 @@
 		0EDD08C42A2E469000FF282B /* Subject.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08C32A2E469000FF282B /* Subject.swift */; };
 		0EDD08C72A2F133B00FF282B /* GPADetailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08C62A2F133B00FF282B /* GPADetailViewController.swift */; };
 		0EDD08C92A2F26D600FF282B /* QuizViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08C82A2F26D600FF282B /* QuizViewController.swift */; };
-		0EDD08CD2A2F2E1B00FF282B /* QuestionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08CC2A2F2E1B00FF282B /* QuestionCell.swift */; };
+		0EDD08CD2A2F2E1B00FF282B /* AnswerCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08CC2A2F2E1B00FF282B /* AnswerCell.swift */; };
 		0EDD08CF2A2F499700FF282B /* QuestionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08CE2A2F499700FF282B /* QuestionItem.swift */; };
+		0EDD08D12A2FB5E600FF282B /* ScoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08D02A2FB5E600FF282B /* ScoreCell.swift */; };
+		0EDD08D42A2FBD0400FF282B /* UITableViewCell+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08D32A2FBD0400FF282B /* UITableViewCell+Identifier.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -38,8 +40,10 @@
 		0EDD08C32A2E469000FF282B /* Subject.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Subject.swift; sourceTree = "<group>"; };
 		0EDD08C62A2F133B00FF282B /* GPADetailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPADetailViewController.swift; sourceTree = "<group>"; };
 		0EDD08C82A2F26D600FF282B /* QuizViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewController.swift; sourceTree = "<group>"; };
-		0EDD08CC2A2F2E1B00FF282B /* QuestionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionCell.swift; sourceTree = "<group>"; };
+		0EDD08CC2A2F2E1B00FF282B /* AnswerCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AnswerCell.swift; sourceTree = "<group>"; };
 		0EDD08CE2A2F499700FF282B /* QuestionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionItem.swift; sourceTree = "<group>"; };
+		0EDD08D02A2FB5E600FF282B /* ScoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreCell.swift; sourceTree = "<group>"; };
+		0EDD08D32A2FBD0400FF282B /* UITableViewCell+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Identifier.swift"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -138,6 +142,7 @@
 			isa = PBXGroup;
 			children = (
 				0EDD08B62A2B5DBB00FF282B /* UIColor+Extantions.swift */,
+				0EDD08D32A2FBD0400FF282B /* UITableViewCell+Identifier.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -181,6 +186,7 @@
 		0EDD08C52A2F132A00FF282B /* GPADetailViewController */ = {
 			isa = PBXGroup;
 			children = (
+				0EDD08D22A2FB5F200FF282B /* ScoreCell */,
 				0EDD08C62A2F133B00FF282B /* GPADetailViewController.swift */,
 			);
 			path = GPADetailViewController;
@@ -189,18 +195,26 @@
 		0EDD08CA2A2F2A7100FF282B /* QuizController */ = {
 			isa = PBXGroup;
 			children = (
-				0EDD08CB2A2F2DF800FF282B /* QuestionCell */,
+				0EDD08CB2A2F2DF800FF282B /* AnswerCell */,
 				0EDD08C82A2F26D600FF282B /* QuizViewController.swift */,
 			);
 			path = QuizController;
 			sourceTree = "<group>";
 		};
-		0EDD08CB2A2F2DF800FF282B /* QuestionCell */ = {
+		0EDD08CB2A2F2DF800FF282B /* AnswerCell */ = {
 			isa = PBXGroup;
 			children = (
-				0EDD08CC2A2F2E1B00FF282B /* QuestionCell.swift */,
+				0EDD08CC2A2F2E1B00FF282B /* AnswerCell.swift */,
 			);
-			path = QuestionCell;
+			path = AnswerCell;
+			sourceTree = "<group>";
+		};
+		0EDD08D22A2FB5F200FF282B /* ScoreCell */ = {
+			isa = PBXGroup;
+			children = (
+				0EDD08D02A2FB5E600FF282B /* ScoreCell.swift */,
+			);
+			path = ScoreCell;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -279,11 +293,13 @@
 				0EDD089A2A2A0B4E00FF282B /* AppDelegate.swift in Sources */,
 				0EDD08A42A2A0B4E00FF282B /* QuizApp.xcdatamodeld in Sources */,
 				0EDD08BF2A2E021200FF282B /* SubjectCell.swift in Sources */,
+				0EDD08D12A2FB5E600FF282B /* ScoreCell.swift in Sources */,
 				0EDD089C2A2A0B4E00FF282B /* SceneDelegate.swift in Sources */,
-				0EDD08CD2A2F2E1B00FF282B /* QuestionCell.swift in Sources */,
+				0EDD08CD2A2F2E1B00FF282B /* AnswerCell.swift in Sources */,
 				0EDD08B72A2B5DBB00FF282B /* UIColor+Extantions.swift in Sources */,
 				0EDD08CF2A2F499700FF282B /* QuestionItem.swift in Sources */,
 				0EDD08C42A2E469000FF282B /* Subject.swift in Sources */,
+				0EDD08D42A2FBD0400FF282B /* UITableViewCell+Identifier.swift in Sources */,
 				0EDD08BB2A2DCAD500FF282B /* HomeViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
