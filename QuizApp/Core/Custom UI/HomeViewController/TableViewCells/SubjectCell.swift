@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-//protocol SubjectCellDelegate: AnyObject {
-//    func didTapButton(in cell: SubjectCell)
-//}
+protocol SubjectCellDelegate: AnyObject {
+    func didTapButton(in cell: SubjectCell)
+}
 
 class SubjectCell: UITableViewCell {
    
@@ -63,7 +63,7 @@ class SubjectCell: UITableViewCell {
         return button
     }()
     
-//    weak var delegate: SubjectCellDelegate?
+    weak var delegate: SubjectCellDelegate?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -85,7 +85,7 @@ class SubjectCell: UITableViewCell {
     }
     
     @objc func buttonTapped() {
-//        delegate?.didTapButton(in: self)
+        delegate?.didTapButton(in: self)
     }
     
     func  containerViewConstraints() {

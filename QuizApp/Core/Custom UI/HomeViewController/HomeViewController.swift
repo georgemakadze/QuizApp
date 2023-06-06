@@ -12,6 +12,7 @@ class HomeViewController: UIViewController {
     
     private var tableView: UITableView!
     let detailViewController = DetailViewController()
+    let quizController = QuizController()
     
     private lazy var scoreView: UIView = {
         let scoreView = UIView()
@@ -189,6 +190,14 @@ class HomeViewController: UIViewController {
     }
 }
 
+extension HomeViewController: SubjectCellDelegate {
+    func didTapButton(in cell: SubjectCell) {
+        navigationController?.pushViewController(quizController, animated: true)
+    }
+    
+    
+}
+
 extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -199,6 +208,7 @@ extension HomeViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SubjectCell", for: indexPath) as! SubjectCell
         let subject = subjects[indexPath.row]
         cell.configure(with: subject)
+        cell.delegate = self
         return cell
     }
     
