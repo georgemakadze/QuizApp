@@ -16,8 +16,8 @@ class SubjectCell: UITableViewCell {
     
     private lazy var containerView: UIView = {
         let containerView = UIView()
-        containerView.backgroundColor = UIColor(hex: "F6F6F6")
-        containerView.layer.cornerRadius = 26
+        containerView.backgroundColor = Constants.ContainerView.backgroundColor
+        containerView.layer.cornerRadius = Constants.ContainerView.cornerRadius
         containerView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(containerView)
         return containerView
@@ -25,7 +25,6 @@ class SubjectCell: UITableViewCell {
     
     private lazy var iconImageView: UIImageView = {
         let iconImageView = UIImageView()
-        //iconImageView.image = UIImage(named: "Globe")
         iconImageView.contentMode = .scaleAspectFill
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(iconImageView)
@@ -34,8 +33,7 @@ class SubjectCell: UITableViewCell {
     
     private lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
-        //nameLabel.text = "გეორგაფია"
-        nameLabel.font = .systemFont(ofSize: 16)
+        nameLabel.font = .systemFont(ofSize: Constants.NameLabel.font)
         nameLabel.backgroundColor = .clear
         nameLabel.textColor = .black
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -45,10 +43,9 @@ class SubjectCell: UITableViewCell {
     
     private lazy var descriptionLabel: UILabel = {
         let descriptionLabel = UILabel()
-        //descriptionLabel.text = "აღწერა"
-        descriptionLabel.font = .systemFont(ofSize: 10)
+        descriptionLabel.font = .systemFont(ofSize: Constants.DescriptionLabel.font)
         descriptionLabel.backgroundColor = .clear
-        descriptionLabel.textColor = UIColor(hex: "B3B3B3")
+        descriptionLabel.textColor = Constants.DescriptionLabel.textColor
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(descriptionLabel)
         return descriptionLabel
@@ -56,7 +53,7 @@ class SubjectCell: UITableViewCell {
     
     private lazy var button: UIButton = {
         let button = UIButton()
-        button.setImage(UIImage(named: "cellbutton"), for: .normal)
+        button.setImage(Constants.Button.setImage, for: .normal)
         button.addTarget(self, action: #selector(buttonTapped),  for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(button)
@@ -89,43 +86,43 @@ class SubjectCell: UITableViewCell {
     
     private func  setupContainerViewConstraints() {
         NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 20),
-            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 20),
-            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: -20),
-            containerView.widthAnchor.constraint(equalToConstant: 344),
-            containerView.heightAnchor.constraint(equalToConstant: 106)
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: Constants.ContainerView.topAnchor),
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: Constants.ContainerView.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: Constants.ContainerView.trailingAnchor),
+            containerView.widthAnchor.constraint(equalToConstant: Constants.ContainerView.widthAnchor),
+            containerView.heightAnchor.constraint(equalToConstant: Constants.ContainerView.heightAnchor)
         ])
     }
     
     private func setupIconImageViewConstrains() {
         NSLayoutConstraint.activate([
-            iconImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 22),
-            iconImageView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -22),
-            iconImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: 29.5)
+            iconImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Constants.IconImageView.topAnchor),
+            iconImageView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: Constants.IconImageView.bottomAnchor),
+            iconImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: Constants.IconImageView.leadingAnchor)
         ])
     }
     
     private func setupNameLabelConstraints() {
         NSLayoutConstraint.activate([
-            nameLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 18),
-            nameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 33),
+            nameLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: Constants.NameLabel.leadingAnchor),
+            nameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Constants.NameLabel.topAnchor),
             //firstLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -52)
         ])
     }
     
     private func setupDescriptionLabelConstraints() {
         NSLayoutConstraint.activate([
-            descriptionLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 2),
-            descriptionLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 18),
-            descriptionLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -34)
+            descriptionLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: Constants.DescriptionLabel.topAnchor),
+            descriptionLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: Constants.DescriptionLabel.leadingAnchor),
+            descriptionLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: Constants.DescriptionLabel.bottomAnchor)
         ])
     }
     
     private func setupButtonConstraints() {
         NSLayoutConstraint.activate([
-            button.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 30),
-            button.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -31),
-            button.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -29.5)
+            button.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Constants.Button.topAnchor),
+            button.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: Constants.Button.bottomAnchor),
+            button.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: Constants.Button.trailingAnchor)
         ])
     }
     
@@ -133,5 +130,42 @@ class SubjectCell: UITableViewCell {
         iconImageView.image = UIImage(named: subject.icon)
         nameLabel.text = subject.name
         descriptionLabel.text = subject.description
+    }
+}
+
+extension SubjectCell {
+    enum Constants {
+        enum ContainerView {
+            static let backgroundColor = UIColor(hex: "F6F6F6")
+            static let cornerRadius: CGFloat = 26
+            static let topAnchor: CGFloat = 20
+            static let leadingAnchor: CGFloat = 20
+            static let trailingAnchor: CGFloat = -20
+            static let widthAnchor: CGFloat = 344
+            static let heightAnchor: CGFloat = 106
+        }
+        enum IconImageView {
+            static let topAnchor: CGFloat = 22
+            static let bottomAnchor: CGFloat = -22
+            static let leadingAnchor: CGFloat = 29.5
+        }
+        enum NameLabel {
+            static let font: CGFloat = 16
+            static let leadingAnchor: CGFloat = 18
+            static let topAnchor: CGFloat = 33
+        }
+        enum DescriptionLabel {
+            static let font: CGFloat = 10
+            static let textColor = UIColor(hex: "B3B3B3")
+            static let topAnchor: CGFloat = 2
+            static let leadingAnchor: CGFloat = 18
+            static let bottomAnchor: CGFloat = -34
+        }
+        enum Button {
+            static let setImage = UIImage(named: "cellbutton")
+            static let topAnchor: CGFloat = 30
+            static let bottomAnchor: CGFloat = -31
+            static let trailingAnchor: CGFloat = -29.5
+        }
     }
 }
