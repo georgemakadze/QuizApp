@@ -27,6 +27,7 @@ class LoginViewController: UIViewController {
         loginTextView.layer.borderColor = Constants.LoginTextView.borderColor
         loginTextView.layer.borderWidth = Constants.LoginTextView.borderWidth
         loginTextView.textAlignment = .center
+        //loginTextView.contentInset = UIEdgeInsets(top: 1.0, left: 1.0, bottom: 1.0, right: 1.0)
         loginTextView.layer.cornerRadius = Constants.LoginTextView.cornerRadius
         loginTextView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(loginTextView)

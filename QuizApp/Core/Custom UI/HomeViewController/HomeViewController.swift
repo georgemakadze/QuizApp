@@ -83,6 +83,25 @@ class HomeViewController: UIViewController {
         return chooseSubjectLabel
     }()
     
+    private lazy var logOutButton: UIButton  = {
+        let logOutButton = UIButton()
+        logOutButton.setImage(UIImage(named: "Log out"), for: .normal)
+        logOutButton.addTarget(self, action: #selector(logOutButtonTapped), for: .touchUpInside)
+        logOutButton.layer.cornerRadius = 21
+        logOutButton.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(logOutButton)
+        return logOutButton
+    }()
+    
+    private lazy var popupView: UIView = {
+        let popupView = UIView()
+        popupView.backgroundColor = UIColor.yellow
+        popupView.layer.cornerRadius = 8
+        popupView.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(popupView)
+        return popupView
+    }()
+    
     let subjects: [Subject] = [
         Subject(icon: "programming", name: "პროგრამირება", description: "აღწერა"),
         Subject(icon: "Book", name: "ისტორია", description: "აღწერა"),
@@ -93,6 +112,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        popupView.isHidden = true
         setupScoreHeaderViewConstraints()
         setupGpaViewConstrains()
         setupGpaTextLabelConstraints()
@@ -101,12 +121,26 @@ class HomeViewController: UIViewController {
         setupScoreViewDetailButtonConstraints()
         setupChooseSubjectLabelConstraints()
         setupTableView()
-        tableViewConstraints()
+        setupTableViewConstraints()
+        setupLogOutButtonConstraints()
+        setupPopupViewConstraints()
     }
     
     @objc func detailedButtonTapped() {
         let detailViewController = GPADetailViewController()
         self.navigationController?.pushViewController(detailViewController, animated: true)
+    }
+    
+    @objc func logOutButtonTapped() {
+        if popupView.isHidden {
+            popupView.isHidden = false
+            popupView.backgroundColor = .yellow
+            //tableView.backgroundColor = .lightGray
+            view.backgroundColor = .lightGray
+        } else {
+            popupView.isHidden = true
+            view.backgroundColor = .white
+        }
     }
     
     private func setupTableView() {
@@ -119,12 +153,30 @@ class HomeViewController: UIViewController {
         view.addSubview(tableView)
     }
     
-    private func tableViewConstraints() {
+    private func setupTableViewConstraints() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: chooseSubjectLabel.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -52)
+        ])
+    }
+    
+    private func setupLogOutButtonConstraints() {
+        NSLayoutConstraint.activate([
+            logOutButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -14),
+            logOutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            logOutButton.widthAnchor.constraint(equalToConstant: 42),
+            logOutButton.heightAnchor.constraint(equalToConstant: 42)
+        ])
+    }
+    
+    private func setupPopupViewConstraints() {
+        NSLayoutConstraint.activate([
+            popupView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
+            popupView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            popupView.widthAnchor.constraint(equalToConstant: 270),
+            popupView.heightAnchor.constraint(equalToConstant: 176)
         ])
     }
     
@@ -220,6 +272,7 @@ extension HomeViewController: UITableViewDelegate {
         return totalHeight
     }
 }
+
 
 
 
