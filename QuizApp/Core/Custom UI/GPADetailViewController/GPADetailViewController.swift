@@ -32,14 +32,14 @@ class GPADetailViewController: UIViewController {
         return starImage
     }()
     
-//    private lazy var noPointsImage: UIImageView = {
-//        let noPointsImage = UIImageView()
-//        noPointsImage.image = UIImage(named: "NoPoints")
-//        noPointsImage.contentMode = .scaleAspectFill
-//        noPointsImage.translatesAutoresizingMaskIntoConstraints = false
-//        view.addSubview(noPointsImage)
-//        return noPointsImage
-//    }()
+    private lazy var noPointsImage: UIImageView = {
+        let noPointsImage = UIImageView()
+        noPointsImage.image = UIImage(named: "NoPoints")
+        noPointsImage.contentMode = .scaleAspectFill
+        noPointsImage.translatesAutoresizingMaskIntoConstraints = false
+        view.addSubview(noPointsImage)
+        return noPointsImage
+    }()
     
     let subjects: [Subject] = [
             Subject(icon: "programming", name: "პროგრამირება", description: "აღწერა"),
@@ -59,7 +59,7 @@ class GPADetailViewController: UIViewController {
         
     }
     
-    func setupTableView() {
+    private func setupTableView() {
         tableView = UITableView()
         tableView.separatorStyle = .none
         tableView.dataSource = self
@@ -69,7 +69,7 @@ class GPADetailViewController: UIViewController {
         view.addSubview(tableView)
     }
     
-    func tableViewConstraints() {
+    private func tableViewConstraints() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: pointLabel.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -79,26 +79,26 @@ class GPADetailViewController: UIViewController {
     }
     
     
-    func pointLabelConstraints() {
+    private func pointLabelConstraints() {
         NSLayoutConstraint.activate([
             pointLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 66),
             pointLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 99),
         ])
     }
     
-    func starImageConstraints() {
+    private func starImageConstraints() {
         NSLayoutConstraint.activate([
             starImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 70),
             starImage.leadingAnchor.constraint(equalTo: pointLabel.trailingAnchor, constant: 5),
         ])
     }
     
-//    func noPointsImageConstraints() {
-//        NSLayoutConstraint.activate([
-//            noPointsImage.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-//            noPointsImage.centerXAnchor.constraint(equalTo: view.centerXAnchor)
-//        ])
-//    }
+    func noPointsImageConstraints() {
+        NSLayoutConstraint.activate([
+            noPointsImage.centerYAnchor.constraint(equalTo: view.centerYAnchor),
+            noPointsImage.centerXAnchor.constraint(equalTo: view.centerXAnchor)
+        ])
+    }
 }
 
 extension GPADetailViewController: UITableViewDataSource {
@@ -108,7 +108,7 @@ extension GPADetailViewController: UITableViewDataSource {
        }
 
        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-           let cell = tableView.dequeueReusableCell(withIdentifier: "ScoreCell", for: indexPath) as! ScoreCell
+           let cell = tableView.dequeueReusableCell(withIdentifier: ScoreCell.reuseIdentifier, for: indexPath) as! ScoreCell
            let subject = subjects[indexPath.row]
            cell.configure(with: subject)
            return cell

@@ -73,7 +73,7 @@ class ScoreCell: UITableViewCell {
         setup()
     }
     
-    func setup() {
+    private func setup() {
         setupContainerViewConstraints()
         setupIconImageViewConstrains()
         setupNameLabelConstraints()
@@ -81,7 +81,7 @@ class ScoreCell: UITableViewCell {
         setupScoreLabelConstraints()
     }
     
-    func  setupContainerViewConstraints() {
+    private func  setupContainerViewConstraints() {
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 20),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 20),
@@ -91,7 +91,7 @@ class ScoreCell: UITableViewCell {
         ])
     }
     
-    func setupIconImageViewConstrains() {
+    private func setupIconImageViewConstrains() {
         NSLayoutConstraint.activate([
             iconImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 22),
             iconImageView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -22),
@@ -99,7 +99,7 @@ class ScoreCell: UITableViewCell {
         ])
     }
     
-    func setupNameLabelConstraints() {
+    private func setupNameLabelConstraints() {
         NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 18),
             nameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 33),
@@ -107,7 +107,7 @@ class ScoreCell: UITableViewCell {
         ])
     }
     
-    func setupDescriptionLabelConstraints() {
+    private func setupDescriptionLabelConstraints() {
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: 2),
             descriptionLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: 18),
@@ -115,7 +115,7 @@ class ScoreCell: UITableViewCell {
         ])
     }
     
-    func setupScoreLabelConstraints() {
+    private func setupScoreLabelConstraints() {
         NSLayoutConstraint.activate([
             scoreLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 30),
             scoreLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -31),

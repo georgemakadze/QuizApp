@@ -109,7 +109,7 @@ class HomeViewController: UIViewController {
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
     
-    func setupTableView() {
+    private func setupTableView() {
         tableView = UITableView()
         tableView.separatorStyle = .none
         tableView.dataSource = self
@@ -119,7 +119,7 @@ class HomeViewController: UIViewController {
         view.addSubview(tableView)
     }
     
-    func tableViewConstraints() {
+    private func tableViewConstraints() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: chooseSubjectLabel.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -128,7 +128,7 @@ class HomeViewController: UIViewController {
         ])
     }
     
-    func setupScoreHeaderViewConstraints() {
+    private func setupScoreHeaderViewConstraints() {
         NSLayoutConstraint.activate([
             scoreHeaderView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
             scoreHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -138,7 +138,7 @@ class HomeViewController: UIViewController {
         ])
     }
     
-    func setupGpaViewConstrains() {
+    private func setupGpaViewConstrains() {
         NSLayoutConstraint.activate([
             gpaView.topAnchor.constraint(equalTo: scoreHeaderView.topAnchor, constant: 16),
             gpaView.bottomAnchor.constraint(equalTo: scoreHeaderView.bottomAnchor, constant: -16),
@@ -148,7 +148,7 @@ class HomeViewController: UIViewController {
         ])
     }
     
-    func setupGpaTextLabelConstraints() {
+    private func setupGpaTextLabelConstraints() {
         NSLayoutConstraint.activate([
             gpaTextLabel.topAnchor.constraint(equalTo: gpaView.topAnchor, constant: 6),
             gpaTextLabel.bottomAnchor.constraint(equalTo: gpaView.bottomAnchor, constant: -6),
@@ -156,7 +156,7 @@ class HomeViewController: UIViewController {
         ])
     }
     
-    func setupGpaScoreLabelConstraints(){
+    private func setupGpaScoreLabelConstraints(){
         NSLayoutConstraint.activate([
             gpaScoreLabel.topAnchor.constraint(equalTo: gpaView.topAnchor, constant: 6),
             gpaScoreLabel.bottomAnchor.constraint(equalTo: gpaView.bottomAnchor, constant: -6),
@@ -166,14 +166,14 @@ class HomeViewController: UIViewController {
         ])
     }
     
-    func setupScoreViewDetailLabelConstraints() {
+    private func setupScoreViewDetailLabelConstraints() {
         NSLayoutConstraint.activate([
             scoreViewDetailLabel.topAnchor.constraint(equalTo: scoreHeaderView.topAnchor, constant: 28),
             scoreViewDetailLabel.bottomAnchor.constraint(equalTo: scoreHeaderView.bottomAnchor, constant: -29),
         ])
     }
     
-    func  setupScoreViewDetailButtonConstraints() {
+    private func  setupScoreViewDetailButtonConstraints() {
         NSLayoutConstraint.activate([
             scoreViewDetailButton.topAnchor.constraint(equalTo: scoreHeaderView.topAnchor, constant: 30),
             scoreViewDetailButton.bottomAnchor.constraint(equalTo: scoreHeaderView.bottomAnchor, constant: -31),
@@ -182,7 +182,7 @@ class HomeViewController: UIViewController {
         ])
     }
     
-    func setupChooseSubjectLabelConstraints() {
+    private func setupChooseSubjectLabelConstraints() {
         NSLayoutConstraint.activate([
             chooseSubjectLabel.topAnchor.constraint(equalTo: scoreHeaderView.bottomAnchor, constant: 32),
             chooseSubjectLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
@@ -204,7 +204,7 @@ extension HomeViewController: UITableViewDataSource {
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "SubjectCell", for: indexPath) as! SubjectCell
+        let cell = tableView.dequeueReusableCell(withIdentifier: SubjectCell.reuseIdentifier, for: indexPath) as! SubjectCell
         let subject = subjects[indexPath.row]
         cell.configure(with: subject)
         cell.delegate = self
@@ -220,3 +220,6 @@ extension HomeViewController: UITableViewDelegate {
         return totalHeight
     }
 }
+
+
+

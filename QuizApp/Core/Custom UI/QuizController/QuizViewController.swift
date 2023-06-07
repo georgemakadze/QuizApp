@@ -21,8 +21,8 @@ class QuizViewController: UIViewController {
     }()
     
     private lazy var questionLabel: UILabel = {
-        let questionLabel = UILabel()
-        questionLabel.text = "რომელია ყველაზე პოპულარული პროგრამირების ენა?"
+        var questionLabel = UILabel()
+        //        questionLabel.text = question.text
         questionLabel.textColor = .black
         questionLabel.backgroundColor = .clear
         questionLabel.numberOfLines = 3
@@ -42,11 +42,11 @@ class QuizViewController: UIViewController {
         return nextButton
     }()
     
-    let answers: [QuestionItem] = [
-        QuestionItem(answer: "Python"),
-        QuestionItem(answer: "Java"),
-        QuestionItem(answer: "C++"),
-        QuestionItem(answer: "Kotlin")
+    let question: [QuestionItem] = [
+        QuestionItem(answer: "Python", text: "რომელია ყველაზე პოპულარული პროგრამირების ენა?"),
+        QuestionItem(answer: "Java", text: "რომელია ყველაზე პოპულარული პროგრამირების ენა?"),
+        QuestionItem(answer: "C++", text: "რომელია ყველაზე პოპულარული პროგრამირების ენა?"),
+        QuestionItem(answer: "Kotlin", text: "რომელია ყველაზე პოპულარული პროგრამირების ენა?")
     ]
     
     override func viewDidLoad() {
@@ -61,6 +61,7 @@ class QuizViewController: UIViewController {
     
     func setupTableView() {
         tableView = UITableView()
+        tableView.separatorStyle = .none
         tableView.delegate = self
         tableView.dataSource = self
         tableView.translatesAutoresizingMaskIntoConstraints = false
@@ -68,7 +69,7 @@ class QuizViewController: UIViewController {
         view.addSubview(tableView)
     }
     
-    func tableViewConstraints() {
+    private func tableViewConstraints() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: questionBackground.bottomAnchor, constant: 74),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -76,7 +77,7 @@ class QuizViewController: UIViewController {
         ])
     }
     
-    func nextButtonConstraints() {
+    private func nextButtonConstraints() {
         NSLayoutConstraint.activate([
             nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
@@ -85,7 +86,7 @@ class QuizViewController: UIViewController {
         ])
     }
     
-    func questionBackgroundConstrains() {
+    private func questionBackgroundConstrains() {
         NSLayoutConstraint.activate([
             questionBackground.topAnchor.constraint(equalTo: view.topAnchor),
             questionBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -96,7 +97,7 @@ class QuizViewController: UIViewController {
         ])
     }
     
-    func questionLabelConstraints() {
+    private func questionLabelConstraints() {
         NSLayoutConstraint.activate([
             questionLabel.centerXAnchor.constraint(equalTo: questionBackground.centerXAnchor),
             questionLabel.topAnchor.constraint(equalTo: questionBackground.topAnchor, constant: 120),
@@ -109,13 +110,16 @@ class QuizViewController: UIViewController {
 
 extension QuizViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return answers.count
+        return question.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCell(withIdentifier: "AnswerCell", for: indexPath) as! AnswerCell
-        let question = answers[indexPath.row]
-        cell.configure(with: question)
+        let cell = tableView.dequeueReusableCell(withIdentifier: AnswerCell.reuseIdentifier, for: indexPath) as! AnswerCell
+        //        let question = question[indexPath.row]
+        //        cell.configure(with: question.answer)
+        let currentQuestion = question[indexPath.row]
+        cell.configure(with: currentQuestion.answer)
+        questionLabel.text = currentQuestion.text
         return cell
     }
 }

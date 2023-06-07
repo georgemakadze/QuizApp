@@ -9,5 +9,5 @@ import Foundation
 
 struct QuestionItem: Hashable {
     let answer: String
-//    let text : String
+    let text : String
 }

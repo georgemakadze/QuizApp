@@ -39,12 +39,12 @@ class AnswerCell: UITableViewCell {
         setup()
     }
     
-    func setup() {
+    private func setup() {
         setupContainerViewConstraints()
         setupAnswerLabelConstraints()
     }
     
-    func setupContainerViewConstraints() {
+    private func setupContainerViewConstraints() {
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: 2),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: 16),
@@ -54,7 +54,7 @@ class AnswerCell: UITableViewCell {
         ])
     }
     
-    func setupAnswerLabelConstraints() {
+    private func setupAnswerLabelConstraints() {
         NSLayoutConstraint.activate([
             answerLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: 22),
             answerLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -22),
@@ -62,7 +62,7 @@ class AnswerCell: UITableViewCell {
         ])
     }
     
-    func configure(with question: QuestionItem) {
-        answerLabel.text = question.answer
+    func configure(with answer: String) {
+        answerLabel.text = answer
     }
 }
