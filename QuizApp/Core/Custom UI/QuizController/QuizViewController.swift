@@ -13,7 +13,7 @@ class QuizViewController: UIViewController {
     
     private lazy var questionBackground: UIImageView = {
         let questionBackground = UIImageView()
-        questionBackground.image = UIImage(named: "Rectangle")
+        questionBackground.image = Constants.QuestionBackground.image
         questionBackground.contentMode = .scaleAspectFill
         questionBackground.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(questionBackground)
@@ -22,12 +22,11 @@ class QuizViewController: UIViewController {
     
     private lazy var questionLabel: UILabel = {
         var questionLabel = UILabel()
-        //        questionLabel.text = question.text
         questionLabel.textColor = .black
         questionLabel.backgroundColor = .clear
-        questionLabel.numberOfLines = 3
+        questionLabel.numberOfLines = Constants.QuestionLabel.numberOfLines
         questionLabel.lineBreakMode = .byTruncatingTail
-        questionLabel.font = .systemFont(ofSize: 16)
+        questionLabel.font = .systemFont(ofSize: Constants.QuestionLabel.font)
         questionLabel.translatesAutoresizingMaskIntoConstraints = false
         questionBackground.addSubview(questionLabel)
         return questionLabel
@@ -100,10 +99,10 @@ class QuizViewController: UIViewController {
     private func questionLabelConstraints() {
         NSLayoutConstraint.activate([
             questionLabel.centerXAnchor.constraint(equalTo: questionBackground.centerXAnchor),
-            questionLabel.topAnchor.constraint(equalTo: questionBackground.topAnchor, constant: 120),
-            questionLabel.leadingAnchor.constraint(equalTo: questionBackground.leadingAnchor, constant: 72),
-            questionLabel.trailingAnchor.constraint(equalTo: questionBackground.trailingAnchor, constant: -72),
-            questionLabel.widthAnchor.constraint(lessThanOrEqualToConstant: 200) //
+            questionLabel.topAnchor.constraint(equalTo: questionBackground.topAnchor, constant: Constants.QuestionLabel.topAnchor),
+            questionLabel.leadingAnchor.constraint(equalTo: questionBackground.leadingAnchor, constant: Constants.QuestionLabel.leadingAnchor),
+            questionLabel.trailingAnchor.constraint(equalTo: questionBackground.trailingAnchor, constant: Constants.QuestionLabel.trailingAnchor),
+            questionLabel.widthAnchor.constraint(lessThanOrEqualToConstant: Constants.QuestionLabel.widthAnchor)
         ])
     }
 }
@@ -131,5 +130,21 @@ extension QuizViewController: UITableViewDelegate {
         let totalHeight = cellHeight + distanceBetweenCells
         
         return totalHeight
+    }
+}
+
+extension QuizViewController {
+    enum Constants {
+        enum QuestionBackground {
+            static let image = UIImage(named: "Rectangle")
+        }
+        enum QuestionLabel {
+            static let numberOfLines = 3
+            static let font: CGFloat = 16
+            static let topAnchor: CGFloat = 120
+            static let leadingAnchor: CGFloat = 72
+            static let trailingAnchor: CGFloat = -72
+            static let widthAnchor: CGFloat = 200
+        }
     }
 }
