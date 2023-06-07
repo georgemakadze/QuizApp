@@ -14,8 +14,8 @@ class GPADetailViewController: UIViewController {
     
     private lazy var pointLabel: UILabel = {
         let pointLabel = UILabel()
-        pointLabel.text = "დაგროვილი ქულები"
-        pointLabel.font = .systemFont(ofSize: 16)
+        pointLabel.text = Constants.PointLabel.text
+        pointLabel.font = .systemFont(ofSize: Constants.PointLabel.font)
         pointLabel.textColor = .black
         pointLabel.backgroundColor = .clear
         pointLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -25,7 +25,7 @@ class GPADetailViewController: UIViewController {
     
     private lazy var starImage: UIImageView = {
         let starImage = UIImageView()
-        starImage.image = UIImage(named: "Star")
+        starImage.image = Constants.StarImage.image
         starImage.contentMode = .scaleAspectFill
         starImage.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(starImage)
@@ -34,7 +34,7 @@ class GPADetailViewController: UIViewController {
     
     private lazy var noPointsImage: UIImageView = {
         let noPointsImage = UIImageView()
-        noPointsImage.image = UIImage(named: "NoPoints")
+        noPointsImage.image = Constants.noPointsImage.image
         noPointsImage.contentMode = .scaleAspectFill
         noPointsImage.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(noPointsImage)
@@ -74,22 +74,22 @@ class GPADetailViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo: pointLabel.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -52)
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.TableView.bottomAnchor)
         ])
     }
     
     
     private func pointLabelConstraints() {
         NSLayoutConstraint.activate([
-            pointLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: 66),
-            pointLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 99),
+            pointLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.PointLabel.topAnchor),
+            pointLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.PointLabel.leadingAnchor),
         ])
     }
     
     private func starImageConstraints() {
         NSLayoutConstraint.activate([
-            starImage.topAnchor.constraint(equalTo: view.topAnchor, constant: 70),
-            starImage.leadingAnchor.constraint(equalTo: pointLabel.trailingAnchor, constant: 5),
+            starImage.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.StarImage.topAnchor),
+            starImage.leadingAnchor.constraint(equalTo: pointLabel.trailingAnchor, constant: Constants.StarImage.leadingAnchor),
         ])
     }
     
@@ -118,10 +118,34 @@ extension GPADetailViewController: UITableViewDataSource {
 extension GPADetailViewController: UITableViewDelegate {
 
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let cellHeight: CGFloat = 106
-        let distanceBetweenCells: CGFloat = 20
+        let cellHeight = Constants.TableView.cellHeight
+        let distanceBetweenCells = Constants.TableView.distanceBetweenCells
         let totalHeight = cellHeight + distanceBetweenCells
         return totalHeight
+    }
+}
+
+extension GPADetailViewController {
+    enum Constants {
+        enum PointLabel {
+            static let text = "დაგროვილი ქულები"
+            static let font: CGFloat = 16
+            static let topAnchor: CGFloat = 66
+            static let leadingAnchor:CGFloat = 99
+        }
+        enum StarImage {
+            static let image = UIImage(named: "Star")
+            static let topAnchor: CGFloat = 70
+            static let leadingAnchor: CGFloat = 5
+        }
+        enum noPointsImage {
+            static let image = UIImage(named: "NoPoints")
+        }
+        enum TableView {
+            static let bottomAnchor: CGFloat = -52
+            static let cellHeight: CGFloat = 106
+            static let distanceBetweenCells:CGFloat = 20
+        }
     }
 }
 
