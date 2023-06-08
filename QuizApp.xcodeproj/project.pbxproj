@@ -23,6 +23,7 @@
 		0EDD08CF2A2F499700FF282B /* QuestionItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08CE2A2F499700FF282B /* QuestionItem.swift */; };
 		0EDD08D12A2FB5E600FF282B /* ScoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08D02A2FB5E600FF282B /* ScoreCell.swift */; };
 		0EDD08D42A2FBD0400FF282B /* UITableViewCell+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08D32A2FBD0400FF282B /* UITableViewCell+Identifier.swift */; };
+		0EDD08D72A31C4F800FF282B /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08D62A31C4F800FF282B /* PopupViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -44,6 +45,7 @@
 		0EDD08CE2A2F499700FF282B /* QuestionItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuestionItem.swift; sourceTree = "<group>"; };
 		0EDD08D02A2FB5E600FF282B /* ScoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreCell.swift; sourceTree = "<group>"; };
 		0EDD08D32A2FBD0400FF282B /* UITableViewCell+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Identifier.swift"; sourceTree = "<group>"; };
+		0EDD08D62A31C4F800FF282B /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -150,6 +152,7 @@
 		0EDD08B92A2DC4B300FF282B /* Custom UI */ = {
 			isa = PBXGroup;
 			children = (
+				0EDD08D52A31C4D200FF282B /* PopupViewConstroller */,
 				0EDD08CA2A2F2A7100FF282B /* QuizController */,
 				0EDD08C52A2F132A00FF282B /* GPADetailViewController */,
 				0EDD08BC2A2E00F000FF282B /* HomeViewController */,
@@ -215,6 +218,14 @@
 				0EDD08D02A2FB5E600FF282B /* ScoreCell.swift */,
 			);
 			path = ScoreCell;
+			sourceTree = "<group>";
+		};
+		0EDD08D52A31C4D200FF282B /* PopupViewConstroller */ = {
+			isa = PBXGroup;
+			children = (
+				0EDD08D62A31C4F800FF282B /* PopupViewController.swift */,
+			);
+			path = PopupViewConstroller;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -294,6 +305,7 @@
 				0EDD08A42A2A0B4E00FF282B /* QuizApp.xcdatamodeld in Sources */,
 				0EDD08BF2A2E021200FF282B /* SubjectCell.swift in Sources */,
 				0EDD08D12A2FB5E600FF282B /* ScoreCell.swift in Sources */,
+				0EDD08D72A31C4F800FF282B /* PopupViewController.swift in Sources */,
 				0EDD089C2A2A0B4E00FF282B /* SceneDelegate.swift in Sources */,
 				0EDD08CD2A2F2E1B00FF282B /* AnswerCell.swift in Sources */,
 				0EDD08B72A2B5DBB00FF282B /* UIColor+Extantions.swift in Sources */,

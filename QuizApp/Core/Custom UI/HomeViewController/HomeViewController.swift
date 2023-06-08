@@ -14,8 +14,8 @@ class HomeViewController: UIViewController {
     
     private lazy var scoreHeaderView: UIView = {
         let scoreHeaderView = UIView()
-        scoreHeaderView.backgroundColor = UIColor(hex: "537FE7")
-        scoreHeaderView.layer.cornerRadius = 26
+        scoreHeaderView.backgroundColor = Constants.ScoreHeaderView.backgroundColor
+        scoreHeaderView.layer.cornerRadius = Constants.ScoreHeaderView.cornerRadius
         scoreHeaderView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scoreHeaderView)
         return scoreHeaderView
@@ -23,8 +23,8 @@ class HomeViewController: UIViewController {
     
     private lazy var gpaView: UIView = {
         let gpaView = UIView()
-        gpaView.backgroundColor = UIColor(hex: "6B91EA")
-        gpaView.layer.cornerRadius = 14
+        gpaView.backgroundColor = Constants.GpaView.backgroundColor
+        gpaView.layer.cornerRadius = Constants.GpaView.cornerRadius
         gpaView.translatesAutoresizingMaskIntoConstraints = false
         scoreHeaderView.addSubview(gpaView)
         return gpaView
@@ -32,8 +32,8 @@ class HomeViewController: UIViewController {
     
     private lazy var gpaTextLabel: UILabel = {
         let gpaTextLabel = UILabel()
-        gpaTextLabel.text = "GPA -"
-        gpaTextLabel.font = .systemFont(ofSize: 16)
+        gpaTextLabel.text = Constants.GpaTextLabel.text
+        gpaTextLabel.font = .systemFont(ofSize: Constants.GpaTextLabel.font)
         gpaTextLabel.backgroundColor = .clear
         gpaTextLabel.textColor = .white
         gpaTextLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -44,9 +44,9 @@ class HomeViewController: UIViewController {
     private lazy var gpaScoreLabel: UILabel = {
         var gpaScoreLabel = UILabel()
         gpaScoreLabel.text = "1.0"
-        gpaScoreLabel.font = .systemFont(ofSize: 16)
+        gpaScoreLabel.font = .systemFont(ofSize: Constants.GpaScoreLabel.font)
         gpaScoreLabel.backgroundColor = .clear
-        gpaScoreLabel.textColor = UIColor(hex: "FFD24C")
+        gpaScoreLabel.textColor = Constants.GpaScoreLabel.textColor
         gpaScoreLabel.translatesAutoresizingMaskIntoConstraints = false
         gpaView.addSubview(gpaScoreLabel)
         return gpaScoreLabel
@@ -92,16 +92,7 @@ class HomeViewController: UIViewController {
         view.addSubview(logOutButton)
         return logOutButton
     }()
-    
-    private lazy var popupView: UIView = {
-        let popupView = UIView()
-        popupView.backgroundColor = UIColor.yellow
-        popupView.layer.cornerRadius = 8
-        popupView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(popupView)
-        return popupView
-    }()
-    
+
     let subjects: [Subject] = [
         Subject(icon: "programming", name: "პროგრამირება", description: "აღწერა"),
         Subject(icon: "Book", name: "ისტორია", description: "აღწერა"),
@@ -112,7 +103,6 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        popupView.isHidden = true
         setupScoreHeaderViewConstraints()
         setupGpaViewConstrains()
         setupGpaTextLabelConstraints()
@@ -123,7 +113,6 @@ class HomeViewController: UIViewController {
         setupTableView()
         setupTableViewConstraints()
         setupLogOutButtonConstraints()
-        setupPopupViewConstraints()
     }
     
     @objc func detailedButtonTapped() {
@@ -132,15 +121,9 @@ class HomeViewController: UIViewController {
     }
     
     @objc func logOutButtonTapped() {
-        if popupView.isHidden {
-            popupView.isHidden = false
-            popupView.backgroundColor = .yellow
-            //tableView.backgroundColor = .lightGray
-            view.backgroundColor = .lightGray
-        } else {
-            popupView.isHidden = true
-            view.backgroundColor = .white
-        }
+        let popupViewController = PopupViewController()
+                popupViewController.modalPresentationStyle = .overCurrentContext
+                present(popupViewController, animated: true, completion: nil)
     }
     
     private func setupTableView() {
@@ -171,49 +154,40 @@ class HomeViewController: UIViewController {
         ])
     }
     
-    private func setupPopupViewConstraints() {
-        NSLayoutConstraint.activate([
-            popupView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            popupView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            popupView.widthAnchor.constraint(equalToConstant: 270),
-            popupView.heightAnchor.constraint(equalToConstant: 176)
-        ])
-    }
-    
     private func setupScoreHeaderViewConstraints() {
         NSLayoutConstraint.activate([
-            scoreHeaderView.topAnchor.constraint(equalTo: view.topAnchor, constant: 100),
-            scoreHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            scoreHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            scoreHeaderView.widthAnchor.constraint(equalToConstant: 344),
-            scoreHeaderView.heightAnchor.constraint(equalToConstant: 76)
+            scoreHeaderView.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.ScoreHeaderView.topAnchor),
+            scoreHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.ScoreHeaderView.leadingAnchor),
+            scoreHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.ScoreHeaderView.trailingAnchor),
+            scoreHeaderView.widthAnchor.constraint(equalToConstant: Constants.ScoreHeaderView.widthAnchor),
+            scoreHeaderView.heightAnchor.constraint(equalToConstant: Constants.ScoreHeaderView.heightAnchor)
         ])
     }
     
     private func setupGpaViewConstrains() {
         NSLayoutConstraint.activate([
-            gpaView.topAnchor.constraint(equalTo: scoreHeaderView.topAnchor, constant: 16),
-            gpaView.bottomAnchor.constraint(equalTo: scoreHeaderView.bottomAnchor, constant: -16),
-            gpaView.leadingAnchor.constraint(equalTo: scoreHeaderView.leadingAnchor, constant: 18),
-            gpaView.widthAnchor.constraint(equalToConstant: 88),
-            gpaView.heightAnchor.constraint(equalToConstant: 40)
+            gpaView.topAnchor.constraint(equalTo: scoreHeaderView.topAnchor, constant: Constants.GpaView.topAnchor),
+            gpaView.bottomAnchor.constraint(equalTo: scoreHeaderView.bottomAnchor, constant: Constants.GpaView.bottomAnchor),
+            gpaView.leadingAnchor.constraint(equalTo: scoreHeaderView.leadingAnchor, constant: Constants.GpaView.leadingAnchor),
+            gpaView.widthAnchor.constraint(equalToConstant: Constants.GpaView.widthAnchor),
+            gpaView.heightAnchor.constraint(equalToConstant: Constants.GpaView.heightAnchor)
         ])
     }
     
     private func setupGpaTextLabelConstraints() {
         NSLayoutConstraint.activate([
-            gpaTextLabel.topAnchor.constraint(equalTo: gpaView.topAnchor, constant: 6),
-            gpaTextLabel.bottomAnchor.constraint(equalTo: gpaView.bottomAnchor, constant: -6),
-            gpaTextLabel.leadingAnchor.constraint(equalTo: gpaView.leadingAnchor, constant: 10),
+            gpaTextLabel.topAnchor.constraint(equalTo: gpaView.topAnchor, constant: Constants.GpaTextLabel.topAnchor),
+            gpaTextLabel.bottomAnchor.constraint(equalTo: gpaView.bottomAnchor, constant: Constants.GpaTextLabel.bottomAnchor),
+            gpaTextLabel.leadingAnchor.constraint(equalTo: gpaView.leadingAnchor, constant: Constants.GpaTextLabel.leadingAnchor),
         ])
     }
     
     private func setupGpaScoreLabelConstraints(){
         NSLayoutConstraint.activate([
-            gpaScoreLabel.topAnchor.constraint(equalTo: gpaView.topAnchor, constant: 6),
-            gpaScoreLabel.bottomAnchor.constraint(equalTo: gpaView.bottomAnchor, constant: -6),
-            gpaScoreLabel.trailingAnchor.constraint(equalTo: gpaView.trailingAnchor, constant: -10),
-            gpaScoreLabel.leadingAnchor.constraint(equalTo: gpaTextLabel.trailingAnchor,constant: 2)
+            gpaScoreLabel.topAnchor.constraint(equalTo: gpaView.topAnchor, constant: Constants.GpaScoreLabel.topAnchor),
+            gpaScoreLabel.bottomAnchor.constraint(equalTo: gpaView.bottomAnchor, constant: Constants.GpaScoreLabel.bottomAnchor),
+            gpaScoreLabel.trailingAnchor.constraint(equalTo: gpaView.trailingAnchor, constant: Constants.GpaScoreLabel.trailingAnchor),
+            gpaScoreLabel.leadingAnchor.constraint(equalTo: gpaTextLabel.trailingAnchor,constant: Constants.GpaScoreLabel.leadingAnchor)
             
         ])
     }
@@ -265,6 +239,7 @@ extension HomeViewController: UITableViewDataSource {
 }
 
 extension HomeViewController: UITableViewDelegate {
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let cellHeight: CGFloat = 106
         let distanceBetweenCells: CGFloat = 20
@@ -273,6 +248,44 @@ extension HomeViewController: UITableViewDelegate {
     }
 }
 
+extension HomeViewController {
+    enum Constants {
+        enum ScoreHeaderView {
+            static let backgroundColor = UIColor(hex: "537FE7")
+            static let cornerRadius: CGFloat = 26
+            static let topAnchor: CGFloat = 100
+            static let leadingAnchor: CGFloat = 16
+            static let trailingAnchor: CGFloat = -16
+            static let widthAnchor: CGFloat = 344
+            static let heightAnchor: CGFloat = 76
+        }
+        enum GpaView {
+            static let backgroundColor = UIColor(hex: "6B91EA")
+            static let cornerRadius: CGFloat = 14
+            static let topAnchor: CGFloat = 16
+            static let bottomAnchor: CGFloat = -16
+            static let leadingAnchor: CGFloat = 18
+            static let widthAnchor: CGFloat = 88
+            static let heightAnchor: CGFloat = 40
+        }
+        enum GpaTextLabel {
+            static let text = "GPA -"
+            static let font: CGFloat = 16
+            static let topAnchor: CGFloat = 6
+            static let bottomAnchor: CGFloat = -6
+            static let leadingAnchor: CGFloat = 10
+        }
+        enum GpaScoreLabel {
+            static let textColor = UIColor(hex: "FFD24C")
+            static let font: CGFloat = 16
+            static let trailingAnchor: CGFloat = -10
+            static let topAnchor: CGFloat = 6
+            static let bottomAnchor: CGFloat = -6
+            static let leadingAnchor: CGFloat = 2
+        }
+        
+    }
+}
 
 
 
