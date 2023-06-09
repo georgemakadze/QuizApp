@@ -84,7 +84,6 @@ class SubjectCell: UITableViewCell {
         delegate?.didTapButton(in: self)
     }
     
-    
     private func  setupContainerViewConstraints() {
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: Constants.ContainerView.topAnchor),

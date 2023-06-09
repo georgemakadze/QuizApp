@@ -54,8 +54,8 @@ class HomeViewController: UIViewController {
     
     private lazy var scoreViewDetailLabel: UILabel = {
         let scoreViewDetailLabel = UILabel()
-        scoreViewDetailLabel.text = "დეტალურად"
-        scoreViewDetailLabel.font = .systemFont(ofSize: 16)
+        scoreViewDetailLabel.text = Constants.ScoreViewDetailLabel.text
+        scoreViewDetailLabel.font = .systemFont(ofSize: Constants.ScoreViewDetailLabel.font)
         scoreViewDetailLabel.textColor = .white
         scoreViewDetailLabel.backgroundColor = .clear
         scoreViewDetailLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -65,7 +65,7 @@ class HomeViewController: UIViewController {
     
     private lazy var scoreViewDetailButton: UIButton = {
         let scoreViewDetailButton = UIButton()
-        scoreViewDetailButton.setImage(UIImage(named: "Polygon"), for: .normal)
+        scoreViewDetailButton.setImage(Constants.ScoreViewDetailButton.setImage, for: .normal)
         scoreViewDetailButton.addTarget(self, action: #selector(detailedButtonTapped),  for: .touchUpInside)
         scoreViewDetailButton.translatesAutoresizingMaskIntoConstraints = false
         scoreHeaderView.addSubview(scoreViewDetailButton)
@@ -74,9 +74,9 @@ class HomeViewController: UIViewController {
     
     private lazy var chooseSubjectLabel: UILabel = {
         let chooseSubjectLabel = UILabel()
-        chooseSubjectLabel.text = "აირჩიე საგანი"
+        chooseSubjectLabel.text = Constants.ChooseSubjectLabel.text
         chooseSubjectLabel.textColor = .black
-        chooseSubjectLabel.font = .systemFont(ofSize: 16)
+        chooseSubjectLabel.font = .systemFont(ofSize: Constants.ChooseSubjectLabel.font)
         chooseSubjectLabel.backgroundColor = .clear
         chooseSubjectLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(chooseSubjectLabel)
@@ -85,9 +85,9 @@ class HomeViewController: UIViewController {
     
     private lazy var logOutButton: UIButton  = {
         let logOutButton = UIButton()
-        logOutButton.setImage(UIImage(named: "Log out"), for: .normal)
+        logOutButton.setImage(Constants.LogOutButton.setImage, for: .normal)
         logOutButton.addTarget(self, action: #selector(logOutButtonTapped), for: .touchUpInside)
-        logOutButton.layer.cornerRadius = 21
+        logOutButton.layer.cornerRadius = Constants.LogOutButton.cornerRadius
         logOutButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(logOutButton)
         return logOutButton
@@ -121,14 +121,13 @@ class HomeViewController: UIViewController {
     }
     
     @objc func logOutButtonTapped() {
-                let popupViewController = PopupViewController()
-                        popupViewController.modalPresentationStyle = .overCurrentContext
-                        present(popupViewController, animated: true, completion: nil)
-//
-//        let finishPopupController = FinishPopupController()
-//        finishPopupController.modalPresentationStyle = .overCurrentContext
-//        present(finishPopupController, animated: true, completion: nil)
-        
+        //                let popupViewController = PopupViewController()
+        //                        popupViewController.modalPresentationStyle = .overCurrentContext
+        //                        present(popupViewController, animated: true, completion: nil)
+        //
+        let finishPopupController = FinishPopupController()
+        finishPopupController.modalPresentationStyle = .overCurrentContext
+        present(finishPopupController, animated: true, completion: nil)
     }
     
     private func setupTableView() {
@@ -146,16 +145,16 @@ class HomeViewController: UIViewController {
             tableView.topAnchor.constraint(equalTo: chooseSubjectLabel.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -52)
+            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.TableView.bottomAnchor)
         ])
     }
     
     private func setupLogOutButtonConstraints() {
         NSLayoutConstraint.activate([
-            logOutButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -14),
-            logOutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            logOutButton.widthAnchor.constraint(equalToConstant: 42),
-            logOutButton.heightAnchor.constraint(equalToConstant: 42)
+            logOutButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.LogOutButton.bottomAnchor),
+            logOutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.LogOutButton.trailingAnchor),
+            logOutButton.widthAnchor.constraint(equalToConstant: Constants.LogOutButton.widthAnchor),
+            logOutButton.heightAnchor.constraint(equalToConstant: Constants.LogOutButton.heightAnchor)
         ])
     }
     
@@ -193,30 +192,29 @@ class HomeViewController: UIViewController {
             gpaScoreLabel.bottomAnchor.constraint(equalTo: gpaView.bottomAnchor, constant: Constants.GpaScoreLabel.bottomAnchor),
             gpaScoreLabel.trailingAnchor.constraint(equalTo: gpaView.trailingAnchor, constant: Constants.GpaScoreLabel.trailingAnchor),
             gpaScoreLabel.leadingAnchor.constraint(equalTo: gpaTextLabel.trailingAnchor,constant: Constants.GpaScoreLabel.leadingAnchor)
-            
         ])
     }
     
     private func setupScoreViewDetailLabelConstraints() {
         NSLayoutConstraint.activate([
-            scoreViewDetailLabel.topAnchor.constraint(equalTo: scoreHeaderView.topAnchor, constant: 28),
-            scoreViewDetailLabel.bottomAnchor.constraint(equalTo: scoreHeaderView.bottomAnchor, constant: -29),
+            scoreViewDetailLabel.topAnchor.constraint(equalTo: scoreHeaderView.topAnchor, constant: Constants.ScoreViewDetailLabel.topAnchor),
+            scoreViewDetailLabel.bottomAnchor.constraint(equalTo: scoreHeaderView.bottomAnchor, constant: Constants.ScoreViewDetailLabel.bottomAnchor)
         ])
     }
     
     private func  setupScoreViewDetailButtonConstraints() {
         NSLayoutConstraint.activate([
-            scoreViewDetailButton.topAnchor.constraint(equalTo: scoreHeaderView.topAnchor, constant: 30),
-            scoreViewDetailButton.bottomAnchor.constraint(equalTo: scoreHeaderView.bottomAnchor, constant: -31),
-            scoreViewDetailButton.trailingAnchor.constraint(equalTo: scoreHeaderView.trailingAnchor, constant: -34),
-            scoreViewDetailButton.leadingAnchor.constraint(equalTo: scoreViewDetailLabel.trailingAnchor, constant: 4)
+            scoreViewDetailButton.topAnchor.constraint(equalTo: scoreHeaderView.topAnchor, constant: Constants.ScoreViewDetailButton.topAnchor),
+            scoreViewDetailButton.bottomAnchor.constraint(equalTo: scoreHeaderView.bottomAnchor, constant: Constants.ScoreViewDetailButton.bottomAnchor),
+            scoreViewDetailButton.trailingAnchor.constraint(equalTo: scoreHeaderView.trailingAnchor, constant: Constants.ScoreViewDetailButton.trailingAnchor),
+            scoreViewDetailButton.leadingAnchor.constraint(equalTo: scoreViewDetailLabel.trailingAnchor, constant: Constants.ScoreViewDetailButton.leadingAnchor)
         ])
     }
     
     private func setupChooseSubjectLabelConstraints() {
         NSLayoutConstraint.activate([
-            chooseSubjectLabel.topAnchor.constraint(equalTo: scoreHeaderView.bottomAnchor, constant: 32),
-            chooseSubjectLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            chooseSubjectLabel.topAnchor.constraint(equalTo: scoreHeaderView.bottomAnchor, constant: Constants.ChooseSubjectLabel.topAnchor),
+            chooseSubjectLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.ChooseSubjectLabel.leadingAnchor),
         ])
     }
 }
@@ -288,7 +286,36 @@ extension HomeViewController {
             static let bottomAnchor: CGFloat = -6
             static let leadingAnchor: CGFloat = 2
         }
-        
+        enum ScoreViewDetailLabel {
+            static let text = "დეტალურად"
+            static let font: CGFloat = 16
+            static let topAnchor: CGFloat = 28
+            static let bottomAnchor: CGFloat = -29
+        }
+        enum ScoreViewDetailButton {
+            static let setImage = UIImage(named: "Polygon")
+            static let topAnchor: CGFloat = 30
+            static let leadingAnchor: CGFloat = 4
+            static let trailingAnchor: CGFloat = -34
+            static let bottomAnchor: CGFloat = -31
+        }
+        enum ChooseSubjectLabel {
+            static let text = "აირჩიე საგანი"
+            static let font: CGFloat = 16
+            static let topAnchor: CGFloat = 32
+            static let leadingAnchor: CGFloat = 16
+        }
+        enum LogOutButton {
+            static let setImage = UIImage(named: "Log out")
+            static let cornerRadius: CGFloat = 21
+            static let widthAnchor: CGFloat = 42
+            static let heightAnchor: CGFloat = 42
+            static let trailingAnchor: CGFloat = -16
+            static let bottomAnchor: CGFloat = -14
+        }
+        enum TableView {
+            static let bottomAnchor: CGFloat = -52
+        }
     }
 }
 

@@ -9,6 +9,7 @@ import Foundation
 import UIKit
 
 class QuizViewController: UIViewController {
+    
     private var tableView: UITableView!
     
     private lazy var questionBackground: UIImageView = {
@@ -51,14 +52,14 @@ class QuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        questionBackgroundConstrains()
+        setupQuestionBackgroundConstrains()
         setupTableView()
-        tableViewConstraints()
-        questionLabelConstraints()
-        nextButtonConstraints()
+        setupTableViewConstraints()
+        setupQuestionLabelConstraints()
+        setupNextButtonConstraints()
     }
     
-    func setupTableView() {
+    private func setupTableView() {
         tableView = UITableView()
         tableView.separatorStyle = .none
         tableView.delegate = self
@@ -68,7 +69,7 @@ class QuizViewController: UIViewController {
         view.addSubview(tableView)
     }
     
-    private func tableViewConstraints() {
+    private func setupTableViewConstraints() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: questionBackground.bottomAnchor, constant: 74),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -76,7 +77,7 @@ class QuizViewController: UIViewController {
         ])
     }
     
-    private func nextButtonConstraints() {
+    private func setupNextButtonConstraints() {
         NSLayoutConstraint.activate([
             nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
             nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
@@ -85,7 +86,7 @@ class QuizViewController: UIViewController {
         ])
     }
     
-    private func questionBackgroundConstrains() {
+    private func setupQuestionBackgroundConstrains() {
         NSLayoutConstraint.activate([
             questionBackground.topAnchor.constraint(equalTo: view.topAnchor),
             questionBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -96,7 +97,7 @@ class QuizViewController: UIViewController {
         ])
     }
     
-    private func questionLabelConstraints() {
+    private func setupQuestionLabelConstraints() {
         NSLayoutConstraint.activate([
             questionLabel.centerXAnchor.constraint(equalTo: questionBackground.centerXAnchor),
             questionLabel.topAnchor.constraint(equalTo: questionBackground.topAnchor, constant: Constants.QuestionLabel.topAnchor),
@@ -128,7 +129,6 @@ extension QuizViewController: UITableViewDelegate {
         let cellHeight: CGFloat = 60
         let distanceBetweenCells: CGFloat = 12
         let totalHeight = cellHeight + distanceBetweenCells
-        
         return totalHeight
     }
 }

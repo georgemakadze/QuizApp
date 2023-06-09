@@ -42,21 +42,20 @@ class GPADetailViewController: UIViewController {
     }()
     
     let subjects: [Subject] = [
-            Subject(icon: "programming", name: "პროგრამირება", description: "აღწერა"),
-            Subject(icon: "Book", name: "ისტორია", description: "აღწერა"),
-            Subject(icon: "Atom", name: "ფიზიკა", description: "აღწერა"),
-            Subject(icon: "Globe", name: "გეოგრაფია", description: "აღწერა")
-        ]
+        Subject(icon: "programming", name: "პროგრამირება", description: "აღწერა"),
+        Subject(icon: "Book", name: "ისტორია", description: "აღწერა"),
+        Subject(icon: "Atom", name: "ფიზიკა", description: "აღწერა"),
+        Subject(icon: "Globe", name: "გეოგრაფია", description: "აღწერა")
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        pointLabelConstraints()
-        starImageConstraints()
+        setupPointLabelConstraints()
+        setupStarImageConstraints()
         setupTableView()
-        tableViewConstraints()
-//        noPointsImageConstraints()
-        
+        setupTableViewConstraints()
+        //        noPointsImageConstraints()
     }
     
     private func setupTableView() {
@@ -69,7 +68,7 @@ class GPADetailViewController: UIViewController {
         view.addSubview(tableView)
     }
     
-    private func tableViewConstraints() {
+    private func setupTableViewConstraints() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: pointLabel.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -78,22 +77,21 @@ class GPADetailViewController: UIViewController {
         ])
     }
     
-    
-    private func pointLabelConstraints() {
+    private func setupPointLabelConstraints() {
         NSLayoutConstraint.activate([
             pointLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.PointLabel.topAnchor),
             pointLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.PointLabel.leadingAnchor),
         ])
     }
     
-    private func starImageConstraints() {
+    private func setupStarImageConstraints() {
         NSLayoutConstraint.activate([
             starImage.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.StarImage.topAnchor),
             starImage.leadingAnchor.constraint(equalTo: pointLabel.trailingAnchor, constant: Constants.StarImage.leadingAnchor),
         ])
     }
     
-    func noPointsImageConstraints() {
+    private func noPointsImageConstraints() {
         NSLayoutConstraint.activate([
             noPointsImage.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             noPointsImage.centerXAnchor.constraint(equalTo: view.centerXAnchor)
@@ -102,21 +100,21 @@ class GPADetailViewController: UIViewController {
 }
 
 extension GPADetailViewController: UITableViewDataSource {
-
+    
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-           return subjects.count
-       }
-
-       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-           let cell = tableView.dequeueReusableCell(withIdentifier: ScoreCell.reuseIdentifier, for: indexPath) as! ScoreCell
-           let subject = subjects[indexPath.row]
-           cell.configure(with: subject)
-           return cell
-       }
+        return subjects.count
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: ScoreCell.reuseIdentifier, for: indexPath) as! ScoreCell
+        let subject = subjects[indexPath.row]
+        cell.configure(with: subject)
+        return cell
+    }
 }
 
 extension GPADetailViewController: UITableViewDelegate {
-
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let cellHeight = Constants.TableView.cellHeight
         let distanceBetweenCells = Constants.TableView.distanceBetweenCells
