@@ -92,7 +92,7 @@ class HomeViewController: UIViewController {
         view.addSubview(logOutButton)
         return logOutButton
     }()
-
+    
     let subjects: [Subject] = [
         Subject(icon: "programming", name: "პროგრამირება", description: "აღწერა"),
         Subject(icon: "Book", name: "ისტორია", description: "აღწერა"),
@@ -121,9 +121,14 @@ class HomeViewController: UIViewController {
     }
     
     @objc func logOutButtonTapped() {
-        let popupViewController = PopupViewController()
-                popupViewController.modalPresentationStyle = .overCurrentContext
-                present(popupViewController, animated: true, completion: nil)
+        //        let popupViewController = PopupViewController()
+        //                popupViewController.modalPresentationStyle = .overCurrentContext
+        //                present(popupViewController, animated: true, completion: nil)
+        
+        let finishPopupController = FinishPopupController()
+        finishPopupController.modalPresentationStyle = .overCurrentContext
+        present(finishPopupController, animated: true, completion: nil)
+        
     }
     
     private func setupTableView() {

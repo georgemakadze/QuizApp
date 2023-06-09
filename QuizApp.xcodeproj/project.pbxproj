@@ -24,6 +24,7 @@
 		0EDD08D12A2FB5E600FF282B /* ScoreCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08D02A2FB5E600FF282B /* ScoreCell.swift */; };
 		0EDD08D42A2FBD0400FF282B /* UITableViewCell+Identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08D32A2FBD0400FF282B /* UITableViewCell+Identifier.swift */; };
 		0EDD08D72A31C4F800FF282B /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08D62A31C4F800FF282B /* PopupViewController.swift */; };
+		0EDD08DA2A33258700FF282B /* FinishPopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08D92A33258700FF282B /* FinishPopupController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -46,6 +47,7 @@
 		0EDD08D02A2FB5E600FF282B /* ScoreCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScoreCell.swift; sourceTree = "<group>"; };
 		0EDD08D32A2FBD0400FF282B /* UITableViewCell+Identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+Identifier.swift"; sourceTree = "<group>"; };
 		0EDD08D62A31C4F800FF282B /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
+		0EDD08D92A33258700FF282B /* FinishPopupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishPopupController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -152,6 +154,7 @@
 		0EDD08B92A2DC4B300FF282B /* Custom UI */ = {
 			isa = PBXGroup;
 			children = (
+				0EDD08D82A33251500FF282B /* FinishPopup */,
 				0EDD08D52A31C4D200FF282B /* PopupViewConstroller */,
 				0EDD08CA2A2F2A7100FF282B /* QuizController */,
 				0EDD08C52A2F132A00FF282B /* GPADetailViewController */,
@@ -228,6 +231,14 @@
 			path = PopupViewConstroller;
 			sourceTree = "<group>";
 		};
+		0EDD08D82A33251500FF282B /* FinishPopup */ = {
+			isa = PBXGroup;
+			children = (
+				0EDD08D92A33258700FF282B /* FinishPopupController.swift */,
+			);
+			path = FinishPopup;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -299,6 +310,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0EDD08C72A2F133B00FF282B /* GPADetailViewController.swift in Sources */,
+				0EDD08DA2A33258700FF282B /* FinishPopupController.swift in Sources */,
 				0EDD089E2A2A0B4E00FF282B /* LoginViewController.swift in Sources */,
 				0EDD08C92A2F26D600FF282B /* QuizViewController.swift in Sources */,
 				0EDD089A2A2A0B4E00FF282B /* AppDelegate.swift in Sources */,
