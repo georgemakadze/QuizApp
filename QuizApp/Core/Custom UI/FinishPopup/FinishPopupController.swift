@@ -136,8 +136,6 @@ class FinishPopupController: UIViewController {
             closeButton.heightAnchor.constraint(equalToConstant: 34),
             closeButton.centerXAnchor.constraint(equalTo: popupView.centerXAnchor),
             closeButton.topAnchor.constraint(equalTo: dividerView.bottomAnchor, constant: 4)
-            
         ])
     }
-    
 }

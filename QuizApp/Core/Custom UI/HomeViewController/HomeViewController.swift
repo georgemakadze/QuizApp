@@ -121,13 +121,13 @@ class HomeViewController: UIViewController {
     }
     
     @objc func logOutButtonTapped() {
-        //        let popupViewController = PopupViewController()
-        //                popupViewController.modalPresentationStyle = .overCurrentContext
-        //                present(popupViewController, animated: true, completion: nil)
-        
-        let finishPopupController = FinishPopupController()
-        finishPopupController.modalPresentationStyle = .overCurrentContext
-        present(finishPopupController, animated: true, completion: nil)
+                let popupViewController = PopupViewController()
+                        popupViewController.modalPresentationStyle = .overCurrentContext
+                        present(popupViewController, animated: true, completion: nil)
+//
+//        let finishPopupController = FinishPopupController()
+//        finishPopupController.modalPresentationStyle = .overCurrentContext
+//        present(finishPopupController, animated: true, completion: nil)
         
     }
     

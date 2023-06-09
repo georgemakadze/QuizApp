@@ -12,8 +12,8 @@ class PopupViewController: UIViewController {
     
     private lazy var popupView: UIView = {
         let popupView = UIView()
-        popupView.backgroundColor = UIColor(hex: "FFC44A")
-        popupView.layer.cornerRadius = 10
+        popupView.backgroundColor = Constants.PopupView.backgroundColor
+        popupView.layer.cornerRadius = Constants.PopupView.cornerRadius
         popupView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(popupView)
         return popupView
@@ -21,11 +21,11 @@ class PopupViewController: UIViewController {
     
     private lazy var popupLabel: UILabel = {
         let popupLabel = UILabel()
-        popupLabel.text = "ნამდვილად გსრურთ გასვლა?"
+        popupLabel.text = Constants.PopupLabel.text
         popupLabel.backgroundColor = .clear
-        popupLabel.numberOfLines = 3
+        popupLabel.numberOfLines = Constants.PopupLabel.numberOfLines
         popupLabel.lineBreakMode = .byTruncatingTail
-        popupLabel.font = .systemFont(ofSize: 18)
+        popupLabel.font = .systemFont(ofSize: Constants.PopupLabel.font)
         popupLabel.textColor = .white
         popupLabel.translatesAutoresizingMaskIntoConstraints = false
         popupView.addSubview(popupLabel)
@@ -35,9 +35,9 @@ class PopupViewController: UIViewController {
     private lazy var yesButton: UIButton = {
         let yesButton = UIButton()
         yesButton.backgroundColor = .white
-        yesButton.setTitle("კი", for: .normal)
+        yesButton.setTitle(Constants.YesButton.setTitle, for: .normal)
         yesButton.setTitleColor(.black, for: .normal)
-        yesButton.layer.cornerRadius = 17
+        yesButton.layer.cornerRadius = Constants.YesButton.cornerRadius
         yesButton.addTarget(self, action: #selector(yesButtonTapped), for: .touchUpInside)
         yesButton.translatesAutoresizingMaskIntoConstraints = false
         popupView.addSubview(yesButton)
@@ -47,9 +47,9 @@ class PopupViewController: UIViewController {
     private lazy var noButton: UIButton = {
         let noButton = UIButton()
         noButton.backgroundColor = .white
-        noButton.setTitle("არა", for: .normal)
+        noButton.setTitle(Constants.NoButton.setTitle, for: .normal)
         noButton.setTitleColor(.black, for: .normal)
-        noButton.layer.cornerRadius = 17
+        noButton.layer.cornerRadius = Constants.NoButton.cornerRadius
         noButton.addTarget(self, action: #selector(yesButtonTapped), for: .touchUpInside)
         noButton.translatesAutoresizingMaskIntoConstraints = false
         popupView.addSubview(noButton)
@@ -81,35 +81,69 @@ class PopupViewController: UIViewController {
         NSLayoutConstraint.activate([
             popupView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             popupView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
-            popupView.widthAnchor.constraint(equalToConstant: 270),
-            popupView.heightAnchor.constraint(equalToConstant: 176)
+            popupView.widthAnchor.constraint(equalToConstant: Constants.PopupView.widthAnchor),
+            popupView.heightAnchor.constraint(equalToConstant: Constants.PopupView.heightAnchor)
         ])
     }
     
     private func setupPopupLabelConstraints() {
         NSLayoutConstraint.activate([
-            popupLabel.topAnchor.constraint(equalTo: popupView.topAnchor, constant: 38),
-            popupLabel.leadingAnchor.constraint(equalTo: popupView.leadingAnchor, constant: 24),
-            popupLabel.trailingAnchor.constraint(equalTo: popupView.trailingAnchor, constant: -24)
+            popupLabel.topAnchor.constraint(equalTo: popupView.topAnchor, constant: Constants.PopupLabel.topAnchor),
+            popupLabel.leadingAnchor.constraint(equalTo: popupView.leadingAnchor, constant: Constants.PopupLabel.leadingAnchor),
+            popupLabel.trailingAnchor.constraint(equalTo: popupView.trailingAnchor, constant: Constants.PopupLabel.trailingAnchor)
         ])
     }
     
     private func setupYesButtonConstraints() {
         NSLayoutConstraint.activate([
-            yesButton.widthAnchor.constraint(equalToConstant: 106),
-            yesButton.heightAnchor.constraint(equalToConstant: 34),
-            yesButton.topAnchor.constraint(equalTo: popupLabel.bottomAnchor, constant: 42),
-            yesButton.leadingAnchor.constraint(equalTo: popupView.leadingAnchor, constant: 24)
+            yesButton.widthAnchor.constraint(equalToConstant: Constants.YesButton.widthAnchor),
+            yesButton.heightAnchor.constraint(equalToConstant: Constants.YesButton.heightAnchor),
+            yesButton.topAnchor.constraint(equalTo: popupLabel.bottomAnchor, constant: Constants.YesButton.topAnchor),
+            yesButton.leadingAnchor.constraint(equalTo: popupView.leadingAnchor, constant: Constants.YesButton.leadingAnchor)
         ])
     }
     
     private func setupNoButtonConstraints() {
         NSLayoutConstraint.activate([
-            noButton.widthAnchor.constraint(equalToConstant: 106),
-            noButton.heightAnchor.constraint(equalToConstant: 34),
-            noButton.topAnchor.constraint(equalTo: popupLabel.bottomAnchor, constant: 42),
-            noButton.trailingAnchor.constraint(equalTo: popupView.trailingAnchor, constant: -24)
+            noButton.widthAnchor.constraint(equalToConstant: Constants.NoButton.widthAnchor),
+            noButton.heightAnchor.constraint(equalToConstant: Constants.NoButton.heightAnchor),
+            noButton.topAnchor.constraint(equalTo: popupLabel.bottomAnchor, constant: Constants.NoButton.topAnchor),
+            noButton.trailingAnchor.constraint(equalTo: popupView.trailingAnchor, constant: Constants.NoButton.trailingAnchor)
         ])
     }
-    
+}
+
+extension PopupViewController {
+    enum Constants {
+        enum PopupView {
+            static let backgroundColor = UIColor(hex: "FFC44A")
+            static let cornerRadius: CGFloat = 10
+            static let widthAnchor: CGFloat = 270
+            static let heightAnchor: CGFloat = 176
+        }
+        enum PopupLabel {
+            static let text = "ნამდვილად გსრურთ გასვლა?"
+            static let font: CGFloat = 18
+            static let numberOfLines = 3
+            static let topAnchor: CGFloat = 38
+            static let leadingAnchor: CGFloat = 24
+            static let trailingAnchor: CGFloat = -24
+        }
+        enum YesButton {
+            static let setTitle = "კი"
+            static let cornerRadius: CGFloat = 17
+            static let widthAnchor: CGFloat = 106
+            static let heightAnchor: CGFloat = 34
+            static let topAnchor: CGFloat = 42
+            static let leadingAnchor: CGFloat = 24
+        }
+        enum NoButton {
+            static let setTitle = "არა"
+            static let cornerRadius: CGFloat = 17
+            static let widthAnchor: CGFloat = 106
+            static let heightAnchor: CGFloat = 34
+            static let topAnchor: CGFloat = 42
+            static let trailingAnchor: CGFloat = -24
+        }
+    }
 }
