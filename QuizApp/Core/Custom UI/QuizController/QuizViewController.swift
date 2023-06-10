@@ -15,7 +15,7 @@ class QuizViewController: UIViewController {
     private lazy var questionBackground: UIImageView = {
         let questionBackground = UIImageView()
         questionBackground.image = Constants.QuestionBackground.image
-        questionBackground.contentMode = .scaleAspectFill
+        questionBackground.contentMode = .scaleToFill
         questionBackground.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(questionBackground)
         return questionBackground
@@ -26,6 +26,7 @@ class QuizViewController: UIViewController {
         questionLabel.textColor = .black
         questionLabel.backgroundColor = .clear
         questionLabel.numberOfLines = Constants.QuestionLabel.numberOfLines
+        questionLabel.textAlignment = .center
         questionLabel.lineBreakMode = .byTruncatingTail
         questionLabel.font = .systemFont(ofSize: Constants.QuestionLabel.font)
         questionLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -35,19 +36,22 @@ class QuizViewController: UIViewController {
     
     private lazy var nextButton: UIButton = {
         let nextButton = UIButton()
-        nextButton.setImage(UIImage(named: "Next"), for: .normal)
+        nextButton.setImage(Constants.NextButton.setImage, for: .normal)
         // daklikeba
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(nextButton)
         return nextButton
     }()
     
-    let question: [QuestionItem] = [
-        QuestionItem(answer: "Python", text: "რომელია ყველაზე პოპულარული პროგრამირების ენა?"),
-        QuestionItem(answer: "Java", text: "რომელია ყველაზე პოპულარული პროგრამირების ენა?"),
-        QuestionItem(answer: "C++", text: "რომელია ყველაზე პოპულარული პროგრამირების ენა?"),
-        QuestionItem(answer: "Kotlin", text: "რომელია ყველაზე პოპულარული პროგრამირების ენა?")
-    ]
+    let question: Question = Question(
+        text: "რომელია ყველაზე პოპულარული პროგრამირების ენა?",
+        answers: [
+            "Python",
+            "Java",
+            "C++",
+            "Kotlin"
+        ]
+    )
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -71,7 +75,7 @@ class QuizViewController: UIViewController {
     
     private func setupTableViewConstraints() {
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: questionBackground.bottomAnchor, constant: 74),
+            tableView.topAnchor.constraint(equalTo: questionBackground.bottomAnchor, constant: Constants.TableView.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
@@ -79,10 +83,10 @@ class QuizViewController: UIViewController {
     
     private func setupNextButtonConstraints() {
         NSLayoutConstraint.activate([
-            nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            nextButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: 64),
-            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -160)
+            nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.NextButton.leadingAnchor),
+            nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.NextButton.trailingAnchor),
+            nextButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: Constants.NextButton.topAnchor),
+            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.NextButton.bottomAnchor)
         ])
     }
     
@@ -91,35 +95,32 @@ class QuizViewController: UIViewController {
             questionBackground.topAnchor.constraint(equalTo: view.topAnchor),
             questionBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             questionBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            //            questionBackground.widthAnchor.constraint(equalToConstant: 376),
-            //            questionBackground.heightAnchor.constraint(equalToConstant: 218)
-            //            questionBackground.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: -580)
+            questionBackground.heightAnchor.constraint(lessThanOrEqualToConstant: Constants.QuestionBackground.heightAnchor)
         ])
     }
     
     private func setupQuestionLabelConstraints() {
         NSLayoutConstraint.activate([
-            questionLabel.centerXAnchor.constraint(equalTo: questionBackground.centerXAnchor),
             questionLabel.topAnchor.constraint(equalTo: questionBackground.topAnchor, constant: Constants.QuestionLabel.topAnchor),
             questionLabel.leadingAnchor.constraint(equalTo: questionBackground.leadingAnchor, constant: Constants.QuestionLabel.leadingAnchor),
             questionLabel.trailingAnchor.constraint(equalTo: questionBackground.trailingAnchor, constant: Constants.QuestionLabel.trailingAnchor),
-            questionLabel.widthAnchor.constraint(lessThanOrEqualToConstant: Constants.QuestionLabel.widthAnchor)
+            questionLabel.bottomAnchor.constraint(equalTo: questionBackground.bottomAnchor, constant: Constants.QuestionLabel.bottomAnchor)
         ])
     }
 }
 
 extension QuizViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return question.count
+        return question.answers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AnswerCell.reuseIdentifier, for: indexPath) as! AnswerCell
         //        let question = question[indexPath.row]
         //        cell.configure(with: question.answer)
-        let currentQuestion = question[indexPath.row]
-        cell.configure(with: currentQuestion.answer)
-        questionLabel.text = currentQuestion.text
+        let currentAnswer = question.answers[indexPath.row]
+        cell.configure(with: currentAnswer)
+        questionLabel.text = question.text
         return cell
     }
 }
@@ -137,14 +138,26 @@ extension QuizViewController {
     enum Constants {
         enum QuestionBackground {
             static let image = UIImage(named: "Rectangle")
+            static let heightAnchor: CGFloat = 250
         }
         enum QuestionLabel {
             static let numberOfLines = 3
             static let font: CGFloat = 16
-            static let topAnchor: CGFloat = 120
+            static let topAnchor: CGFloat = 48
             static let leadingAnchor: CGFloat = 72
             static let trailingAnchor: CGFloat = -72
             static let widthAnchor: CGFloat = 200
+            static let bottomAnchor: CGFloat = -8
+        }
+        enum NextButton {
+            static let setImage = UIImage(named: "Next")
+            static let topAnchor: CGFloat = 64
+            static let leadingAnchor: CGFloat = 16
+            static let trailingAnchor: CGFloat = -16
+            static let bottomAnchor: CGFloat = -64
+        }
+        enum TableView {
+            static let topAnchor: CGFloat = 74
         }
     }
 }

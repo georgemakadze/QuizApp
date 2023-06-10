@@ -61,8 +61,6 @@ class ScoreCell: UITableViewCell {
         return scoreLabel
     }()
     
-    weak var delegate: SubjectCellDelegate?
-    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         setup()

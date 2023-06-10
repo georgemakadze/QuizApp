@@ -8,9 +8,9 @@
 import Foundation
 import UIKit
 
-protocol SubjectCellDelegate: AnyObject {
-    func didTapButton(in cell: SubjectCell)
-}
+//protocol SubjectCellDelegate: AnyObject {
+//    func didTapButton(in cell: SubjectCell)
+//}
 
 class SubjectCell: UITableViewCell {
     
@@ -60,7 +60,7 @@ class SubjectCell: UITableViewCell {
         return button
     }()
     
-    weak var delegate: SubjectCellDelegate?
+    //    weak var delegate: SubjectCellDelegate?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -81,7 +81,7 @@ class SubjectCell: UITableViewCell {
     }
     
     @objc func buttonTapped() {
-        delegate?.didTapButton(in: self)
+        //        delegate?.didTapButton(in: self)
     }
     
     private func  setupContainerViewConstraints() {
@@ -89,8 +89,9 @@ class SubjectCell: UITableViewCell {
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: Constants.ContainerView.topAnchor),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: Constants.ContainerView.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: Constants.ContainerView.trailingAnchor),
-            containerView.widthAnchor.constraint(equalToConstant: Constants.ContainerView.widthAnchor),
-            containerView.heightAnchor.constraint(equalToConstant: Constants.ContainerView.heightAnchor)
+            //            containerView.widthAnchor.constraint(equalToConstant: Constants.ContainerView.widthAnchor),
+            //            containerView.heightAnchor.constraint(equalToConstant: Constants.ContainerView.heightAnchor)
+            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: Constants.ContainerView.bottomAnchor)
         ])
     }
     
@@ -106,7 +107,6 @@ class SubjectCell: UITableViewCell {
         NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: Constants.NameLabel.leadingAnchor),
             nameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Constants.NameLabel.topAnchor),
-            //firstLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -52)
         ])
     }
     
@@ -138,11 +138,12 @@ extension SubjectCell {
         enum ContainerView {
             static let backgroundColor = UIColor(hex: "F6F6F6")
             static let cornerRadius: CGFloat = 26
-            static let topAnchor: CGFloat = 20
+            static let topAnchor: CGFloat = 9
             static let leadingAnchor: CGFloat = 20
             static let trailingAnchor: CGFloat = -20
             static let widthAnchor: CGFloat = 344
             static let heightAnchor: CGFloat = 106
+            static let bottomAnchor: CGFloat = -9
         }
         enum IconImageView {
             static let topAnchor: CGFloat = 22

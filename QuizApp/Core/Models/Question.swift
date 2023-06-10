@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct QuestionItem: Hashable {
-    let answer: String
+struct Question: Hashable {
     let text : String
+    let answers: [String]
 }

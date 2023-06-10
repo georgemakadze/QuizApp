@@ -160,7 +160,7 @@ class HomeViewController: UIViewController {
     
     private func setupScoreHeaderViewConstraints() {
         NSLayoutConstraint.activate([
-            scoreHeaderView.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.ScoreHeaderView.topAnchor),
+            scoreHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.ScoreHeaderView.topAnchor),
             scoreHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.ScoreHeaderView.leadingAnchor),
             scoreHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.ScoreHeaderView.trailingAnchor),
             scoreHeaderView.widthAnchor.constraint(equalToConstant: Constants.ScoreHeaderView.widthAnchor),
@@ -219,12 +219,12 @@ class HomeViewController: UIViewController {
     }
 }
 
-extension HomeViewController: SubjectCellDelegate {
-    func didTapButton(in cell: SubjectCell) {
-        let quizController = QuizViewController()
-        navigationController?.pushViewController(quizController, animated: true)
-    }
-}
+//extension HomeViewController: SubjectCellDelegate {
+//    func didTapButton(in cell: SubjectCell) {
+//        let quizController = QuizViewController()
+//        navigationController?.pushViewController(quizController, animated: true)
+//    }
+//}
 
 extension HomeViewController: UITableViewDataSource {
     
@@ -236,16 +236,21 @@ extension HomeViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: SubjectCell.reuseIdentifier, for: indexPath) as! SubjectCell
         let subject = subjects[indexPath.row]
         cell.configure(with: subject)
-        cell.delegate = self
+//        cell.delegate = self
         return cell
     }
 }
 
 extension HomeViewController: UITableViewDelegate {
     
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let quizController = QuizViewController()
+        navigationController?.pushViewController(quizController, animated: true)
+    }
+    
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let cellHeight: CGFloat = 106
-        let distanceBetweenCells: CGFloat = 20
+        let cellHeight: CGFloat = 108
+        let distanceBetweenCells: CGFloat = 18
         let totalHeight = cellHeight + distanceBetweenCells
         return totalHeight
     }
@@ -256,7 +261,7 @@ extension HomeViewController {
         enum ScoreHeaderView {
             static let backgroundColor = UIColor(hex: "537FE7")
             static let cornerRadius: CGFloat = 26
-            static let topAnchor: CGFloat = 100
+            static let topAnchor: CGFloat = 20
             static let leadingAnchor: CGFloat = 16
             static let trailingAnchor: CGFloat = -16
             static let widthAnchor: CGFloat = 344

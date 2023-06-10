@@ -44,30 +44,31 @@ class LoginViewController: UIViewController {
         return startButton
     }()
     
-    private lazy var coverLabel: UITextView = {
-        let coverLabel = UITextView()
+    private lazy var coverLabel: UILabel = {
+        let coverLabel = UILabel()
         coverLabel.text = Constants.CoverLabel.text
         coverLabel.backgroundColor = .clear
         coverLabel.font = .systemFont(ofSize: Constants.CoverLabel.font)
         coverLabel.textColor = .white
         coverLabel.textAlignment = .center
         coverLabel.translatesAutoresizingMaskIntoConstraints = false
-        coverImageView.addSubview(coverLabel)
+        view.addSubview(coverLabel)
         return coverLabel
     }()
     
     private lazy var coverIcon: UIImageView = {
         let coverIcon = UIImageView()
         coverIcon.image = Constants.CoverIcon.image
-        coverIcon.contentMode = .scaleAspectFill
+        coverIcon.contentMode = .scaleAspectFit
         coverIcon.translatesAutoresizingMaskIntoConstraints = false
-        coverImageView.addSubview(coverIcon)
+        view.addSubview(coverIcon)
         return coverIcon
     }()
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        //        navigationController?.setNavigationBarHidden(true, animated: false)
         setupCoverImageViewConstraints()
         setupLoginTextViewConstraints()
         setupStartButton()
@@ -82,10 +83,10 @@ class LoginViewController: UIViewController {
     
     private func setupCoverImageViewConstraints() {
         NSLayoutConstraint.activate([
-            //            coverImageView.topAnchor.constraint(equalTo: view.topAnchor, constant: 10),
+            coverImageView.topAnchor.constraint(equalTo: view.topAnchor),
             coverImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             coverImageView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            coverImageView.bottomAnchor.constraint(equalTo: view.centerYAnchor),
+            coverImageView.heightAnchor.constraint(lessThanOrEqualToConstant: Constants.CoverImageView.heightAnchor)
         ])
     }
     
@@ -93,6 +94,7 @@ class LoginViewController: UIViewController {
         NSLayoutConstraint.activate([
             loginTextView.topAnchor.constraint(equalTo: coverImageView.bottomAnchor, constant: Constants.LoginTextView.topAnchor),
             loginTextView.widthAnchor.constraint(equalToConstant: Constants.LoginTextView.widthAnchor),
+            loginTextView.heightAnchor.constraint(equalToConstant: Constants.LoginTextView.heightAnchor),
             loginTextView.centerXAnchor.constraint(equalTo: view.centerXAnchor)
         ])
     }
@@ -101,25 +103,25 @@ class LoginViewController: UIViewController {
         NSLayoutConstraint.activate([
             startButton.topAnchor.constraint(equalTo: loginTextView.bottomAnchor, constant: Constants.StartButton.topAnchor),
             startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
-            startButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.StartButton.bottomAnchor)
         ])
     }
     
     private func setupCoverLabelConstraints() {
         NSLayoutConstraint.activate([
-            coverLabel.leadingAnchor.constraint(equalTo: coverImageView.leadingAnchor, constant: Constants.CoverLabel.leadingAnchor),
-            coverLabel.trailingAnchor.constraint(equalTo: coverImageView.trailingAnchor, constant: Constants.CoverLabel.trailingAnchor),
-            coverLabel.topAnchor.constraint(equalTo: coverImageView.topAnchor, constant: Constants.CoverLabel.topAnchor),
-            //text.bottomAnchor.constraint(equalTo: firstView.bottomAnchor, constant: 40)
+            coverLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.CoverLabel.leadingAnchor),
+            coverLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.CoverLabel.trailingAnchor),
+            coverLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.CoverLabel.topAnchor),
         ])
     }
     
     private func setupCoverIconConstraints() {
         NSLayoutConstraint.activate([
             coverIcon.topAnchor.constraint(equalTo: coverLabel.bottomAnchor, constant: Constants.CoverIcon.topAnchor),
-            coverIcon.leadingAnchor.constraint(equalTo: coverImageView.leadingAnchor, constant: Constants.CoverIcon.leadingAnchor),
-            coverIcon.trailingAnchor.constraint(equalTo: coverImageView.trailingAnchor, constant: Constants.CoverIcon.trailingAnchor),
-            coverIcon.bottomAnchor.constraint(equalTo: coverImageView.bottomAnchor, constant: Constants.CoverIcon.bottomAnchor)
+            coverIcon.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.CoverIcon.leadingAnchor),
+            coverIcon.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.CoverIcon.trailingAnchor),
+            //            coverIcon.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.CoverIcon.bottomAnchor),
+            coverIcon.widthAnchor.constraint(equalToConstant: Constants.CoverIcon.widthAnchor),
+            coverIcon.heightAnchor.constraint(equalToConstant: Constants.CoverIcon.heightAnchor)
         ])
     }
 }
@@ -128,6 +130,7 @@ extension LoginViewController {
     enum Constants {
         enum CoverImageView {
             static let image = UIImage(named: "Blue")
+            static let heightAnchor: CGFloat = 300
         }
         enum LoginTextView {
             static let font: CGFloat = 14
@@ -136,28 +139,30 @@ extension LoginViewController {
             static let borderColor = UIColor(hex: "FFC44A").cgColor
             static let borderWidth: CGFloat = 1.0
             static let cornerRadius: CGFloat = 12
-            static let topAnchor: CGFloat = 130
+            static let topAnchor: CGFloat = 200
             static let widthAnchor: CGFloat = 270
+            static let heightAnchor: CGFloat = 44
         }
         enum StartButton {
             static let cornerRadius: CGFloat = 12
             static let setImage = UIImage(named: "StartButton")
-            static let topAnchor: CGFloat = 38
-            static let bottomAnchor: CGFloat = -170
+            static let topAnchor: CGFloat = 40
+            static let bottomAnchor: CGFloat = -70
         }
         enum CoverLabel {
             static let text = "ჩემი პირველი ქვიზი"
             static let font: CGFloat = 20
             static let leadingAnchor: CGFloat = 80
             static let trailingAnchor: CGFloat = -89
-            static let topAnchor: CGFloat = 10
+            static let topAnchor: CGFloat = 100
         }
         enum CoverIcon {
             static let image = UIImage(named: "Illustration")
-            static let topAnchor: CGFloat = 10
+            static let topAnchor: CGFloat = 2
             static let leadingAnchor: CGFloat = 20
             static let trailingAnchor: CGFloat = -20
-            static let bottomAnchor: CGFloat = -40
+            static let widthAnchor: CGFloat = 299
+            static let heightAnchor: CGFloat = 299
         }
     }
 }
