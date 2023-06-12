@@ -10,10 +10,12 @@ import UIKit
 
 class AnswerCell: UITableViewCell {
     
+    //MARK: Components
+    
     private lazy var containerView: UIView = {
         let containerView = UIView()
-        containerView.backgroundColor = Constans.ContainerView.backgroundColor
-        containerView.layer.cornerRadius = Constans.ContainerView.cornerRadius
+        containerView.backgroundColor = Constants.ContainerView.backgroundColor
+        containerView.layer.cornerRadius = Constants.ContainerView.cornerRadius
         containerView.translatesAutoresizingMaskIntoConstraints = false
         contentView.addSubview(containerView)
         return containerView
@@ -21,9 +23,9 @@ class AnswerCell: UITableViewCell {
     
     private lazy var answerLabel: UILabel = {
         let answerLabel = UILabel()
-        answerLabel.backgroundColor = .clear
-        answerLabel.font = .systemFont(ofSize: Constans.AnswerLabel.font)
-        answerLabel.textColor = .black
+        answerLabel.backgroundColor = Constants.AnswerLabel.backgroundColor
+        answerLabel.font = .systemFont(ofSize: Constants.AnswerLabel.font)
+        answerLabel.textColor = Constants.AnswerLabel.textColor
         answerLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(answerLabel)
         return answerLabel
@@ -44,21 +46,23 @@ class AnswerCell: UITableViewCell {
         setupAnswerLabelConstraints()
     }
     
+    // MARK: - Constraints Setup
+    
     private func setupContainerViewConstraints() {
         NSLayoutConstraint.activate([
-            containerView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: Constans.ContainerView.topAnchor),
-            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: Constans.ContainerView.leadingAnchor),
-            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: Constans.ContainerView.trailingAnchor),
-            containerView.widthAnchor.constraint(equalToConstant: Constans.ContainerView.widthAnchor),
-            containerView.heightAnchor.constraint(equalToConstant: Constans.ContainerView.heightAnchor)
+            containerView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: Constants.ContainerView.topAnchor),
+            containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: Constants.ContainerView.leadingAnchor),
+            containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: Constants.ContainerView.trailingAnchor),
+            containerView.widthAnchor.constraint(equalToConstant: Constants.ContainerView.widthAnchor),
+            containerView.heightAnchor.constraint(equalToConstant: Constants.ContainerView.heightAnchor)
         ])
     }
     
     private func setupAnswerLabelConstraints() {
         NSLayoutConstraint.activate([
-            answerLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Constans.AnswerLabel.topAnchor),
-            answerLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: Constans.AnswerLabel.bottomAnchor),
-            answerLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: Constans.AnswerLabel.leadingAnchor)
+            answerLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Constants.AnswerLabel.topAnchor),
+            answerLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: Constants.AnswerLabel.bottomAnchor),
+            answerLabel.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: Constants.AnswerLabel.leadingAnchor)
         ])
     }
     
@@ -67,8 +71,10 @@ class AnswerCell: UITableViewCell {
     }
 }
 
-extension AnswerCell {
-    enum Constans {
+//MARK: - Constants
+
+private extension AnswerCell {
+    enum Constants {
         enum ContainerView {
             static let backgroundColor = UIColor(hex: "F6F6F6")
             static let cornerRadius: CGFloat = 22
@@ -79,6 +85,8 @@ extension AnswerCell {
             static let heightAnchor: CGFloat = 60
         }
         enum AnswerLabel {
+            static let backgroundColor: UIColor = .clear
+            static let textColor: UIColor = .black
             static let font: CGFloat = 16
             static let topAnchor: CGFloat = 22
             static let bottomAnchor: CGFloat = -22

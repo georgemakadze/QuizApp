@@ -9,6 +9,8 @@ import UIKit
 
 class LoginViewController: UIViewController {
     
+    //MARK: - Components
+    
     private lazy var coverImageView: UIImageView = {
         let coverImageView = UIImageView()
         coverImageView.image = Constants.CoverImageView.image
@@ -20,14 +22,14 @@ class LoginViewController: UIViewController {
     
     private lazy var loginTextView: UITextView = {
         let loginTextView = UITextView()
-        loginTextView.backgroundColor = .clear
-        loginTextView.font = .systemFont(ofSize: Constants.LoginTextView.font)
+        loginTextView.backgroundColor = Constants.LoginTextView.backgroundColor
+        loginTextView.font =  Constants.LoginTextView.font
         loginTextView.text = Constants.LoginTextView.text
         loginTextView.textColor = Constants.LoginTextView.textColor
         loginTextView.layer.borderColor = Constants.LoginTextView.borderColor
         loginTextView.layer.borderWidth = Constants.LoginTextView.borderWidth
         loginTextView.textAlignment = .center
-        loginTextView.contentInset = UIEdgeInsets(top: 5, left: 1.0, bottom: 5, right: 1.0)
+        loginTextView.contentInset = Constants.LoginTextView.contentInset
         loginTextView.layer.cornerRadius = Constants.LoginTextView.cornerRadius
         loginTextView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(loginTextView)
@@ -47,9 +49,9 @@ class LoginViewController: UIViewController {
     private lazy var coverLabel: UILabel = {
         let coverLabel = UILabel()
         coverLabel.text = Constants.CoverLabel.text
-        coverLabel.backgroundColor = .clear
-        coverLabel.font = .systemFont(ofSize: Constants.CoverLabel.font)
-        coverLabel.textColor = .white
+        coverLabel.backgroundColor = Constants.CoverLabel.backgroundColor
+        coverLabel.font = Constants.CoverLabel.font
+        coverLabel.textColor = Constants.CoverLabel.textColor
         coverLabel.textAlignment = .center
         coverLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(coverLabel)
@@ -67,8 +69,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        view.backgroundColor = .white
-        //        navigationController?.setNavigationBarHidden(true, animated: false)
+        view.backgroundColor = Constants.View.backgroundColor
         setupCoverImageViewConstraints()
         setupLoginTextViewConstraints()
         setupStartButton()
@@ -80,6 +81,8 @@ class LoginViewController: UIViewController {
         let homeViewController = HomeViewController()
         self.navigationController?.pushViewController(homeViewController, animated: true)
     }
+    
+    // MARK: - Constraints Setup
     
     private func setupCoverImageViewConstraints() {
         NSLayoutConstraint.activate([
@@ -119,21 +122,26 @@ class LoginViewController: UIViewController {
             coverIcon.topAnchor.constraint(equalTo: coverLabel.bottomAnchor, constant: Constants.CoverIcon.topAnchor),
             coverIcon.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.CoverIcon.leadingAnchor),
             coverIcon.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.CoverIcon.trailingAnchor),
-            //            coverIcon.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.CoverIcon.bottomAnchor),
             coverIcon.widthAnchor.constraint(equalToConstant: Constants.CoverIcon.widthAnchor),
             coverIcon.heightAnchor.constraint(equalToConstant: Constants.CoverIcon.heightAnchor)
         ])
     }
 }
 
-extension LoginViewController {
+// MARK: - Constants
+
+private extension LoginViewController {
     enum Constants {
+        
         enum CoverImageView {
             static let image = UIImage(named: "Blue")
             static let heightAnchor: CGFloat = 300
         }
+        
         enum LoginTextView {
-            static let font: CGFloat = 14
+            static let contentInset: UIEdgeInsets = UIEdgeInsets(top: 5, left: 1.0, bottom: 5, right: 1.0)
+            static let backgroundColor: UIColor = .clear
+            static let font: UIFont = .systemFont(ofSize: 14)
             static let text = "შეიყვანე სახელი"
             static let textColor = UIColor(hex: "C7C7C7")
             static let borderColor = UIColor(hex: "FFC44A").cgColor
@@ -143,19 +151,24 @@ extension LoginViewController {
             static let widthAnchor: CGFloat = 270
             static let heightAnchor: CGFloat = 44
         }
+        
         enum StartButton {
             static let cornerRadius: CGFloat = 12
             static let setImage = UIImage(named: "StartButton")
             static let topAnchor: CGFloat = 40
             static let bottomAnchor: CGFloat = -70
         }
+        
         enum CoverLabel {
+            static let backgroundColor: UIColor = .clear
+            static let textColor: UIColor = .white
             static let text = "ჩემი პირველი ქვიზი"
-            static let font: CGFloat = 20
+            static let font: UIFont =  .systemFont(ofSize: 20)
             static let leadingAnchor: CGFloat = 80
             static let trailingAnchor: CGFloat = -89
             static let topAnchor: CGFloat = 100
         }
+        
         enum CoverIcon {
             static let image = UIImage(named: "Illustration")
             static let topAnchor: CGFloat = 2
@@ -163,6 +176,10 @@ extension LoginViewController {
             static let trailingAnchor: CGFloat = -20
             static let widthAnchor: CGFloat = 299
             static let heightAnchor: CGFloat = 299
+        }
+        
+        enum View {
+            static let backgroundColor: UIColor = .white
         }
     }
 }

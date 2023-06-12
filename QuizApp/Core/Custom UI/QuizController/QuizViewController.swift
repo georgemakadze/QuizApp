@@ -10,8 +10,9 @@ import UIKit
 
 class QuizViewController: UIViewController {
     
-    private var tableView: UITableView!
+    //MARK: - Components
     
+    private var tableView: UITableView!
     private lazy var questionBackground: UIImageView = {
         let questionBackground = UIImageView()
         questionBackground.image = Constants.QuestionBackground.image
@@ -23,8 +24,8 @@ class QuizViewController: UIViewController {
     
     private lazy var questionLabel: UILabel = {
         var questionLabel = UILabel()
-        questionLabel.textColor = .black
-        questionLabel.backgroundColor = .clear
+        questionLabel.textColor = Constants.QuestionLabel.textColor
+        questionLabel.backgroundColor = Constants.QuestionLabel.backgroundColor
         questionLabel.numberOfLines = Constants.QuestionLabel.numberOfLines
         questionLabel.textAlignment = .center
         questionLabel.lineBreakMode = .byTruncatingTail
@@ -73,6 +74,8 @@ class QuizViewController: UIViewController {
         view.addSubview(tableView)
     }
     
+    // MARK: - Constraints Setup
+    
     private func setupTableViewConstraints() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: questionBackground.bottomAnchor, constant: Constants.TableView.topAnchor),
@@ -109,15 +112,15 @@ class QuizViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
+
 extension QuizViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return question.answers.count
+        question.answers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AnswerCell.reuseIdentifier, for: indexPath) as! AnswerCell
-        //        let question = question[indexPath.row]
-        //        cell.configure(with: question.answer)
         let currentAnswer = question.answers[indexPath.row]
         cell.configure(with: currentAnswer)
         questionLabel.text = question.text
@@ -125,22 +128,30 @@ extension QuizViewController: UITableViewDataSource {
     }
 }
 
+// MARK: - UITableViewDelegate
+
 extension QuizViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let cellHeight: CGFloat = 60
-        let distanceBetweenCells: CGFloat = 12
+        let cellHeight = Constants.TableViewCell.cellHeight
+        let distanceBetweenCells = Constants.TableViewCell.distanceBetweenCells
         let totalHeight = cellHeight + distanceBetweenCells
         return totalHeight
     }
 }
 
-extension QuizViewController {
+// MARK: - Constants
+
+private extension QuizViewController {
     enum Constants {
+        
         enum QuestionBackground {
             static let image = UIImage(named: "Rectangle")
             static let heightAnchor: CGFloat = 250
         }
+        
         enum QuestionLabel {
+            static let textColor: UIColor = .black
+            static let backgroundColor: UIColor = .clear
             static let numberOfLines = 3
             static let font: CGFloat = 16
             static let topAnchor: CGFloat = 48
@@ -149,6 +160,7 @@ extension QuizViewController {
             static let widthAnchor: CGFloat = 200
             static let bottomAnchor: CGFloat = -8
         }
+        
         enum NextButton {
             static let setImage = UIImage(named: "Next")
             static let topAnchor: CGFloat = 64
@@ -156,8 +168,14 @@ extension QuizViewController {
             static let trailingAnchor: CGFloat = -16
             static let bottomAnchor: CGFloat = -64
         }
+        
         enum TableView {
             static let topAnchor: CGFloat = 74
+        }
+        
+        enum TableViewCell {
+            static let cellHeight: CGFloat = 60
+            static let distanceBetweenCells: CGFloat = 12
         }
     }
 }

@@ -10,14 +10,15 @@ import UIKit
 
 class GPADetailViewController: UIViewController {
     
-    private var tableView: UITableView!
+    // MARK: - Components
     
+    private var tableView: UITableView!
     private lazy var pointLabel: UILabel = {
         let pointLabel = UILabel()
         pointLabel.text = Constants.PointLabel.text
-        pointLabel.font = .systemFont(ofSize: Constants.PointLabel.font)
-        pointLabel.textColor = .black
-        pointLabel.backgroundColor = .clear
+        pointLabel.font = Constants.PointLabel.font
+        pointLabel.textColor = Constants.PointLabel.textColor
+        pointLabel.backgroundColor = Constants.PointLabel.backgroundColor
         pointLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(pointLabel)
         return pointLabel
@@ -68,6 +69,8 @@ class GPADetailViewController: UIViewController {
         view.addSubview(tableView)
     }
     
+    // MARK: - Constraints Setup
+    
     private func setupTableViewConstraints() {
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: pointLabel.bottomAnchor),
@@ -99,10 +102,12 @@ class GPADetailViewController: UIViewController {
     }
 }
 
+// MARK: - UITableViewDataSource
+
 extension GPADetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return subjects.count
+        subjects.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -112,6 +117,8 @@ extension GPADetailViewController: UITableViewDataSource {
         return cell
     }
 }
+
+// MARK: - UITableViewDelegate
 
 extension GPADetailViewController: UITableViewDelegate {
     
@@ -123,22 +130,30 @@ extension GPADetailViewController: UITableViewDelegate {
     }
 }
 
-extension GPADetailViewController {
+// MARK: - Constants
+
+private extension GPADetailViewController {
     enum Constants {
+        
         enum PointLabel {
+            static let textColor: UIColor  = .black
             static let text = "დაგროვილი ქულები"
-            static let font: CGFloat = 16
+            static let font: UIFont = .systemFont(ofSize: 16)
+            static let backgroundColor: UIColor = .clear
             static let topAnchor: CGFloat = 66
             static let leadingAnchor:CGFloat = 99
         }
+        
         enum StarImage {
             static let image = UIImage(named: "Star")
             static let topAnchor: CGFloat = 70
             static let leadingAnchor: CGFloat = 5
         }
+        
         enum noPointsImage {
             static let image = UIImage(named: "NoPoints")
         }
+        
         enum TableView {
             static let bottomAnchor: CGFloat = -52
             static let cellHeight: CGFloat = 106

@@ -8,11 +8,9 @@
 import Foundation
 import UIKit
 
-//protocol SubjectCellDelegate: AnyObject {
-//    func didTapButton(in cell: SubjectCell)
-//}
-
 class SubjectCell: UITableViewCell {
+    
+    // MARK: - Components
     
     private lazy var containerView: UIView = {
         let containerView = UIView()
@@ -33,9 +31,9 @@ class SubjectCell: UITableViewCell {
     
     private lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.font = .systemFont(ofSize: Constants.NameLabel.font)
-        nameLabel.backgroundColor = .clear
-        nameLabel.textColor = .black
+        nameLabel.font = Constants.NameLabel.font
+        nameLabel.backgroundColor = Constants.NameLabel.backgroundColor
+        nameLabel.textColor = Constants.NameLabel.textColor
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(nameLabel)
         return nameLabel
@@ -43,8 +41,8 @@ class SubjectCell: UITableViewCell {
     
     private lazy var descriptionLabel: UILabel = {
         let descriptionLabel = UILabel()
-        descriptionLabel.font = .systemFont(ofSize: Constants.DescriptionLabel.font)
-        descriptionLabel.backgroundColor = .clear
+        descriptionLabel.font = Constants.DescriptionLabel.font
+        descriptionLabel.backgroundColor = Constants.DescriptionLabel.backgroundColor
         descriptionLabel.textColor = Constants.DescriptionLabel.textColor
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(descriptionLabel)
@@ -59,8 +57,6 @@ class SubjectCell: UITableViewCell {
         containerView.addSubview(button)
         return button
     }()
-    
-    //    weak var delegate: SubjectCellDelegate?
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -81,16 +77,15 @@ class SubjectCell: UITableViewCell {
     }
     
     @objc func buttonTapped() {
-        //        delegate?.didTapButton(in: self)
     }
+    
+    // MARK: - Constraints Setup
     
     private func  setupContainerViewConstraints() {
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: Constants.ContainerView.topAnchor),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: Constants.ContainerView.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: Constants.ContainerView.trailingAnchor),
-            //            containerView.widthAnchor.constraint(equalToConstant: Constants.ContainerView.widthAnchor),
-            //            containerView.heightAnchor.constraint(equalToConstant: Constants.ContainerView.heightAnchor)
             containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: Constants.ContainerView.bottomAnchor)
         ])
     }
@@ -133,8 +128,11 @@ class SubjectCell: UITableViewCell {
     }
 }
 
-extension SubjectCell {
+// MARK: - Constants
+
+private extension SubjectCell {
     enum Constants {
+        
         enum ContainerView {
             static let backgroundColor = UIColor(hex: "F6F6F6")
             static let cornerRadius: CGFloat = 26
@@ -145,23 +143,30 @@ extension SubjectCell {
             static let heightAnchor: CGFloat = 106
             static let bottomAnchor: CGFloat = -9
         }
+        
         enum IconImageView {
             static let topAnchor: CGFloat = 22
             static let bottomAnchor: CGFloat = -22
             static let leadingAnchor: CGFloat = 29.5
         }
+        
         enum NameLabel {
-            static let font: CGFloat = 16
+            static let font: UIFont = .systemFont(ofSize: 16)
+            static let backgroundColor: UIColor = .clear
+            static let textColor: UIColor = .black
             static let leadingAnchor: CGFloat = 18
             static let topAnchor: CGFloat = 33
         }
+        
         enum DescriptionLabel {
-            static let font: CGFloat = 10
+            static let backgroundColor: UIColor = .clear
+            static let font: UIFont = .systemFont(ofSize: 10)
             static let textColor = UIColor(hex: "B3B3B3")
             static let topAnchor: CGFloat = 2
             static let leadingAnchor: CGFloat = 18
             static let bottomAnchor: CGFloat = -34
         }
+        
         enum Button {
             static let setImage = UIImage(named: "cellbutton")
             static let topAnchor: CGFloat = 30

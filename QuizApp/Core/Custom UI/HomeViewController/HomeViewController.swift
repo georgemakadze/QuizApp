@@ -10,8 +10,9 @@ import UIKit
 
 class HomeViewController: UIViewController {
     
-    private var tableView: UITableView!
+    //MARK: - Components
     
+    private var tableView: UITableView!
     private lazy var scoreHeaderView: UIView = {
         let scoreHeaderView = UIView()
         scoreHeaderView.backgroundColor = Constants.ScoreHeaderView.backgroundColor
@@ -33,9 +34,9 @@ class HomeViewController: UIViewController {
     private lazy var gpaTextLabel: UILabel = {
         let gpaTextLabel = UILabel()
         gpaTextLabel.text = Constants.GpaTextLabel.text
-        gpaTextLabel.font = .systemFont(ofSize: Constants.GpaTextLabel.font)
-        gpaTextLabel.backgroundColor = .clear
-        gpaTextLabel.textColor = .white
+        gpaTextLabel.font = Constants.GpaTextLabel.font
+        gpaTextLabel.backgroundColor = Constants.GpaTextLabel.backgroundColor
+        gpaTextLabel.textColor = Constants.GpaTextLabel.textColor
         gpaTextLabel.translatesAutoresizingMaskIntoConstraints = false
         gpaView.addSubview(gpaTextLabel)
         return gpaTextLabel
@@ -43,9 +44,9 @@ class HomeViewController: UIViewController {
     
     private lazy var gpaScoreLabel: UILabel = {
         var gpaScoreLabel = UILabel()
-        gpaScoreLabel.text = "1.0"
-        gpaScoreLabel.font = .systemFont(ofSize: Constants.GpaScoreLabel.font)
-        gpaScoreLabel.backgroundColor = .clear
+        gpaScoreLabel.text = Constants.GpaScoreLabel.text
+        gpaScoreLabel.font = Constants.GpaScoreLabel.font
+        gpaScoreLabel.backgroundColor = Constants.GpaScoreLabel.backgroundColor
         gpaScoreLabel.textColor = Constants.GpaScoreLabel.textColor
         gpaScoreLabel.translatesAutoresizingMaskIntoConstraints = false
         gpaView.addSubview(gpaScoreLabel)
@@ -55,9 +56,9 @@ class HomeViewController: UIViewController {
     private lazy var scoreViewDetailLabel: UILabel = {
         let scoreViewDetailLabel = UILabel()
         scoreViewDetailLabel.text = Constants.ScoreViewDetailLabel.text
-        scoreViewDetailLabel.font = .systemFont(ofSize: Constants.ScoreViewDetailLabel.font)
-        scoreViewDetailLabel.textColor = .white
-        scoreViewDetailLabel.backgroundColor = .clear
+        scoreViewDetailLabel.font = Constants.ScoreViewDetailLabel.font
+        scoreViewDetailLabel.textColor = Constants.ScoreViewDetailLabel.textColor
+        scoreViewDetailLabel.backgroundColor = Constants.ScoreViewDetailLabel.backgroundColor
         scoreViewDetailLabel.translatesAutoresizingMaskIntoConstraints = false
         scoreHeaderView.addSubview(scoreViewDetailLabel)
         return scoreViewDetailLabel
@@ -75,9 +76,9 @@ class HomeViewController: UIViewController {
     private lazy var chooseSubjectLabel: UILabel = {
         let chooseSubjectLabel = UILabel()
         chooseSubjectLabel.text = Constants.ChooseSubjectLabel.text
-        chooseSubjectLabel.textColor = .black
-        chooseSubjectLabel.font = .systemFont(ofSize: Constants.ChooseSubjectLabel.font)
-        chooseSubjectLabel.backgroundColor = .clear
+        chooseSubjectLabel.textColor = Constants.ChooseSubjectLabel.textColor
+        chooseSubjectLabel.font = Constants.ChooseSubjectLabel.font
+        chooseSubjectLabel.backgroundColor = Constants.ChooseSubjectLabel.backgroundColor
         chooseSubjectLabel.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(chooseSubjectLabel)
         return chooseSubjectLabel
@@ -121,13 +122,13 @@ class HomeViewController: UIViewController {
     }
     
     @objc func logOutButtonTapped() {
-        //                let popupViewController = PopupViewController()
-        //                        popupViewController.modalPresentationStyle = .overCurrentContext
-        //                        present(popupViewController, animated: true, completion: nil)
-        //
-        let finishPopupController = FinishPopupController()
-        finishPopupController.modalPresentationStyle = .overCurrentContext
-        present(finishPopupController, animated: true, completion: nil)
+                        let popupViewController = PopupViewController()
+                                popupViewController.modalPresentationStyle = .overCurrentContext
+                                present(popupViewController, animated: true, completion: nil)
+        
+//        let finishPopupController = FinishPopupController()
+//        finishPopupController.modalPresentationStyle = .overCurrentContext
+//        present(finishPopupController, animated: true, completion: nil)
     }
     
     private func setupTableView() {
@@ -139,6 +140,8 @@ class HomeViewController: UIViewController {
         tableView.register(SubjectCell.self, forCellReuseIdentifier: SubjectCell.reuseIdentifier)
         view.addSubview(tableView)
     }
+    
+    // MARK: - Constraints Setup
     
     private func setupTableViewConstraints() {
         NSLayoutConstraint.activate([
@@ -219,27 +222,23 @@ class HomeViewController: UIViewController {
     }
 }
 
-//extension HomeViewController: SubjectCellDelegate {
-//    func didTapButton(in cell: SubjectCell) {
-//        let quizController = QuizViewController()
-//        navigationController?.pushViewController(quizController, animated: true)
-//    }
-//}
+// MARK: - UITableViewDataSource
 
 extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return subjects.count
+        subjects.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SubjectCell.reuseIdentifier, for: indexPath) as! SubjectCell
         let subject = subjects[indexPath.row]
         cell.configure(with: subject)
-//        cell.delegate = self
         return cell
     }
 }
+
+// MARK: - UITableViewDelegate
 
 extension HomeViewController: UITableViewDelegate {
     
@@ -249,15 +248,18 @@ extension HomeViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        let cellHeight: CGFloat = 108
-        let distanceBetweenCells: CGFloat = 18
+        let cellHeight = Constants.TableViewCell.cellHeight
+        let distanceBetweenCells = Constants.TableViewCell.distanceBetweenCells
         let totalHeight = cellHeight + distanceBetweenCells
         return totalHeight
     }
 }
 
-extension HomeViewController {
+// MARK: - Constants
+
+private extension HomeViewController {
     enum Constants {
+        
         enum ScoreHeaderView {
             static let backgroundColor = UIColor(hex: "537FE7")
             static let cornerRadius: CGFloat = 26
@@ -267,6 +269,7 @@ extension HomeViewController {
             static let widthAnchor: CGFloat = 344
             static let heightAnchor: CGFloat = 76
         }
+        
         enum GpaView {
             static let backgroundColor = UIColor(hex: "6B91EA")
             static let cornerRadius: CGFloat = 14
@@ -276,27 +279,37 @@ extension HomeViewController {
             static let widthAnchor: CGFloat = 88
             static let heightAnchor: CGFloat = 40
         }
+        
         enum GpaTextLabel {
             static let text = "GPA -"
-            static let font: CGFloat = 16
+            static let backgroundColor: UIColor = .clear
+            static let textColor: UIColor = .white
+            static let font: UIFont = .systemFont(ofSize: 16)
             static let topAnchor: CGFloat = 6
             static let bottomAnchor: CGFloat = -6
             static let leadingAnchor: CGFloat = 10
         }
+        
         enum GpaScoreLabel {
             static let textColor = UIColor(hex: "FFD24C")
-            static let font: CGFloat = 16
+            static let font: UIFont = .systemFont(ofSize: 16)
+            static let text = "1.0"
+            static let backgroundColor: UIColor = .clear
             static let trailingAnchor: CGFloat = -10
             static let topAnchor: CGFloat = 6
             static let bottomAnchor: CGFloat = -6
             static let leadingAnchor: CGFloat = 2
         }
+        
         enum ScoreViewDetailLabel {
+            static let textColor: UIColor = .white
             static let text = "დეტალურად"
-            static let font: CGFloat = 16
+            static let backgroundColor: UIColor = .clear
+            static let font: UIFont = .systemFont(ofSize: 16)
             static let topAnchor: CGFloat = 28
             static let bottomAnchor: CGFloat = -29
         }
+        
         enum ScoreViewDetailButton {
             static let setImage = UIImage(named: "Polygon")
             static let topAnchor: CGFloat = 30
@@ -304,12 +317,16 @@ extension HomeViewController {
             static let trailingAnchor: CGFloat = -34
             static let bottomAnchor: CGFloat = -31
         }
+        
         enum ChooseSubjectLabel {
             static let text = "აირჩიე საგანი"
-            static let font: CGFloat = 16
+            static let font: UIFont = .systemFont(ofSize: 16)
             static let topAnchor: CGFloat = 32
             static let leadingAnchor: CGFloat = 16
+            static let textColor: UIColor = .black
+            static let backgroundColor: UIColor = .clear
         }
+        
         enum LogOutButton {
             static let setImage = UIImage(named: "Log out")
             static let cornerRadius: CGFloat = 21
@@ -318,8 +335,14 @@ extension HomeViewController {
             static let trailingAnchor: CGFloat = -16
             static let bottomAnchor: CGFloat = -14
         }
+        
         enum TableView {
             static let bottomAnchor: CGFloat = -52
+        }
+        
+        enum TableViewCell {
+            static let cellHeight: CGFloat = 108
+            static let distanceBetweenCells: CGFloat = 18
         }
     }
 }

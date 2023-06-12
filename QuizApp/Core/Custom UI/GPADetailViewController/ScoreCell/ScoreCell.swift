@@ -10,6 +10,8 @@ import UIKit
 
 class ScoreCell: UITableViewCell {
     
+    //MARK: - Components
+    
     private lazy var containerView: UIView = {
         let containerView = UIView()
         containerView.backgroundColor = Constants.ContainerView.backgroundColor
@@ -30,8 +32,8 @@ class ScoreCell: UITableViewCell {
     private lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.font = .systemFont(ofSize: Constants.NameLabel.font)
-        nameLabel.backgroundColor = .clear
-        nameLabel.textColor = .black
+        nameLabel.backgroundColor = Constants.NameLabel.backgroundColor
+        nameLabel.textColor = Constants.NameLabel.textColor
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(nameLabel)
         return nameLabel
@@ -39,8 +41,8 @@ class ScoreCell: UITableViewCell {
     
     private lazy var descriptionLabel: UILabel = {
         let descriptionLabel = UILabel()
-        descriptionLabel.font = .systemFont(ofSize: Constants.DescriptionLabel.font)
-        descriptionLabel.backgroundColor = .clear
+        descriptionLabel.font = Constants.DescriptionLabel.font
+        descriptionLabel.backgroundColor = Constants.DescriptionLabel.backgroundColor
         descriptionLabel.textColor = Constants.DescriptionLabel.textColor
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(descriptionLabel)
@@ -49,9 +51,9 @@ class ScoreCell: UITableViewCell {
     
     private lazy var scoreLabel: UILabel = {
         let scoreLabel = UILabel()
-        scoreLabel.text = "1"
-        scoreLabel.textColor = .white
-        scoreLabel.font = .systemFont(ofSize: Constants.ScoreLabel.font)
+        scoreLabel.text = Constants.ScoreLabel.text
+        scoreLabel.textColor = Constants.ScoreLabel.textColor
+        scoreLabel.font = Constants.ScoreLabel.font
         scoreLabel.textAlignment = .center
         scoreLabel.layer.masksToBounds = true
         scoreLabel.backgroundColor = Constants.ScoreLabel.backgroundColor
@@ -79,6 +81,8 @@ class ScoreCell: UITableViewCell {
         setupScoreLabelConstraints()
     }
     
+    // MARK: - Constraints Setup
+    
     private func  setupContainerViewConstraints() {
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: Constants.ContainerView.topAnchor),
@@ -101,7 +105,6 @@ class ScoreCell: UITableViewCell {
         NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: Constants.NameLabel.leadingAnchor),
             nameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Constants.NameLabel.topAnchor),
-            //firstLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: -52)
         ])
     }
     
@@ -130,7 +133,9 @@ class ScoreCell: UITableViewCell {
     }
 }
 
-extension ScoreCell {
+//MARK: - Constants
+
+private extension ScoreCell {
     enum Constants {
         enum ContainerView {
             static let backgroundColor = UIColor(hex: "F6F6F6")
@@ -147,19 +152,24 @@ extension ScoreCell {
             static let leadingAnchor: CGFloat = 29.5
         }
         enum NameLabel {
+            static let backgroundColor: UIColor = .clear
+            static let textColor: UIColor = .black
             static let font: CGFloat = 16
             static let leadingAnchor: CGFloat = 18
             static let topAnchor: CGFloat = 33
         }
         enum DescriptionLabel {
-            static let font: CGFloat = 10
+            static let font: UIFont = .systemFont(ofSize: 10)
             static let textColor = UIColor(hex: "B3B3B3")
             static let topAnchor: CGFloat = 2
             static let leadingAnchor: CGFloat = 18
             static let bottomAnchor: CGFloat = -34
+            static let backgroundColor: UIColor = .clear
         }
         enum ScoreLabel {
-            static let font: CGFloat = 16
+            static let font: UIFont = .systemFont(ofSize: 16)
+            static let text = "1"
+            static let textColor: UIColor = .white
             static let backgroundColor = UIColor(hex: "FFC44A")
             static let cornerRadius: CGFloat = 22.5
             static let topAnchor: CGFloat = 30
