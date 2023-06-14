@@ -52,7 +52,6 @@ class FinishPopupController: UIViewController {
         let dividerView = UIView()
         dividerView.backgroundColor = Constants.DividerView.backgroundColor
         dividerView.translatesAutoresizingMaskIntoConstraints = false
-        popupView.addSubview(dividerView)
         return dividerView
     }()
     

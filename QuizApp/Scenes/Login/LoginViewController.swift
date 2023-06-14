@@ -166,7 +166,7 @@ private extension LoginViewController {
             static let font: UIFont =  .systemFont(ofSize: 20)
             static let leadingAnchor: CGFloat = 80
             static let trailingAnchor: CGFloat = -89
-            static let topAnchor: CGFloat = 100
+            static let topAnchor: CGFloat = 60
         }
         
         enum CoverIcon {
