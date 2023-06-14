@@ -13,6 +13,17 @@ class HomeViewController: UIViewController {
     //MARK: - Components
     
     private var tableView: UITableView!
+    private lazy var subjectTableView: UITableView = { //closure
+        let tableView = UITableView()
+        tableView.separatorStyle = .none
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(SubjectCell.self, forCellReuseIdentifier: SubjectCell.reuseIdentifier)
+        view.addSubview(tableView)
+        return tableView
+    }()
+    
     private lazy var scoreHeaderView: UIView = {
         let scoreHeaderView = UIView()
         scoreHeaderView.backgroundColor = Constants.ScoreHeaderView.backgroundColor
@@ -111,7 +122,6 @@ class HomeViewController: UIViewController {
         setupScoreViewDetailLabelConstraints()
         setupScoreViewDetailButtonConstraints()
         setupChooseSubjectLabelConstraints()
-        setupTableView()
         setupTableViewConstraints()
         setupLogOutButtonConstraints()
     }
@@ -122,28 +132,19 @@ class HomeViewController: UIViewController {
     }
     
     @objc func logOutButtonTapped() {
-//        let popupViewController = PopupViewController()
-//        popupViewController.modalPresentationStyle = .overCurrentContext
-//        present(popupViewController, animated: true, completion: nil)
+        //        let popupViewController = PopupViewController()
+        //        popupViewController.modalPresentationStyle = .overCurrentContext
+        //        present(popupViewController, animated: true, completion: nil)
         
-                let finishPopupController = FinishPopupController()
-                finishPopupController.modalPresentationStyle = .overCurrentContext
-                present(finishPopupController, animated: true, completion: nil)
-    }
-    
-    private func setupTableView() {
-        tableView = UITableView()
-        tableView.separatorStyle = .none
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(SubjectCell.self, forCellReuseIdentifier: SubjectCell.reuseIdentifier)
-        view.addSubview(tableView)
+        let finishPopupController = FinishPopupController()
+        finishPopupController.modalPresentationStyle = .overCurrentContext
+        present(finishPopupController, animated: true, completion: nil)
     }
     
     // MARK: - Constraints Setup
     
     private func setupTableViewConstraints() {
+        tableView = subjectTableView
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: chooseSubjectLabel.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),

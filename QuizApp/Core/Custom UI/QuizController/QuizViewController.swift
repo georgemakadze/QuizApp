@@ -13,6 +13,17 @@ class QuizViewController: UIViewController {
     //MARK: - Components
     
     private var tableView: UITableView!
+    private lazy var subjectTableView: UITableView =  {
+        let tableView = UITableView()
+        tableView.separatorStyle = .none
+        tableView.delegate = self
+        tableView.dataSource = self
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(AnswerCell.self, forCellReuseIdentifier: AnswerCell.reuseIdentifier)
+        view.addSubview(tableView)
+        return tableView
+    }()
+    
     private lazy var questionBackground: UIImageView = {
         let questionBackground = UIImageView()
         questionBackground.image = Constants.QuestionBackground.image
@@ -58,25 +69,15 @@ class QuizViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = .white
         setupQuestionBackgroundConstrains()
-        setupTableView()
         setupTableViewConstraints()
         setupQuestionLabelConstraints()
         setupNextButtonConstraints()
     }
     
-    private func setupTableView() {
-        tableView = UITableView()
-        tableView.separatorStyle = .none
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(AnswerCell.self, forCellReuseIdentifier: AnswerCell.reuseIdentifier)
-        view.addSubview(tableView)
-    }
-    
     // MARK: - Constraints Setup
     
     private func setupTableViewConstraints() {
+        tableView = subjectTableView
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: questionBackground.bottomAnchor, constant: Constants.TableView.topAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -123,7 +124,7 @@ extension QuizViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: AnswerCell.reuseIdentifier, for: indexPath) as! AnswerCell
         let currentAnswer = question.answers[indexPath.row]
         cell.configure(with: currentAnswer)
-        questionLabel.text = question.text
+        questionLabel.text = question.text //viewdidload
         return cell
     }
 }

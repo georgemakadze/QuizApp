@@ -52,7 +52,6 @@ class SubjectCell: UITableViewCell {
     private lazy var button: UIButton = {
         let button = UIButton()
         button.setImage(Constants.Button.image, for: .normal)
-        button.addTarget(self, action: #selector(buttonTapped),  for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(button)
         return button
@@ -64,8 +63,7 @@ class SubjectCell: UITableViewCell {
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setup()
+        fatalError("error!")
     }
     
     private func setup() {
@@ -74,9 +72,6 @@ class SubjectCell: UITableViewCell {
         setupNameLabelConstraints()
         setupDescriptionLabelConstraints()
         setupButtonConstraints()
-    }
-    
-    @objc func buttonTapped() {
     }
     
     // MARK: - Constraints Setup

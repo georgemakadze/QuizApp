@@ -77,13 +77,15 @@ class FinishPopupController: UIViewController {
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("error")
     }
     
     init() {
         super.init(nibName: nil, bundle: nil)
     }
     
+    //MARK: - Action
+
     @objc func closeButtonTapped() {
         dismiss(animated: true, completion: nil)
     }

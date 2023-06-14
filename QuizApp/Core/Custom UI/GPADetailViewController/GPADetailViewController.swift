@@ -13,6 +13,17 @@ class GPADetailViewController: UIViewController {
     // MARK: - Components
     
     private var tableView: UITableView!
+    private lazy var subjectTableView: UITableView = { //closure
+        let tableView = UITableView()
+        tableView.separatorStyle = .none
+        tableView.dataSource = self
+        tableView.delegate = self
+        tableView.translatesAutoresizingMaskIntoConstraints = false
+        tableView.register(ScoreCell.self, forCellReuseIdentifier: ScoreCell.reuseIdentifier)
+        view.addSubview(tableView)
+        return tableView
+    }()
+    
     private lazy var pointLabel: UILabel = {
         let pointLabel = UILabel()
         pointLabel.text = Constants.PointLabel.text
@@ -54,24 +65,14 @@ class GPADetailViewController: UIViewController {
         view.backgroundColor = .white
         setupPointLabelConstraints()
         setupStarImageConstraints()
-        setupTableView()
         setupTableViewConstraints()
         //        noPointsImageConstraints()
-    }
-    
-    private func setupTableView() {
-        tableView = UITableView()
-        tableView.separatorStyle = .none
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(ScoreCell.self, forCellReuseIdentifier: ScoreCell.reuseIdentifier)
-        view.addSubview(tableView)
     }
     
     // MARK: - Constraints Setup
     
     private func setupTableViewConstraints() {
+        tableView = subjectTableView
         NSLayoutConstraint.activate([
             tableView.topAnchor.constraint(equalTo: pointLabel.bottomAnchor),
             tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),

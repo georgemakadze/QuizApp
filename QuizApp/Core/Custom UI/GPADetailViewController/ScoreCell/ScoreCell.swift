@@ -69,8 +69,7 @@ class ScoreCell: UITableViewCell {
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
-        setup()
+        fatalError("error!")
     }
     
     private func setup() {

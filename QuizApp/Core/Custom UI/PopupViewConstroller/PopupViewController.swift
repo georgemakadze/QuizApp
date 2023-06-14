@@ -64,7 +64,7 @@ class PopupViewController: UIViewController {
     }
     
     required init?(coder: NSCoder) {
-        super.init(coder: coder)
+        fatalError("error!")
     }
     
     init() {
