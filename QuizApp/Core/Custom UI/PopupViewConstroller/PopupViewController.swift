@@ -12,16 +12,15 @@ class PopupViewController: UIViewController {
     
     //MARK: - Components
     
-    private lazy var popupView: UIView = {
+    private let popupView: UIView = {
         let popupView = UIView()
         popupView.backgroundColor = Constants.PopupView.backgroundColor
         popupView.layer.cornerRadius = Constants.PopupView.cornerRadius
         popupView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(popupView)
         return popupView
     }()
     
-    private lazy var popupLabel: UILabel = {
+    private let popupLabel: UILabel = {
         let popupLabel = UILabel()
         popupLabel.text = Constants.PopupLabel.text
         popupLabel.backgroundColor = Constants.PopupLabel.backgroundColor
@@ -30,31 +29,28 @@ class PopupViewController: UIViewController {
         popupLabel.font = .systemFont(ofSize: Constants.PopupLabel.font)
         popupLabel.textColor = Constants.PopupLabel.textColor
         popupLabel.translatesAutoresizingMaskIntoConstraints = false
-        popupView.addSubview(popupLabel)
         return popupLabel
     }()
     
     private lazy var yesButton: UIButton = {
         let yesButton = UIButton()
         yesButton.backgroundColor = Constants.YesButton.backgroundColor
-        yesButton.setTitle(Constants.YesButton.setTitle, for: .normal)
-        yesButton.setTitleColor(Constants.YesButton.setTitleColor, for: .normal)
+        yesButton.setTitle(Constants.YesButton.title, for: .normal)
+        yesButton.setTitleColor(Constants.YesButton.titleColor, for: .normal)
         yesButton.layer.cornerRadius = Constants.YesButton.cornerRadius
         yesButton.addTarget(self, action: #selector(yesButtonTapped), for: .touchUpInside)
         yesButton.translatesAutoresizingMaskIntoConstraints = false
-        popupView.addSubview(yesButton)
         return yesButton
     }()
     
     private lazy var noButton: UIButton = {
         let noButton = UIButton()
         noButton.backgroundColor = Constants.NoButton.backgroundColor
-        noButton.setTitle(Constants.NoButton.setTitle, for: .normal)
-        noButton.setTitleColor(Constants.NoButton.setTitleColor, for: .normal)
+        noButton.setTitle(Constants.NoButton.title, for: .normal)
+        noButton.setTitleColor(Constants.NoButton.titleColor, for: .normal)
         noButton.layer.cornerRadius = Constants.NoButton.cornerRadius
         noButton.addTarget(self, action: #selector(yesButtonTapped), for: .touchUpInside)
         noButton.translatesAutoresizingMaskIntoConstraints = false
-        popupView.addSubview(noButton)
         return noButton
     }()
     
@@ -82,6 +78,7 @@ class PopupViewController: UIViewController {
     // MARK: - Constraints Setup
     
     private func setupPopupViewConstraints() {
+        view.addSubview(popupView)
         NSLayoutConstraint.activate([
             popupView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             popupView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -91,6 +88,7 @@ class PopupViewController: UIViewController {
     }
     
     private func setupPopupLabelConstraints() {
+        popupView.addSubview(popupLabel)
         NSLayoutConstraint.activate([
             popupLabel.topAnchor.constraint(equalTo: popupView.topAnchor, constant: Constants.PopupLabel.topAnchor),
             popupLabel.leadingAnchor.constraint(equalTo: popupView.leadingAnchor, constant: Constants.PopupLabel.leadingAnchor),
@@ -99,6 +97,7 @@ class PopupViewController: UIViewController {
     }
     
     private func setupYesButtonConstraints() {
+        popupView.addSubview(yesButton)
         NSLayoutConstraint.activate([
             yesButton.widthAnchor.constraint(equalToConstant: Constants.YesButton.widthAnchor),
             yesButton.heightAnchor.constraint(equalToConstant: Constants.YesButton.heightAnchor),
@@ -108,6 +107,7 @@ class PopupViewController: UIViewController {
     }
     
     private func setupNoButtonConstraints() {
+        popupView.addSubview(noButton)
         NSLayoutConstraint.activate([
             noButton.widthAnchor.constraint(equalToConstant: Constants.NoButton.widthAnchor),
             noButton.heightAnchor.constraint(equalToConstant: Constants.NoButton.heightAnchor),
@@ -142,8 +142,8 @@ private extension PopupViewController {
         
         enum YesButton {
             static let backgroundColor: UIColor = .white
-            static let setTitleColor: UIColor = .black
-            static let setTitle = "კი"
+            static let titleColor: UIColor = .black
+            static let title = "კი"
             static let cornerRadius: CGFloat = 17
             static let widthAnchor: CGFloat = 106
             static let heightAnchor: CGFloat = 34
@@ -153,8 +153,8 @@ private extension PopupViewController {
         
         enum NoButton {
             static let backgroundColor: UIColor = .white
-            static let setTitleColor: UIColor = .black
-            static let setTitle = "არა"
+            static let titleColor: UIColor = .black
+            static let title = "არა"
             static let cornerRadius: CGFloat = 17
             static let widthAnchor: CGFloat = 106
             static let heightAnchor: CGFloat = 34

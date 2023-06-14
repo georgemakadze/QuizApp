@@ -51,7 +51,7 @@ class SubjectCell: UITableViewCell {
     
     private lazy var button: UIButton = {
         let button = UIButton()
-        button.setImage(Constants.Button.setImage, for: .normal)
+        button.setImage(Constants.Button.image, for: .normal)
         button.addTarget(self, action: #selector(buttonTapped),  for: .touchUpInside)
         button.translatesAutoresizingMaskIntoConstraints = false
         containerView.addSubview(button)
@@ -168,7 +168,7 @@ private extension SubjectCell {
         }
         
         enum Button {
-            static let setImage = UIImage(named: "cellbutton")
+            static let image = UIImage(named: "cellbutton")
             static let topAnchor: CGFloat = 30
             static let bottomAnchor: CGFloat = -31
             static let trailingAnchor: CGFloat = -29.5

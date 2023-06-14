@@ -37,7 +37,7 @@ class QuizViewController: UIViewController {
     
     private lazy var nextButton: UIButton = {
         let nextButton = UIButton()
-        nextButton.setImage(Constants.NextButton.setImage, for: .normal)
+        nextButton.setImage(Constants.NextButton.image, for: .normal)
         // daklikeba
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(nextButton)
@@ -162,7 +162,7 @@ private extension QuizViewController {
         }
         
         enum NextButton {
-            static let setImage = UIImage(named: "Next")
+            static let image = UIImage(named: "Next")
             static let topAnchor: CGFloat = 64
             static let leadingAnchor: CGFloat = 16
             static let trailingAnchor: CGFloat = -16

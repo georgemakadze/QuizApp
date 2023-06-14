@@ -66,7 +66,7 @@ class HomeViewController: UIViewController {
     
     private lazy var scoreViewDetailButton: UIButton = {
         let scoreViewDetailButton = UIButton()
-        scoreViewDetailButton.setImage(Constants.ScoreViewDetailButton.setImage, for: .normal)
+        scoreViewDetailButton.setImage(Constants.ScoreViewDetailButton.image, for: .normal)
         scoreViewDetailButton.addTarget(self, action: #selector(detailedButtonTapped),  for: .touchUpInside)
         scoreViewDetailButton.translatesAutoresizingMaskIntoConstraints = false
         scoreHeaderView.addSubview(scoreViewDetailButton)
@@ -86,7 +86,7 @@ class HomeViewController: UIViewController {
     
     private lazy var logOutButton: UIButton  = {
         let logOutButton = UIButton()
-        logOutButton.setImage(Constants.LogOutButton.setImage, for: .normal)
+        logOutButton.setImage(Constants.LogOutButton.image, for: .normal)
         logOutButton.addTarget(self, action: #selector(logOutButtonTapped), for: .touchUpInside)
         logOutButton.layer.cornerRadius = Constants.LogOutButton.cornerRadius
         logOutButton.translatesAutoresizingMaskIntoConstraints = false
@@ -122,13 +122,13 @@ class HomeViewController: UIViewController {
     }
     
     @objc func logOutButtonTapped() {
-                        let popupViewController = PopupViewController()
-                                popupViewController.modalPresentationStyle = .overCurrentContext
-                                present(popupViewController, animated: true, completion: nil)
+        let popupViewController = PopupViewController()
+        popupViewController.modalPresentationStyle = .overCurrentContext
+        present(popupViewController, animated: true, completion: nil)
         
-//        let finishPopupController = FinishPopupController()
-//        finishPopupController.modalPresentationStyle = .overCurrentContext
-//        present(finishPopupController, animated: true, completion: nil)
+        //        let finishPopupController = FinishPopupController()
+        //        finishPopupController.modalPresentationStyle = .overCurrentContext
+        //        present(finishPopupController, animated: true, completion: nil)
     }
     
     private func setupTableView() {
@@ -311,7 +311,7 @@ private extension HomeViewController {
         }
         
         enum ScoreViewDetailButton {
-            static let setImage = UIImage(named: "Polygon")
+            static let image = UIImage(named: "Polygon")
             static let topAnchor: CGFloat = 30
             static let leadingAnchor: CGFloat = 4
             static let trailingAnchor: CGFloat = -34
@@ -328,7 +328,7 @@ private extension HomeViewController {
         }
         
         enum LogOutButton {
-            static let setImage = UIImage(named: "Log out")
+            static let image = UIImage(named: "Log out")
             static let cornerRadius: CGFloat = 21
             static let widthAnchor: CGFloat = 42
             static let heightAnchor: CGFloat = 42

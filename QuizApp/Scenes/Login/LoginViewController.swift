@@ -11,16 +11,15 @@ class LoginViewController: UIViewController {
     
     //MARK: - Components
     
-    private lazy var coverImageView: UIImageView = {
+    private let coverImageView: UIImageView = {
         let coverImageView = UIImageView()
         coverImageView.image = Constants.CoverImageView.image
         coverImageView.contentMode = .scaleAspectFill
-        view.addSubview(coverImageView)
         coverImageView.translatesAutoresizingMaskIntoConstraints = false
         return coverImageView
     }()
     
-    private lazy var loginTextView: UITextView = {
+    private let loginTextView: UITextView = {
         let loginTextView = UITextView()
         loginTextView.backgroundColor = Constants.LoginTextView.backgroundColor
         loginTextView.font =  Constants.LoginTextView.font
@@ -32,21 +31,19 @@ class LoginViewController: UIViewController {
         loginTextView.contentInset = Constants.LoginTextView.contentInset
         loginTextView.layer.cornerRadius = Constants.LoginTextView.cornerRadius
         loginTextView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(loginTextView)
         return loginTextView
     }()
     
     private lazy var startButton: UIButton = {
         let startButton = UIButton(type: .custom)
         startButton.layer.cornerRadius = Constants.StartButton.cornerRadius
-        startButton.setImage(Constants.StartButton.setImage, for: .normal)
+        startButton.setImage(Constants.StartButton.image, for: .normal)
         startButton.addTarget(self, action: #selector(startButtonTapped),  for: .touchUpInside)
         startButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(startButton)
         return startButton
     }()
     
-    private lazy var coverLabel: UILabel = {
+    private let coverLabel: UILabel = {
         let coverLabel = UILabel()
         coverLabel.text = Constants.CoverLabel.text
         coverLabel.backgroundColor = Constants.CoverLabel.backgroundColor
@@ -54,16 +51,14 @@ class LoginViewController: UIViewController {
         coverLabel.textColor = Constants.CoverLabel.textColor
         coverLabel.textAlignment = .center
         coverLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(coverLabel)
         return coverLabel
     }()
     
-    private lazy var coverIcon: UIImageView = {
+    private let coverIcon: UIImageView = {
         let coverIcon = UIImageView()
         coverIcon.image = Constants.CoverIcon.image
         coverIcon.contentMode = .scaleAspectFit
         coverIcon.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(coverIcon)
         return coverIcon
     }()
     
@@ -85,6 +80,7 @@ class LoginViewController: UIViewController {
     // MARK: - Constraints Setup
     
     private func setupCoverImageViewConstraints() {
+        view.addSubview(coverImageView)
         NSLayoutConstraint.activate([
             coverImageView.topAnchor.constraint(equalTo: view.topAnchor),
             coverImageView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -94,6 +90,7 @@ class LoginViewController: UIViewController {
     }
     
     private func setupLoginTextViewConstraints() {
+        view.addSubview(loginTextView)
         NSLayoutConstraint.activate([
             loginTextView.topAnchor.constraint(equalTo: coverImageView.bottomAnchor, constant: Constants.LoginTextView.topAnchor),
             loginTextView.widthAnchor.constraint(equalToConstant: Constants.LoginTextView.widthAnchor),
@@ -103,6 +100,7 @@ class LoginViewController: UIViewController {
     }
     
     private func setupStartButton() {
+        view.addSubview(startButton)
         NSLayoutConstraint.activate([
             startButton.topAnchor.constraint(equalTo: loginTextView.bottomAnchor, constant: Constants.StartButton.topAnchor),
             startButton.centerXAnchor.constraint(equalTo: view.centerXAnchor),
@@ -110,6 +108,7 @@ class LoginViewController: UIViewController {
     }
     
     private func setupCoverLabelConstraints() {
+        view.addSubview(coverLabel)
         NSLayoutConstraint.activate([
             coverLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.CoverLabel.leadingAnchor),
             coverLabel.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.CoverLabel.trailingAnchor),
@@ -118,6 +117,7 @@ class LoginViewController: UIViewController {
     }
     
     private func setupCoverIconConstraints() {
+        view.addSubview(coverIcon)
         NSLayoutConstraint.activate([
             coverIcon.topAnchor.constraint(equalTo: coverLabel.bottomAnchor, constant: Constants.CoverIcon.topAnchor),
             coverIcon.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.CoverIcon.leadingAnchor),
@@ -154,7 +154,7 @@ private extension LoginViewController {
         
         enum StartButton {
             static let cornerRadius: CGFloat = 12
-            static let setImage = UIImage(named: "StartButton")
+            static let image = UIImage(named: "StartButton")
             static let topAnchor: CGFloat = 40
             static let bottomAnchor: CGFloat = -70
         }

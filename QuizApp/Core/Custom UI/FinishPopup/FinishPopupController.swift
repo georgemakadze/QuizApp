@@ -9,23 +9,22 @@ import Foundation
 import UIKit
 
 class FinishPopupController: UIViewController {
+    
     //MARK: -  Components
     
-    private lazy var popupView: UIView = {
+    private let popupView: UIView = {
         let popupView = UIView()
         popupView.backgroundColor = Constants.PopupView.backgroundColor
         popupView.layer.cornerRadius = Constants.PopupView.cornerRadius
         popupView.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(popupView)
         return popupView
     }()
     
-    private lazy var successIcon: UIImageView = {
+    private let successIcon: UIImageView = {
         let successIcon = UIImageView()
         successIcon.image = Constants.SuccessIcon.image
         successIcon.contentMode = .scaleAspectFill
         successIcon.translatesAutoresizingMaskIntoConstraints = false
-        popupView.addSubview(successIcon)
         return successIcon
     }()
     
@@ -36,22 +35,20 @@ class FinishPopupController: UIViewController {
         popupLabel.font = Constants.PopupLabel.font
         popupLabel.textColor = Constants.PopupLabel.textColor
         popupLabel.translatesAutoresizingMaskIntoConstraints = false
-        popupView.addSubview(popupLabel)
         return popupLabel
     }()
     
-    private lazy var popupScoreLabel: UILabel = {
+    private let popupScoreLabel: UILabel = {
         let popupScoreLabel = UILabel()
         popupScoreLabel.text = Constants.PopupScoreLabel.text
         popupScoreLabel.backgroundColor = Constants.PopupScoreLabel.backgroundColor
         popupScoreLabel.font = Constants.PopupScoreLabel.font
         popupScoreLabel.textColor = Constants.PopupScoreLabel.textColor
         popupScoreLabel.translatesAutoresizingMaskIntoConstraints = false
-        popupView.addSubview(popupScoreLabel)
         return popupScoreLabel
     }()
     
-    private lazy var dividerView: UIView = {
+    private let dividerView: UIView = {
         let dividerView = UIView()
         dividerView.backgroundColor = Constants.DividerView.backgroundColor
         dividerView.translatesAutoresizingMaskIntoConstraints = false
@@ -62,11 +59,10 @@ class FinishPopupController: UIViewController {
     private lazy var closeButton: UIButton = {
         let closeButton = UIButton()
         closeButton.backgroundColor = Constants.CloseButton.backgroundColor
-        closeButton.setTitle(Constants.CloseButton.setTitle, for: .normal)
-        closeButton.setTitleColor(Constants.CloseButton.setTitleColor, for: .normal)
+        closeButton.setTitle(Constants.CloseButton.title, for: .normal)
+        closeButton.setTitleColor(Constants.CloseButton.titleColor, for: .normal)
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
         closeButton.translatesAutoresizingMaskIntoConstraints = false
-        popupView.addSubview(closeButton)
         return closeButton
     }()
     
@@ -94,7 +90,9 @@ class FinishPopupController: UIViewController {
     }
     
     //MARK: - Constraints Setup
+    
     private func setupPopupViewConstraints() {
+        view.addSubview(popupView)
         NSLayoutConstraint.activate([
             popupView.centerXAnchor.constraint(equalTo: view.centerXAnchor),
             popupView.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -104,6 +102,7 @@ class FinishPopupController: UIViewController {
     }
     
     private func setupSuccessIconConstraints() {
+        popupView.addSubview(successIcon)
         NSLayoutConstraint.activate([
             successIcon.centerXAnchor.constraint(equalTo: popupView.centerXAnchor),
             successIcon.topAnchor.constraint(equalTo: popupView.topAnchor, constant: Constants.SuccessIcon.topAnchor)
@@ -111,6 +110,7 @@ class FinishPopupController: UIViewController {
     }
     
     private func setupPopupLabelConstraints() {
+        popupView.addSubview(popupLabel)
         NSLayoutConstraint.activate([
             popupLabel.centerXAnchor.constraint(equalTo: popupView.centerXAnchor),
             popupLabel.topAnchor.constraint(equalTo: successIcon.bottomAnchor, constant: Constants.PopupLabel.topAnchor)
@@ -118,6 +118,7 @@ class FinishPopupController: UIViewController {
     }
     
     private func setupPopupScoreLabelConstraints() {
+        popupView.addSubview(popupScoreLabel)
         NSLayoutConstraint.activate([
             popupScoreLabel.centerXAnchor.constraint(equalTo: popupView.centerXAnchor),
             popupScoreLabel.topAnchor.constraint(equalTo: popupLabel.bottomAnchor, constant: Constants.PopupScoreLabel.topAnchor)
@@ -125,6 +126,7 @@ class FinishPopupController: UIViewController {
     }
     
     private func setupDividerViewConstraints() {
+        popupView.addSubview(dividerView)
         NSLayoutConstraint.activate([
             dividerView.topAnchor.constraint(equalTo: popupScoreLabel.bottomAnchor, constant: Constants.DividerView.topAnchor),
             dividerView.leadingAnchor.constraint(equalTo: popupView.leadingAnchor),
@@ -134,6 +136,7 @@ class FinishPopupController: UIViewController {
     }
     
     private func setupCloseButtonConstraints() {
+        popupView.addSubview(closeButton)
         NSLayoutConstraint.activate([
             closeButton.widthAnchor.constraint(equalToConstant: Constants.CloseButton.widthAnchor),
             closeButton.heightAnchor.constraint(equalToConstant: Constants.CloseButton.heightAnchor),
@@ -164,8 +167,8 @@ private extension FinishPopupController {
         }
         
         enum CloseButton {
-            static let setTitleColor: UIColor = .white
-            static let setTitle = "დახურვა"
+            static let titleColor: UIColor = .white
+            static let title = "დახურვა"
             static let backgroundColor: UIColor = .clear
             static let widthAnchor: CGFloat = 106
             static let heightAnchor: CGFloat = 34
