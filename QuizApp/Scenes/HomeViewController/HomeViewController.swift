@@ -11,7 +11,6 @@ import UIKit
 class HomeViewController: UIViewController {
     
     //MARK: - Components
-    private var tableView: UITableView!
     private lazy var subjectTableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
@@ -144,12 +143,11 @@ class HomeViewController: UIViewController {
     // MARK: - Constraints Setup
     
     private func setupTableViewConstraints() {
-        tableView = subjectTableView
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: chooseSubjectLabel.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.TableView.bottomAnchor)
+            subjectTableView.topAnchor.constraint(equalTo: chooseSubjectLabel.bottomAnchor),
+            subjectTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            subjectTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            subjectTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.TableView.bottomAnchor)
         ])
     }
     

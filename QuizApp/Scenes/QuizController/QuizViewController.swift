@@ -11,7 +11,7 @@ import UIKit
 class QuizViewController: UIViewController {
     
     //MARK: - Components
-    private var tableView: UITableView!
+//    private var tableView: UITableView!
     private lazy var subjectTableView: UITableView =  {
         let tableView = UITableView()
         tableView.separatorStyle = .none
@@ -92,11 +92,11 @@ class QuizViewController: UIViewController {
     
     // MARK: - Constraints Setup
     private func setupTableViewConstraints() {
-        tableView = subjectTableView
+        
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: questionBackground.bottomAnchor, constant: Constants.TableView.topAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
+            subjectTableView.topAnchor.constraint(equalTo: questionBackground.bottomAnchor, constant: Constants.TableView.topAnchor),
+            subjectTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            subjectTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor)
         ])
     }
     
@@ -104,7 +104,7 @@ class QuizViewController: UIViewController {
         NSLayoutConstraint.activate([
             nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.NextButton.leadingAnchor),
             nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.NextButton.trailingAnchor),
-            nextButton.topAnchor.constraint(equalTo: tableView.bottomAnchor, constant: Constants.NextButton.topAnchor),
+            nextButton.topAnchor.constraint(equalTo: subjectTableView.bottomAnchor, constant: Constants.NextButton.topAnchor),
             nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.NextButton.bottomAnchor)
         ])
     }

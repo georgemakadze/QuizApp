@@ -11,7 +11,6 @@ import UIKit
 class GPADetailViewController: UIViewController {
     
     // MARK: - Components
-    private var tableView: UITableView!
     private lazy var subjectTableView: UITableView = { //closure
         let tableView = UITableView()
         tableView.separatorStyle = .none
@@ -70,12 +69,11 @@ class GPADetailViewController: UIViewController {
     
     // MARK: - Constraints Setup
     private func setupTableViewConstraints() {
-        tableView = subjectTableView
         NSLayoutConstraint.activate([
-            tableView.topAnchor.constraint(equalTo: pointLabel.bottomAnchor),
-            tableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            tableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            tableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.TableView.bottomAnchor)
+            subjectTableView.topAnchor.constraint(equalTo: pointLabel.bottomAnchor),
+            subjectTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            subjectTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            subjectTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.TableView.bottomAnchor)
         ])
     }
     
