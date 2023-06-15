@@ -8,6 +8,10 @@
 import Foundation
 import UIKit
 
+protocol FinishPopupControllerDelegate: AnyObject {
+    func didTapCloseButton()
+}
+
 class FinishPopupController: UIViewController {
     
     //MARK: -  Components
@@ -64,6 +68,8 @@ class FinishPopupController: UIViewController {
         return closeButton
     }()
     
+    weak var delegate: FinishPopupControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Constants.View.backgroundColor
@@ -85,6 +91,7 @@ class FinishPopupController: UIViewController {
     
     //MARK: - Action
     @objc func closeButtonTapped() {
+        delegate?.didTapCloseButton()
         dismiss(animated: true, completion: nil)
     }
     

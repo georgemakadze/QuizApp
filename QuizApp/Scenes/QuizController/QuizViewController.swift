@@ -49,6 +49,7 @@ class QuizViewController: UIViewController {
         let nextButton = UIButton()
         nextButton.setImage(Constants.NextButton.image, for: .normal)
         // daklikeba
+        nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(nextButton)
         return nextButton
@@ -73,6 +74,13 @@ class QuizViewController: UIViewController {
         setupTableViewConstraints()
         setupQuestionLabelConstraints()
         setupNextButtonConstraints()
+    }
+    
+    @objc func nextButtonTapped() {
+        let finishPopupViewController = FinishPopupController()
+        finishPopupViewController.delegate = self
+        finishPopupViewController.modalPresentationStyle = .overCurrentContext
+        present(finishPopupViewController, animated: true, completion: nil)
     }
     
     func setupNavigationController() {
@@ -133,6 +141,15 @@ extension QuizViewController: PopupViewControllerDelegate {
         dismiss(animated: true, completion: nil)
         navigationController?.popViewController(animated: true)
     }
+}
+
+extension QuizViewController: FinishPopupControllerDelegate {
+    func didTapCloseButton() {
+        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
+    }
+    
+    
 }
 
 // MARK: - UITableViewDataSource
