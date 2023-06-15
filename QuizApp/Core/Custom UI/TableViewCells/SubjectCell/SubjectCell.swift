@@ -48,13 +48,14 @@ class SubjectCell: UITableViewCell {
         return descriptionLabel
     }()
     
-    private lazy var button: UIButton = {
-        let button = UIButton()
-        button.setImage(Constants.Button.image, for: .normal)
-        button.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(button)
-        return button
+    private lazy var ellipseImage: UIImageView = {
+        let ellipseImage = UIImageView()
+        ellipseImage.image = Constants.Button.image
+        ellipseImage.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(ellipseImage)
+        return ellipseImage
     }()
+
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -108,9 +109,9 @@ class SubjectCell: UITableViewCell {
     
     private func setupButtonConstraints() {
         NSLayoutConstraint.activate([
-            button.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Constants.Button.topAnchor),
-            button.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: Constants.Button.bottomAnchor),
-            button.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: Constants.Button.trailingAnchor)
+            ellipseImage.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Constants.Button.topAnchor),
+            ellipseImage.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: Constants.Button.bottomAnchor),
+            ellipseImage.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: Constants.Button.trailingAnchor)
         ])
     }
     

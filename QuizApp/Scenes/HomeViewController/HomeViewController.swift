@@ -28,6 +28,8 @@ class HomeViewController: UIViewController {
         scoreHeaderView.layer.cornerRadius = Constants.ScoreHeaderView.cornerRadius
         scoreHeaderView.isUserInteractionEnabled = true
         scoreHeaderView.translatesAutoresizingMaskIntoConstraints = false
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(scoreHeaderViewTapped))
+           scoreHeaderView.addGestureRecognizer(tapGesture)
         view.addSubview(scoreHeaderView)
         return scoreHeaderView
     }()
@@ -74,13 +76,20 @@ class HomeViewController: UIViewController {
         return scoreViewDetailLabel
     }()
     
-    private lazy var scoreViewDetailButton: UIButton = {
-        let scoreViewDetailButton = UIButton()
-        scoreViewDetailButton.setImage(Constants.ScoreViewDetailButton.image, for: .normal)
-        scoreViewDetailButton.addTarget(self, action: #selector(detailedButtonTapped),  for: .touchUpInside)
-        scoreViewDetailButton.translatesAutoresizingMaskIntoConstraints = false
-        scoreHeaderView.addSubview(scoreViewDetailButton)
-        return scoreViewDetailButton
+//    private lazy var scoreViewDetailButton:  = {
+//        let scoreViewDetailButton = UIButton()
+//        scoreViewDetailButton.setImage(Constants.ScoreViewDetailButton.image, for: .normal)
+//        scoreViewDetailButton.translatesAutoresizingMaskIntoConstraints = false
+//        scoreHeaderView.addSubview(scoreViewDetailButton)
+//        return scoreViewDetailButton
+//    }()
+    
+    private lazy var scoreViewDetailImageView: UIImageView = {
+        let scoreViewDetailImageView = UIImageView()
+        scoreViewDetailImageView.image = Constants.ScoreViewDetailButton.image
+        scoreViewDetailImageView.translatesAutoresizingMaskIntoConstraints = false
+        scoreHeaderView.addSubview(scoreViewDetailImageView)
+        return scoreViewDetailImageView
     }()
     
     private lazy var chooseSubjectLabel: UILabel = {
@@ -125,7 +134,7 @@ class HomeViewController: UIViewController {
         setupLogOutButtonConstraints()
     }
     
-    @objc func detailedButtonTapped() {
+    @objc private func scoreHeaderViewTapped() {
         let detailViewController = GPADetailViewController()
         self.navigationController?.pushViewController(detailViewController, animated: true)
     }
@@ -203,10 +212,10 @@ class HomeViewController: UIViewController {
     
     private func  setupScoreViewDetailButtonConstraints() {
         NSLayoutConstraint.activate([
-            scoreViewDetailButton.topAnchor.constraint(equalTo: scoreHeaderView.topAnchor, constant: Constants.ScoreViewDetailButton.topAnchor),
-            scoreViewDetailButton.bottomAnchor.constraint(equalTo: scoreHeaderView.bottomAnchor, constant: Constants.ScoreViewDetailButton.bottomAnchor),
-            scoreViewDetailButton.trailingAnchor.constraint(equalTo: scoreHeaderView.trailingAnchor, constant: Constants.ScoreViewDetailButton.trailingAnchor),
-            scoreViewDetailButton.leadingAnchor.constraint(equalTo: scoreViewDetailLabel.trailingAnchor, constant: Constants.ScoreViewDetailButton.leadingAnchor)
+            scoreViewDetailImageView.topAnchor.constraint(equalTo: scoreHeaderView.topAnchor, constant: Constants.ScoreViewDetailButton.topAnchor),
+            scoreViewDetailImageView.bottomAnchor.constraint(equalTo: scoreHeaderView.bottomAnchor, constant: Constants.ScoreViewDetailButton.bottomAnchor),
+            scoreViewDetailImageView.trailingAnchor.constraint(equalTo: scoreHeaderView.trailingAnchor, constant: Constants.ScoreViewDetailButton.trailingAnchor),
+            scoreViewDetailImageView.leadingAnchor.constraint(equalTo: scoreViewDetailLabel.trailingAnchor, constant: Constants.ScoreViewDetailButton.leadingAnchor)
         ])
     }
     

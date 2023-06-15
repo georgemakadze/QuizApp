@@ -11,7 +11,7 @@ import UIKit
 class GPADetailViewController: UIViewController {
     
     // MARK: - Components
-    private lazy var subjectTableView: UITableView = { //closure
+    private lazy var subjectTableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
         tableView.dataSource = self
