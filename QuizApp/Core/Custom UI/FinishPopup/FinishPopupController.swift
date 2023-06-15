@@ -11,7 +11,6 @@ import UIKit
 class FinishPopupController: UIViewController {
     
     //MARK: -  Components
-    
     private let popupView: UIView = {
         let popupView = UIView()
         popupView.backgroundColor = Constants.PopupView.backgroundColor
@@ -85,13 +84,11 @@ class FinishPopupController: UIViewController {
     }
     
     //MARK: - Action
-
     @objc func closeButtonTapped() {
         dismiss(animated: true, completion: nil)
     }
     
     //MARK: - Constraints Setup
-    
     private func setupPopupViewConstraints() {
         view.addSubview(popupView)
         NSLayoutConstraint.activate([
@@ -148,7 +145,6 @@ class FinishPopupController: UIViewController {
 }
 
 //MARK: - Constants
-
 private extension FinishPopupController {
     enum Constants {
         

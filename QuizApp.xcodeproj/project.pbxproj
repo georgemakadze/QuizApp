@@ -101,6 +101,9 @@
 		0EDD08B12A2B214200FF282B /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
+				0EDD08BC2A2E00F000FF282B /* HomeViewController */,
+				0EDD08C52A2F132A00FF282B /* GPADetailViewController */,
+				0EDD08CA2A2F2A7100FF282B /* QuizController */,
 				0EDD08B42A2B220300FF282B /* Login */,
 				0EDD08B22A2B215400FF282B /* Launch */,
 			);
@@ -154,11 +157,9 @@
 		0EDD08B92A2DC4B300FF282B /* Custom UI */ = {
 			isa = PBXGroup;
 			children = (
+				0EDD08DB2A3B21FF00FF282B /* TableViewCells */,
 				0EDD08D82A33251500FF282B /* FinishPopup */,
-				0EDD08D52A31C4D200FF282B /* PopupViewConstroller */,
-				0EDD08CA2A2F2A7100FF282B /* QuizController */,
-				0EDD08C52A2F132A00FF282B /* GPADetailViewController */,
-				0EDD08BC2A2E00F000FF282B /* HomeViewController */,
+				0EDD08D52A31C4D200FF282B /* LogOutPopup */,
 			);
 			path = "Custom UI";
 			sourceTree = "<group>";
@@ -166,18 +167,17 @@
 		0EDD08BC2A2E00F000FF282B /* HomeViewController */ = {
 			isa = PBXGroup;
 			children = (
-				0EDD08BD2A2E011700FF282B /* TableViewCells */,
 				0EDD08BA2A2DCAD500FF282B /* HomeViewController.swift */,
 			);
 			path = HomeViewController;
 			sourceTree = "<group>";
 		};
-		0EDD08BD2A2E011700FF282B /* TableViewCells */ = {
+		0EDD08BD2A2E011700FF282B /* SubjectCell */ = {
 			isa = PBXGroup;
 			children = (
 				0EDD08BE2A2E021200FF282B /* SubjectCell.swift */,
 			);
-			path = TableViewCells;
+			path = SubjectCell;
 			sourceTree = "<group>";
 		};
 		0EDD08C22A2E466A00FF282B /* Models */ = {
@@ -192,7 +192,6 @@
 		0EDD08C52A2F132A00FF282B /* GPADetailViewController */ = {
 			isa = PBXGroup;
 			children = (
-				0EDD08D22A2FB5F200FF282B /* ScoreCell */,
 				0EDD08C62A2F133B00FF282B /* GPADetailViewController.swift */,
 			);
 			path = GPADetailViewController;
@@ -201,7 +200,6 @@
 		0EDD08CA2A2F2A7100FF282B /* QuizController */ = {
 			isa = PBXGroup;
 			children = (
-				0EDD08CB2A2F2DF800FF282B /* AnswerCell */,
 				0EDD08C82A2F26D600FF282B /* QuizViewController.swift */,
 			);
 			path = QuizController;
@@ -223,12 +221,12 @@
 			path = ScoreCell;
 			sourceTree = "<group>";
 		};
-		0EDD08D52A31C4D200FF282B /* PopupViewConstroller */ = {
+		0EDD08D52A31C4D200FF282B /* LogOutPopup */ = {
 			isa = PBXGroup;
 			children = (
 				0EDD08D62A31C4F800FF282B /* PopupViewController.swift */,
 			);
-			path = PopupViewConstroller;
+			path = LogOutPopup;
 			sourceTree = "<group>";
 		};
 		0EDD08D82A33251500FF282B /* FinishPopup */ = {
@@ -237,6 +235,16 @@
 				0EDD08D92A33258700FF282B /* FinishPopupController.swift */,
 			);
 			path = FinishPopup;
+			sourceTree = "<group>";
+		};
+		0EDD08DB2A3B21FF00FF282B /* TableViewCells */ = {
+			isa = PBXGroup;
+			children = (
+				0EDD08BD2A2E011700FF282B /* SubjectCell */,
+				0EDD08D22A2FB5F200FF282B /* ScoreCell */,
+				0EDD08CB2A2F2DF800FF282B /* AnswerCell */,
+			);
+			path = TableViewCells;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */

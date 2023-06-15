@@ -11,7 +11,6 @@ import UIKit
 class AnswerCell: UITableViewCell {
     
     //MARK: Components
-    
     private lazy var containerView: UIView = {
         let containerView = UIView()
         containerView.backgroundColor = Constants.ContainerView.backgroundColor
@@ -46,7 +45,6 @@ class AnswerCell: UITableViewCell {
     }
     
     // MARK: - Constraints Setup
-    
     private func setupContainerViewConstraints() {
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: Constants.ContainerView.topAnchor),
@@ -71,7 +69,6 @@ class AnswerCell: UITableViewCell {
 }
 
 //MARK: - Constants
-
 private extension AnswerCell {
     enum Constants {
         enum ContainerView {

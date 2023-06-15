@@ -11,7 +11,6 @@ import UIKit
 class QuizViewController: UIViewController {
     
     //MARK: - Components
-    
     private var tableView: UITableView!
     private lazy var subjectTableView: UITableView =  {
         let tableView = UITableView()
@@ -68,14 +67,30 @@ class QuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        questionLabel.text = question.text
+        setupNavigationController()
         setupQuestionBackgroundConstrains()
         setupTableViewConstraints()
         setupQuestionLabelConstraints()
         setupNextButtonConstraints()
     }
     
-    // MARK: - Constraints Setup
+    func setupNavigationController() {
+        navigationItem.setHidesBackButton(true, animated: false)
+        navigationItem.title = "პროგრამირება"
+        let rightBarButtonItem = UIBarButtonItem(title: "X", style: .plain, target: self, action: #selector(rightBarButtonTapped))
+        rightBarButtonItem.tintColor = .black
+        navigationItem.rightBarButtonItem = rightBarButtonItem
+    }
     
+    @objc private func rightBarButtonTapped() {
+        let popupViewController = PopupViewController()
+        popupViewController.delegate = self
+        popupViewController.modalPresentationStyle = .overCurrentContext
+        present(popupViewController, animated: true, completion: nil)
+    }
+    
+    // MARK: - Constraints Setup
     private func setupTableViewConstraints() {
         tableView = subjectTableView
         NSLayoutConstraint.activate([
@@ -113,8 +128,14 @@ class QuizViewController: UIViewController {
     }
 }
 
-// MARK: - UITableViewDataSource
+extension QuizViewController: PopupViewControllerDelegate {
+    func didTapYesButton() {
+        dismiss(animated: true, completion: nil)
+        navigationController?.popViewController(animated: true)
+    }
+}
 
+// MARK: - UITableViewDataSource
 extension QuizViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         question.answers.count
@@ -124,13 +145,11 @@ extension QuizViewController: UITableViewDataSource {
         let cell = tableView.dequeueReusableCell(withIdentifier: AnswerCell.reuseIdentifier, for: indexPath) as! AnswerCell
         let currentAnswer = question.answers[indexPath.row]
         cell.configure(with: currentAnswer)
-        questionLabel.text = question.text //viewdidload
         return cell
     }
 }
 
 // MARK: - UITableViewDelegate
-
 extension QuizViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
         let cellHeight = Constants.TableViewCell.cellHeight
@@ -141,7 +160,6 @@ extension QuizViewController: UITableViewDelegate {
 }
 
 // MARK: - Constants
-
 private extension QuizViewController {
     enum Constants {
         
@@ -155,7 +173,7 @@ private extension QuizViewController {
             static let backgroundColor: UIColor = .clear
             static let numberOfLines = 3
             static let font: CGFloat = 16
-            static let topAnchor: CGFloat = 48
+            static let topAnchor: CGFloat = 64
             static let leadingAnchor: CGFloat = 72
             static let trailingAnchor: CGFloat = -72
             static let widthAnchor: CGFloat = 200

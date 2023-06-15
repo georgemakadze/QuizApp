@@ -10,7 +10,6 @@ import UIKit
 class LoginViewController: UIViewController {
     
     //MARK: - Components
-    
     private let coverImageView: UIImageView = {
         let coverImageView = UIImageView()
         coverImageView.image = Constants.CoverImageView.image
@@ -74,11 +73,10 @@ class LoginViewController: UIViewController {
     
     @objc func startButtonTapped() {
         let homeViewController = HomeViewController()
-        self.navigationController?.pushViewController(homeViewController, animated: true)
+        navigationController?.pushViewController(homeViewController, animated: true)
     }
     
     // MARK: - Constraints Setup
-    
     private func setupCoverImageViewConstraints() {
         view.addSubview(coverImageView)
         NSLayoutConstraint.activate([
@@ -129,7 +127,6 @@ class LoginViewController: UIViewController {
 }
 
 // MARK: - Constants
-
 private extension LoginViewController {
     enum Constants {
         

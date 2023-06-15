@@ -11,9 +11,8 @@ import UIKit
 class HomeViewController: UIViewController {
     
     //MARK: - Components
-    
     private var tableView: UITableView!
-    private lazy var subjectTableView: UITableView = { //closure
+    private lazy var subjectTableView: UITableView = {
         let tableView = UITableView()
         tableView.separatorStyle = .none
         tableView.dataSource = self
@@ -132,13 +131,14 @@ class HomeViewController: UIViewController {
     }
     
     @objc func logOutButtonTapped() {
-        //        let popupViewController = PopupViewController()
-        //        popupViewController.modalPresentationStyle = .overCurrentContext
-        //        present(popupViewController, animated: true, completion: nil)
+        let popupViewController = PopupViewController()
+        popupViewController.delegate = self
+        popupViewController.modalPresentationStyle = .overCurrentContext
+        present(popupViewController, animated: true, completion: nil)
         
-        let finishPopupController = FinishPopupController()
-        finishPopupController.modalPresentationStyle = .overCurrentContext
-        present(finishPopupController, animated: true, completion: nil)
+        //        let finishPopupController = FinishPopupController()
+        //        finishPopupController.modalPresentationStyle = .overCurrentContext
+        //        present(finishPopupController, animated: true, completion: nil)
     }
     
     // MARK: - Constraints Setup
@@ -223,8 +223,14 @@ class HomeViewController: UIViewController {
     }
 }
 
-// MARK: - UITableViewDataSource
+extension HomeViewController: PopupViewControllerDelegate {
+    func didTapYesButton() {
+        let loginViewController = LoginViewController()
+        navigationController?.setViewControllers([loginViewController], animated: true)
+    }
+}
 
+// MARK: - UITableViewDataSource
 extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -240,7 +246,6 @@ extension HomeViewController: UITableViewDataSource {
 }
 
 // MARK: - UITableViewDelegate
-
 extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -257,7 +262,6 @@ extension HomeViewController: UITableViewDelegate {
 }
 
 // MARK: - Constants
-
 private extension HomeViewController {
     enum Constants {
         
@@ -347,6 +351,3 @@ private extension HomeViewController {
         }
     }
 }
-
-
-

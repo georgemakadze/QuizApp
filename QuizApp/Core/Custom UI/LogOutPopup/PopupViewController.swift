@@ -8,10 +8,13 @@
 import Foundation
 import UIKit
 
+protocol PopupViewControllerDelegate: AnyObject {
+    func didTapYesButton()
+}
+
 class PopupViewController: UIViewController {
     
     //MARK: - Components
-    
     private let popupView: UIView = {
         let popupView = UIView()
         popupView.backgroundColor = Constants.PopupView.backgroundColor
@@ -23,6 +26,7 @@ class PopupViewController: UIViewController {
     private let popupLabel: UILabel = {
         let popupLabel = UILabel()
         popupLabel.text = Constants.PopupLabel.text
+        popupLabel.textAlignment = .center
         popupLabel.backgroundColor = Constants.PopupLabel.backgroundColor
         popupLabel.numberOfLines = Constants.PopupLabel.numberOfLines
         popupLabel.lineBreakMode = .byTruncatingTail
@@ -54,6 +58,8 @@ class PopupViewController: UIViewController {
         return noButton
     }()
     
+    weak var delegate: PopupViewControllerDelegate?
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Constants.View.backgroundColor
@@ -72,11 +78,11 @@ class PopupViewController: UIViewController {
     }
     
     @objc func yesButtonTapped() {
+        delegate?.didTapYesButton()
         dismiss(animated: true, completion: nil)
     }
     
     // MARK: - Constraints Setup
-    
     private func setupPopupViewConstraints() {
         view.addSubview(popupView)
         NSLayoutConstraint.activate([
@@ -118,7 +124,6 @@ class PopupViewController: UIViewController {
 }
 
 //MARK: - Constants
-
 private extension PopupViewController {
     enum Constants {
         

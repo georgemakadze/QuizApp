@@ -11,7 +11,6 @@ import UIKit
 class GPADetailViewController: UIViewController {
     
     // MARK: - Components
-    
     private var tableView: UITableView!
     private lazy var subjectTableView: UITableView = { //closure
         let tableView = UITableView()
@@ -70,7 +69,6 @@ class GPADetailViewController: UIViewController {
     }
     
     // MARK: - Constraints Setup
-    
     private func setupTableViewConstraints() {
         tableView = subjectTableView
         NSLayoutConstraint.activate([
@@ -104,7 +102,6 @@ class GPADetailViewController: UIViewController {
 }
 
 // MARK: - UITableViewDataSource
-
 extension GPADetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -120,7 +117,6 @@ extension GPADetailViewController: UITableViewDataSource {
 }
 
 // MARK: - UITableViewDelegate
-
 extension GPADetailViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
@@ -132,7 +128,6 @@ extension GPADetailViewController: UITableViewDelegate {
 }
 
 // MARK: - Constants
-
 private extension GPADetailViewController {
     enum Constants {
         
