@@ -53,7 +53,7 @@ class PopupViewController: UIViewController {
         noButton.setTitle(Constants.NoButton.title, for: .normal)
         noButton.setTitleColor(Constants.NoButton.titleColor, for: .normal)
         noButton.layer.cornerRadius = Constants.NoButton.cornerRadius
-        noButton.addTarget(self, action: #selector(yesButtonTapped), for: .touchUpInside)
+        noButton.addTarget(self, action: #selector(noButtonTapped), for: .touchUpInside)
         noButton.translatesAutoresizingMaskIntoConstraints = false
         return noButton
     }()
@@ -79,6 +79,10 @@ class PopupViewController: UIViewController {
     
     @objc func yesButtonTapped() {
         delegate?.didTapYesButton()
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @objc func noButtonTapped() {
         dismiss(animated: true, completion: nil)
     }
     

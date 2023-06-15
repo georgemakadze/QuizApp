@@ -61,6 +61,10 @@ class LoginViewController: UIViewController {
         return coverIcon
     }()
     
+    override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
+         return .portrait
+     }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = Constants.View.backgroundColor
@@ -73,7 +77,8 @@ class LoginViewController: UIViewController {
     
     @objc func startButtonTapped() {
         let homeViewController = HomeViewController()
-        navigationController?.pushViewController(homeViewController, animated: true)
+        let navVC = UINavigationController(rootViewController: homeViewController)
+         window?.rootViewController = navVC
     }
     
     // MARK: - Constraints Setup

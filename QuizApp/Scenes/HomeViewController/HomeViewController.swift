@@ -26,6 +26,7 @@ class HomeViewController: UIViewController {
         let scoreHeaderView = UIView()
         scoreHeaderView.backgroundColor = Constants.ScoreHeaderView.backgroundColor
         scoreHeaderView.layer.cornerRadius = Constants.ScoreHeaderView.cornerRadius
+        scoreHeaderView.isUserInteractionEnabled = true
         scoreHeaderView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scoreHeaderView)
         return scoreHeaderView
@@ -134,10 +135,6 @@ class HomeViewController: UIViewController {
         popupViewController.delegate = self
         popupViewController.modalPresentationStyle = .overCurrentContext
         present(popupViewController, animated: true, completion: nil)
-        
-        //        let finishPopupController = FinishPopupController()
-        //        finishPopupController.modalPresentationStyle = .overCurrentContext
-        //        present(finishPopupController, animated: true, completion: nil)
     }
     
     // MARK: - Constraints Setup
@@ -223,8 +220,7 @@ class HomeViewController: UIViewController {
 
 extension HomeViewController: PopupViewControllerDelegate {
     func didTapYesButton() {
-        let loginViewController = LoginViewController()
-        navigationController?.setViewControllers([loginViewController], animated: true)
+       window?.rootViewController = LoginViewController()
     }
 }
 
@@ -237,6 +233,7 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SubjectCell.reuseIdentifier, for: indexPath) as! SubjectCell
+        cell.selectionStyle = .none
         let subject = subjects[indexPath.row]
         cell.configure(with: subject)
         return cell

@@ -108,6 +108,7 @@ extension GPADetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ScoreCell.reuseIdentifier, for: indexPath) as! ScoreCell
+        cell.selectionStyle = .none
         let subject = subjects[indexPath.row]
         cell.configure(with: subject)
         return cell

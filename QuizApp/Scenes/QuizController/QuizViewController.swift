@@ -11,7 +11,6 @@ import UIKit
 class QuizViewController: UIViewController {
     
     //MARK: - Components
-//    private var tableView: UITableView!
     private lazy var subjectTableView: UITableView =  {
         let tableView = UITableView()
         tableView.separatorStyle = .none
@@ -160,6 +159,7 @@ extension QuizViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AnswerCell.reuseIdentifier, for: indexPath) as! AnswerCell
+        cell.selectionStyle = .none
         let currentAnswer = question.answers[indexPath.row]
         cell.configure(with: currentAnswer)
         return cell
@@ -199,14 +199,14 @@ private extension QuizViewController {
         
         enum NextButton {
             static let image = UIImage(named: "Next")
-            static let topAnchor: CGFloat = 64
+            static let topAnchor: CGFloat = 32
             static let leadingAnchor: CGFloat = 16
             static let trailingAnchor: CGFloat = -16
-            static let bottomAnchor: CGFloat = -64
+            static let bottomAnchor: CGFloat = -50
         }
         
         enum TableView {
-            static let topAnchor: CGFloat = 74
+            static let topAnchor: CGFloat = 30
         }
         
         enum TableViewCell {
