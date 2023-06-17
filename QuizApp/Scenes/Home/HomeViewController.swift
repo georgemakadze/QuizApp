@@ -76,14 +76,6 @@ class HomeViewController: UIViewController {
         return scoreViewDetailLabel
     }()
     
-//    private lazy var scoreViewDetailButton:  = {
-//        let scoreViewDetailButton = UIButton()
-//        scoreViewDetailButton.setImage(Constants.ScoreViewDetailButton.image, for: .normal)
-//        scoreViewDetailButton.translatesAutoresizingMaskIntoConstraints = false
-//        scoreHeaderView.addSubview(scoreViewDetailButton)
-//        return scoreViewDetailButton
-//    }()
-    
     private lazy var scoreViewDetailImageView: UIImageView = {
         let scoreViewDetailImageView = UIImageView()
         scoreViewDetailImageView.image = Constants.ScoreViewDetailButton.image
@@ -227,6 +219,7 @@ class HomeViewController: UIViewController {
     }
 }
 
+// MARK: - PopupViewControllerDelegate
 extension HomeViewController: PopupViewControllerDelegate {
     func didTapYesButton() {
        window?.rootViewController = LoginViewController()
@@ -242,7 +235,6 @@ extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SubjectCell.reuseIdentifier, for: indexPath) as! SubjectCell
-        cell.selectionStyle = .none
         let subject = subjects[indexPath.row]
         cell.configure(with: subject)
         return cell

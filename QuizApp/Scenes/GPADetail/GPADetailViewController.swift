@@ -21,27 +21,7 @@ class GPADetailViewController: UIViewController {
         view.addSubview(tableView)
         return tableView
     }()
-    
-    private lazy var pointLabel: UILabel = {
-        let pointLabel = UILabel()
-        pointLabel.text = Constants.PointLabel.text
-        pointLabel.font = Constants.PointLabel.font
-        pointLabel.textColor = Constants.PointLabel.textColor
-        pointLabel.backgroundColor = Constants.PointLabel.backgroundColor
-        pointLabel.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(pointLabel)
-        return pointLabel
-    }()
-    
-    private lazy var starImage: UIImageView = {
-        let starImage = UIImageView()
-        starImage.image = Constants.StarImage.image
-        starImage.contentMode = .scaleAspectFill
-        starImage.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(starImage)
-        return starImage
-    }()
-    
+
     private lazy var noPointsImage: UIImageView = {
         let noPointsImage = UIImageView()
         noPointsImage.image = Constants.noPointsImage.image
@@ -61,36 +41,33 @@ class GPADetailViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        setupPointLabelConstraints()
-        setupStarImageConstraints()
         setupTableViewConstraints()
-        //        noPointsImageConstraints()
+        setupNavigationController()
+    }
+    
+    func setupNavigationController() {
+        navigationItem.setHidesBackButton(true, animated: false)
+        navigationItem.title = "დაგროვილი ქულები ⭐️"
+        
+        let leftBarButtonItem = UIBarButtonItem(title: "<", style: .plain, target: self, action: #selector(leftBarButtonTapped))
+        leftBarButtonItem.tintColor = .black
+        navigationItem.leftBarButtonItem = leftBarButtonItem
+    }
+    
+    @objc func leftBarButtonTapped() {
+        self.navigationController?.popViewController(animated: true)
     }
     
     // MARK: - Constraints Setup
     private func setupTableViewConstraints() {
         NSLayoutConstraint.activate([
-            subjectTableView.topAnchor.constraint(equalTo: pointLabel.bottomAnchor),
+            subjectTableView.topAnchor.constraint(equalTo: view.topAnchor),
             subjectTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             subjectTableView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
             subjectTableView.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.TableView.bottomAnchor)
         ])
     }
-    
-    private func setupPointLabelConstraints() {
-        NSLayoutConstraint.activate([
-            pointLabel.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.PointLabel.topAnchor),
-            pointLabel.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.PointLabel.leadingAnchor),
-        ])
-    }
-    
-    private func setupStarImageConstraints() {
-        NSLayoutConstraint.activate([
-            starImage.topAnchor.constraint(equalTo: view.topAnchor, constant: Constants.StarImage.topAnchor),
-            starImage.leadingAnchor.constraint(equalTo: pointLabel.trailingAnchor, constant: Constants.StarImage.leadingAnchor),
-        ])
-    }
-    
+
     private func noPointsImageConstraints() {
         NSLayoutConstraint.activate([
             noPointsImage.centerYAnchor.constraint(equalTo: view.centerYAnchor),
@@ -108,7 +85,6 @@ extension GPADetailViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: ScoreCell.reuseIdentifier, for: indexPath) as! ScoreCell
-        cell.selectionStyle = .none
         let subject = subjects[indexPath.row]
         cell.configure(with: subject)
         return cell

@@ -1,16 +1,16 @@
 //
-//  SubjectCell.swift
+//  ScoreCell.swift
 //  QuizApp
 //
-//  Created by Giorgi Makadze on 05.06.2023.
+//  Created by Giorgi Makadze on 06.06.2023.
 //
 
 import Foundation
 import UIKit
 
-class SubjectCell: UITableViewCell {
+class ScoreCell: UITableViewCell {
     
-    // MARK: - Components
+    //MARK: - Components
     private lazy var containerView: UIView = {
         let containerView = UIView()
         containerView.backgroundColor = Constants.ContainerView.backgroundColor
@@ -30,7 +30,7 @@ class SubjectCell: UITableViewCell {
     
     private lazy var nameLabel: UILabel = {
         let nameLabel = UILabel()
-        nameLabel.font = Constants.NameLabel.font
+        nameLabel.font = .systemFont(ofSize: Constants.NameLabel.font)
         nameLabel.backgroundColor = Constants.NameLabel.backgroundColor
         nameLabel.textColor = Constants.NameLabel.textColor
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
@@ -48,17 +48,23 @@ class SubjectCell: UITableViewCell {
         return descriptionLabel
     }()
     
-    private lazy var ellipseImage: UIImageView = {
-        let ellipseImage = UIImageView()
-        ellipseImage.image = Constants.Button.image
-        ellipseImage.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(ellipseImage)
-        return ellipseImage
+    private lazy var scoreLabel: UILabel = {
+        let scoreLabel = UILabel()
+        scoreLabel.text = Constants.ScoreLabel.text
+        scoreLabel.textColor = Constants.ScoreLabel.textColor
+        scoreLabel.font = Constants.ScoreLabel.font
+        scoreLabel.textAlignment = .center
+        scoreLabel.layer.masksToBounds = true
+        scoreLabel.backgroundColor = Constants.ScoreLabel.backgroundColor
+        scoreLabel.layer.cornerRadius = Constants.ScoreLabel.cornerRadius
+        scoreLabel.translatesAutoresizingMaskIntoConstraints = false
+        containerView.addSubview(scoreLabel)
+        return scoreLabel
     }()
-
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
+        selectionStyle = .none
         setup()
     }
     
@@ -71,7 +77,7 @@ class SubjectCell: UITableViewCell {
         setupIconImageViewConstrains()
         setupNameLabelConstraints()
         setupDescriptionLabelConstraints()
-        setupButtonConstraints()
+        setupScoreLabelConstraints()
     }
     
     // MARK: - Constraints Setup
@@ -80,7 +86,8 @@ class SubjectCell: UITableViewCell {
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: Constants.ContainerView.topAnchor),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: Constants.ContainerView.leadingAnchor),
             containerView.trailingAnchor.constraint(equalTo: contentView.trailingAnchor,constant: Constants.ContainerView.trailingAnchor),
-            containerView.bottomAnchor.constraint(equalTo: contentView.bottomAnchor, constant: Constants.ContainerView.bottomAnchor)
+            containerView.widthAnchor.constraint(equalToConstant: Constants.ContainerView.widthAnchor),
+            containerView.heightAnchor.constraint(equalToConstant: Constants.ContainerView.heightAnchor)
         ])
     }
     
@@ -107,11 +114,13 @@ class SubjectCell: UITableViewCell {
         ])
     }
     
-    private func setupButtonConstraints() {
+    private func setupScoreLabelConstraints() {
         NSLayoutConstraint.activate([
-            ellipseImage.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Constants.Button.topAnchor),
-            ellipseImage.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: Constants.Button.bottomAnchor),
-            ellipseImage.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: Constants.Button.trailingAnchor)
+            scoreLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Constants.ScoreLabel.topAnchor),
+            scoreLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: Constants.ScoreLabel.bottomAnchor),
+            scoreLabel.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: Constants.ScoreLabel.trailingAnchor),
+            scoreLabel.widthAnchor.constraint(equalToConstant: Constants.ScoreLabel.widthAnchor),
+            scoreLabel.heightAnchor.constraint(equalToConstant: Constants.ScoreLabel.heightAnchor)
         ])
     }
     
@@ -122,49 +131,49 @@ class SubjectCell: UITableViewCell {
     }
 }
 
-// MARK: - Constants
-private extension SubjectCell {
+//MARK: - Constants
+private extension ScoreCell {
     enum Constants {
-        
         enum ContainerView {
             static let backgroundColor = UIColor(hex: "F6F6F6")
             static let cornerRadius: CGFloat = 26
-            static let topAnchor: CGFloat = 9
+            static let topAnchor: CGFloat = 20
             static let leadingAnchor: CGFloat = 20
             static let trailingAnchor: CGFloat = -20
             static let widthAnchor: CGFloat = 344
             static let heightAnchor: CGFloat = 106
-            static let bottomAnchor: CGFloat = -9
         }
-        
         enum IconImageView {
             static let topAnchor: CGFloat = 22
             static let bottomAnchor: CGFloat = -22
             static let leadingAnchor: CGFloat = 29.5
         }
-        
         enum NameLabel {
-            static let font: UIFont = .systemFont(ofSize: 16)
             static let backgroundColor: UIColor = .clear
             static let textColor: UIColor = .black
+            static let font: CGFloat = 16
             static let leadingAnchor: CGFloat = 18
             static let topAnchor: CGFloat = 33
         }
-        
         enum DescriptionLabel {
-            static let backgroundColor: UIColor = .clear
             static let font: UIFont = .systemFont(ofSize: 10)
             static let textColor = UIColor(hex: "B3B3B3")
             static let topAnchor: CGFloat = 2
             static let leadingAnchor: CGFloat = 18
             static let bottomAnchor: CGFloat = -34
+            static let backgroundColor: UIColor = .clear
         }
-        
-        enum Button {
-            static let image = UIImage(named: "cellbutton")
+        enum ScoreLabel {
+            static let font: UIFont = .systemFont(ofSize: 16)
+            static let text = "1"
+            static let textColor: UIColor = .white
+            static let backgroundColor = UIColor(hex: "FFC44A")
+            static let cornerRadius: CGFloat = 22.5
             static let topAnchor: CGFloat = 30
             static let bottomAnchor: CGFloat = -31
             static let trailingAnchor: CGFloat = -29.5
+            static let widthAnchor: CGFloat = 45
+            static let heightAnchor: CGFloat = 45
         }
     }
 }

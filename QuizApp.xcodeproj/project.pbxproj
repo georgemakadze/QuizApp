@@ -86,8 +86,7 @@
 				0EDD08B32A2B217C00FF282B /* App */,
 				0EDD08B12A2B214200FF282B /* Scenes */,
 				0EDD08B02A2B211700FF282B /* Resource */,
-				0EDD08AA2A2A0B5000FF282B /* Info.plist */,
-				0EDD08A22A2A0B4E00FF282B /* QuizApp.xcdatamodeld */,
+				0EDD08E12A3D989E00FF282B /* Supporting Files */,
 			);
 			path = QuizApp;
 			sourceTree = "<group>";
@@ -103,9 +102,9 @@
 		0EDD08B12A2B214200FF282B /* Scenes */ = {
 			isa = PBXGroup;
 			children = (
-				0EDD08BC2A2E00F000FF282B /* HomeViewController */,
-				0EDD08C52A2F132A00FF282B /* GPADetailViewController */,
-				0EDD08CA2A2F2A7100FF282B /* QuizController */,
+				0EDD08BC2A2E00F000FF282B /* Home */,
+				0EDD08C52A2F132A00FF282B /* GPADetail */,
+				0EDD08CA2A2F2A7100FF282B /* Quiz */,
 				0EDD08B42A2B220300FF282B /* Login */,
 				0EDD08B22A2B215400FF282B /* Launch */,
 			);
@@ -140,6 +139,7 @@
 		0EDD08B52A2B5DA200FF282B /* Core */ = {
 			isa = PBXGroup;
 			children = (
+				0EDD08E22A3D9A9900FF282B /* Core Data */,
 				0EDD08C22A2E466A00FF282B /* Models */,
 				0EDD08B92A2DC4B300FF282B /* Custom UI */,
 				0EDD08B82A2DC4A500FF282B /* Extensions */,
@@ -160,27 +160,19 @@
 		0EDD08B92A2DC4B300FF282B /* Custom UI */ = {
 			isa = PBXGroup;
 			children = (
-				0EDD08DB2A3B21FF00FF282B /* TableViewCells */,
 				0EDD08D82A33251500FF282B /* FinishPopup */,
 				0EDD08D52A31C4D200FF282B /* LogOutPopup */,
 			);
 			path = "Custom UI";
 			sourceTree = "<group>";
 		};
-		0EDD08BC2A2E00F000FF282B /* HomeViewController */ = {
+		0EDD08BC2A2E00F000FF282B /* Home */ = {
 			isa = PBXGroup;
 			children = (
+				0EDD08DE2A3D92F800FF282B /* TableViewCell */,
 				0EDD08BA2A2DCAD500FF282B /* HomeViewController.swift */,
 			);
-			path = HomeViewController;
-			sourceTree = "<group>";
-		};
-		0EDD08BD2A2E011700FF282B /* SubjectCell */ = {
-			isa = PBXGroup;
-			children = (
-				0EDD08BE2A2E021200FF282B /* SubjectCell.swift */,
-			);
-			path = SubjectCell;
+			path = Home;
 			sourceTree = "<group>";
 		};
 		0EDD08C22A2E466A00FF282B /* Models */ = {
@@ -192,36 +184,22 @@
 			path = Models;
 			sourceTree = "<group>";
 		};
-		0EDD08C52A2F132A00FF282B /* GPADetailViewController */ = {
+		0EDD08C52A2F132A00FF282B /* GPADetail */ = {
 			isa = PBXGroup;
 			children = (
+				0EDD08E02A3D933100FF282B /* TableViewCell */,
 				0EDD08C62A2F133B00FF282B /* GPADetailViewController.swift */,
 			);
-			path = GPADetailViewController;
+			path = GPADetail;
 			sourceTree = "<group>";
 		};
-		0EDD08CA2A2F2A7100FF282B /* QuizController */ = {
+		0EDD08CA2A2F2A7100FF282B /* Quiz */ = {
 			isa = PBXGroup;
 			children = (
+				0EDD08DF2A3D931B00FF282B /* TableViewCell */,
 				0EDD08C82A2F26D600FF282B /* QuizViewController.swift */,
 			);
-			path = QuizController;
-			sourceTree = "<group>";
-		};
-		0EDD08CB2A2F2DF800FF282B /* AnswerCell */ = {
-			isa = PBXGroup;
-			children = (
-				0EDD08CC2A2F2E1B00FF282B /* AnswerCell.swift */,
-			);
-			path = AnswerCell;
-			sourceTree = "<group>";
-		};
-		0EDD08D22A2FB5F200FF282B /* ScoreCell */ = {
-			isa = PBXGroup;
-			children = (
-				0EDD08D02A2FB5E600FF282B /* ScoreCell.swift */,
-			);
-			path = ScoreCell;
+			path = Quiz;
 			sourceTree = "<group>";
 		};
 		0EDD08D52A31C4D200FF282B /* LogOutPopup */ = {
@@ -240,14 +218,44 @@
 			path = FinishPopup;
 			sourceTree = "<group>";
 		};
-		0EDD08DB2A3B21FF00FF282B /* TableViewCells */ = {
+		0EDD08DE2A3D92F800FF282B /* TableViewCell */ = {
 			isa = PBXGroup;
 			children = (
-				0EDD08BD2A2E011700FF282B /* SubjectCell */,
-				0EDD08D22A2FB5F200FF282B /* ScoreCell */,
-				0EDD08CB2A2F2DF800FF282B /* AnswerCell */,
+				0EDD08BE2A2E021200FF282B /* SubjectCell.swift */,
 			);
-			path = TableViewCells;
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		0EDD08DF2A3D931B00FF282B /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				0EDD08CC2A2F2E1B00FF282B /* AnswerCell.swift */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		0EDD08E02A3D933100FF282B /* TableViewCell */ = {
+			isa = PBXGroup;
+			children = (
+				0EDD08D02A2FB5E600FF282B /* ScoreCell.swift */,
+			);
+			path = TableViewCell;
+			sourceTree = "<group>";
+		};
+		0EDD08E12A3D989E00FF282B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				0EDD08AA2A2A0B5000FF282B /* Info.plist */,
+			);
+			path = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		0EDD08E22A3D9A9900FF282B /* Core Data */ = {
+			isa = PBXGroup;
+			children = (
+				0EDD08A22A2A0B4E00FF282B /* QuizApp.xcdatamodeld */,
+			);
+			path = "Core Data";
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -476,7 +484,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = QuizApp/Info.plist;
+				INFOPLIST_FILE = "QuizApp/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
@@ -502,7 +510,7 @@
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
 				GENERATE_INFOPLIST_FILE = YES;
-				INFOPLIST_FILE = QuizApp/Info.plist;
+				INFOPLIST_FILE = "QuizApp/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";

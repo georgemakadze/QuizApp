@@ -18,16 +18,15 @@ class LoginViewController: UIViewController {
         return coverImageView
     }()
     
-    private let loginTextView: UITextView = {
-        let loginTextView = UITextView()
+    private let loginTextView: UITextField = {
+        let loginTextView = UITextField()
         loginTextView.backgroundColor = Constants.LoginTextView.backgroundColor
         loginTextView.font =  Constants.LoginTextView.font
-        loginTextView.text = Constants.LoginTextView.text
         loginTextView.textColor = Constants.LoginTextView.textColor
         loginTextView.layer.borderColor = Constants.LoginTextView.borderColor
         loginTextView.layer.borderWidth = Constants.LoginTextView.borderWidth
         loginTextView.textAlignment = .center
-        loginTextView.contentInset = Constants.LoginTextView.contentInset
+        loginTextView.placeholder = Constants.LoginTextView.text
         loginTextView.layer.cornerRadius = Constants.LoginTextView.cornerRadius
         loginTextView.translatesAutoresizingMaskIntoConstraints = false
         return loginTextView
@@ -67,6 +66,7 @@ class LoginViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        loginTextView.delegate = self
         view.backgroundColor = Constants.View.backgroundColor
         setupCoverImageViewConstraints()
         setupLoginTextViewConstraints()
@@ -131,6 +131,12 @@ class LoginViewController: UIViewController {
     }
 }
 
+extension LoginViewController: UITextFieldDelegate {
+    func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.textColor = .black
+    }
+}
+   
 // MARK: - Constants
 private extension LoginViewController {
     enum Constants {

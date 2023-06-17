@@ -47,7 +47,6 @@ class QuizViewController: UIViewController {
     private lazy var nextButton: UIButton = {
         let nextButton = UIButton()
         nextButton.setImage(Constants.NextButton.image, for: .normal)
-        // daklikeba
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         nextButton.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(nextButton)
@@ -75,19 +74,20 @@ class QuizViewController: UIViewController {
         setupNextButtonConstraints()
     }
     
-    @objc func nextButtonTapped() {
-        let finishPopupViewController = FinishPopupController()
-        finishPopupViewController.delegate = self
-        finishPopupViewController.modalPresentationStyle = .overCurrentContext
-        present(finishPopupViewController, animated: true, completion: nil)
-    }
-    
+    // MARK: - Actions
     func setupNavigationController() {
         navigationItem.setHidesBackButton(true, animated: false)
         navigationItem.title = "პროგრამირება"
         let rightBarButtonItem = UIBarButtonItem(title: "X", style: .plain, target: self, action: #selector(rightBarButtonTapped))
         rightBarButtonItem.tintColor = .black
         navigationItem.rightBarButtonItem = rightBarButtonItem
+    }
+    
+    @objc func nextButtonTapped() {
+        let finishPopupViewController = FinishPopupController()
+        finishPopupViewController.delegate = self
+        finishPopupViewController.modalPresentationStyle = .overCurrentContext
+        present(finishPopupViewController, animated: true, completion: nil)
     }
     
     @objc private func rightBarButtonTapped() {
@@ -135,6 +135,7 @@ class QuizViewController: UIViewController {
     }
 }
 
+// MARK: - PopupViewControllerDelegate
 extension QuizViewController: PopupViewControllerDelegate {
     func didTapYesButton() {
         dismiss(animated: true, completion: nil)
@@ -142,13 +143,12 @@ extension QuizViewController: PopupViewControllerDelegate {
     }
 }
 
+// MARK: - FinishPopupControllerDelegate
 extension QuizViewController: FinishPopupControllerDelegate {
     func didTapCloseButton() {
         dismiss(animated: true, completion: nil)
         navigationController?.popViewController(animated: true)
     }
-    
-    
 }
 
 // MARK: - UITableViewDataSource
@@ -159,7 +159,6 @@ extension QuizViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AnswerCell.reuseIdentifier, for: indexPath) as! AnswerCell
-        cell.selectionStyle = .none
         let currentAnswer = question.answers[indexPath.row]
         cell.configure(with: currentAnswer)
         return cell
