@@ -29,7 +29,7 @@ class HomeViewController: UIViewController {
         scoreHeaderView.isUserInteractionEnabled = true
         scoreHeaderView.translatesAutoresizingMaskIntoConstraints = false
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(scoreHeaderViewTapped))
-           scoreHeaderView.addGestureRecognizer(tapGesture)
+        scoreHeaderView.addGestureRecognizer(tapGesture)
         view.addSubview(scoreHeaderView)
         return scoreHeaderView
     }()
@@ -115,6 +115,7 @@ class HomeViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
+        setupNavigationController()
         setupScoreHeaderViewConstraints()
         setupGpaViewConstrains()
         setupGpaTextLabelConstraints()
@@ -124,6 +125,26 @@ class HomeViewController: UIViewController {
         setupChooseSubjectLabelConstraints()
         setupTableViewConstraints()
         setupLogOutButtonConstraints()
+    }
+    
+    func setupNavigationController() {
+        let titleLabel = UILabel()
+        titleLabel.text = Constants.TitleLabel.text
+        titleLabel.font = Constants.TitleLabel.font
+        titleLabel.textColor = Constants.TitleLabel.textColor
+        
+        let titleView = UIView()
+        titleView.addSubview(titleLabel)
+        
+        titleLabel.translatesAutoresizingMaskIntoConstraints = false
+        titleView.translatesAutoresizingMaskIntoConstraints = false
+        
+        NSLayoutConstraint.activate([
+            titleLabel.leadingAnchor.constraint(equalTo: titleView.leadingAnchor),
+            titleLabel.centerYAnchor.constraint(equalTo: titleView.centerYAnchor)
+        ])
+        
+        navigationItem.leftBarButtonItem = UIBarButtonItem(customView: titleView)
     }
     
     @objc private func scoreHeaderViewTapped() {
@@ -160,7 +181,7 @@ class HomeViewController: UIViewController {
     
     private func setupScoreHeaderViewConstraints() {
         NSLayoutConstraint.activate([
-            scoreHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.ScoreHeaderView.topAnchor),
+            scoreHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scoreHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.ScoreHeaderView.leadingAnchor),
             scoreHeaderView.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.ScoreHeaderView.trailingAnchor),
             scoreHeaderView.widthAnchor.constraint(equalToConstant: Constants.ScoreHeaderView.widthAnchor),
@@ -222,7 +243,7 @@ class HomeViewController: UIViewController {
 // MARK: - PopupViewControllerDelegate
 extension HomeViewController: PopupViewControllerDelegate {
     func didTapYesButton() {
-       window?.rootViewController = LoginViewController()
+        window?.rootViewController = LoginViewController()
     }
 }
 
@@ -344,6 +365,12 @@ private extension HomeViewController {
         enum TableViewCell {
             static let cellHeight: CGFloat = 108
             static let distanceBetweenCells: CGFloat = 18
+        }
+        
+        enum TitleLabel {
+            static let text = "გამარჯობა,ირაკლი"
+            static let font: UIFont = .systemFont(ofSize: 16)
+            static let textColor = UIColor(hex: "FFC44A")
         }
     }
 }
