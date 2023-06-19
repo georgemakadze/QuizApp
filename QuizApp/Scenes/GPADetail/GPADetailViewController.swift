@@ -46,10 +46,14 @@ class GPADetailViewController: UIViewController {
     
     func setupNavigationController() {
         navigationItem.setHidesBackButton(true, animated: false)
-        navigationItem.title = "დაგროვილი ქულები ⭐️"
+        navigationItem.title = Constants.Navigation.title
         
-        let leftBarButtonItem = UIBarButtonItem(title: "<", style: .plain, target: self, action: #selector(leftBarButtonTapped))
-        leftBarButtonItem.tintColor = .black
+        let iconImage = Constants.Navigation.icon
+        let iconButton = UIButton(type: .custom)
+        iconButton.setImage(iconImage, for: .normal)
+        iconButton.addTarget(self, action: #selector(leftBarButtonTapped), for: .touchUpInside)
+
+        let leftBarButtonItem = UIBarButtonItem(customView: iconButton)
         navigationItem.leftBarButtonItem = leftBarButtonItem
     }
     
@@ -129,6 +133,11 @@ private extension GPADetailViewController {
             static let bottomAnchor: CGFloat = -52
             static let cellHeight: CGFloat = 106
             static let distanceBetweenCells:CGFloat = 20
+        }
+        
+        enum Navigation {
+            static let title = "დაგროვილი ქულები ⭐️"
+            static let icon = UIImage(named: "backbutton")
         }
     }
 }

@@ -67,12 +67,19 @@ class LoginViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         loginTextView.delegate = self
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+        
         view.backgroundColor = Constants.View.backgroundColor
         setupCoverImageViewConstraints()
         setupLoginTextViewConstraints()
         setupStartButton()
         setupCoverLabelConstraints()
         setupCoverIconConstraints()
+    }
+    
+    @objc func dismissKeyboard() {
+        view.endEditing(true)
     }
     
     @objc func startButtonTapped() {
@@ -133,7 +140,9 @@ class LoginViewController: UIViewController {
 
 extension LoginViewController: UITextFieldDelegate {
     func textFieldDidBeginEditing(_ textField: UITextField) {
+        textField.textAlignment = .left
         textField.textColor = .black
+        textField.placeholder = nil
     }
 }
    
