@@ -11,22 +11,20 @@ import UIKit
 class AnswerCell: UITableViewCell {
     
     //MARK: Components
-    private lazy var containerView: UIView = {
+    private let containerView: UIView = {
         let containerView = UIView()
         containerView.backgroundColor = Constants.ContainerView.backgroundColor
         containerView.layer.cornerRadius = Constants.ContainerView.cornerRadius
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(containerView)
         return containerView
     }()
     
-    private lazy var answerLabel: UILabel = {
+    private let answerLabel: UILabel = {
         let answerLabel = UILabel()
         answerLabel.backgroundColor = Constants.AnswerLabel.backgroundColor
         answerLabel.font = .systemFont(ofSize: Constants.AnswerLabel.font)
         answerLabel.textColor = Constants.AnswerLabel.textColor
         answerLabel.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(answerLabel)
         return answerLabel
     }()
     
@@ -47,6 +45,7 @@ class AnswerCell: UITableViewCell {
     
     // MARK: - Constraints Setup
     private func setupContainerViewConstraints() {
+        contentView.addSubview(containerView)
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: Constants.ContainerView.topAnchor),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: Constants.ContainerView.leadingAnchor),
@@ -57,6 +56,7 @@ class AnswerCell: UITableViewCell {
     }
     
     private func setupAnswerLabelConstraints() {
+        containerView.addSubview(answerLabel)
         NSLayoutConstraint.activate([
             answerLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Constants.AnswerLabel.topAnchor),
             answerLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: Constants.AnswerLabel.bottomAnchor),

@@ -11,48 +11,43 @@ import UIKit
 class SubjectCell: UITableViewCell {
     
     // MARK: - Components
-    private lazy var containerView: UIView = {
+    private let containerView: UIView = {
         let containerView = UIView()
         containerView.backgroundColor = Constants.ContainerView.backgroundColor
         containerView.layer.cornerRadius = Constants.ContainerView.cornerRadius
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(containerView)
         return containerView
     }()
     
-    private lazy var iconImageView: UIImageView = {
+    private let iconImageView: UIImageView = {
         let iconImageView = UIImageView()
         iconImageView.contentMode = .scaleAspectFill
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(iconImageView)
         return iconImageView
     }()
     
-    private lazy var nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.font = Constants.NameLabel.font
         nameLabel.backgroundColor = Constants.NameLabel.backgroundColor
         nameLabel.textColor = Constants.NameLabel.textColor
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(nameLabel)
         return nameLabel
     }()
     
-    private lazy var descriptionLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         let descriptionLabel = UILabel()
         descriptionLabel.font = Constants.DescriptionLabel.font
         descriptionLabel.backgroundColor = Constants.DescriptionLabel.backgroundColor
         descriptionLabel.textColor = Constants.DescriptionLabel.textColor
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(descriptionLabel)
         return descriptionLabel
     }()
     
-    private lazy var ellipseImage: UIImageView = {
+    private let ellipseImage: UIImageView = {
         let ellipseImage = UIImageView()
         ellipseImage.image = Constants.Button.image
         ellipseImage.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(ellipseImage)
         return ellipseImage
     }()
 
@@ -72,11 +67,12 @@ class SubjectCell: UITableViewCell {
         setupIconImageViewConstrains()
         setupNameLabelConstraints()
         setupDescriptionLabelConstraints()
-        setupButtonConstraints()
+        setupEllipseImageConstraints()
     }
     
     // MARK: - Constraints Setup
     private func  setupContainerViewConstraints() {
+        contentView.addSubview(containerView)
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: Constants.ContainerView.topAnchor),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: Constants.ContainerView.leadingAnchor),
@@ -86,6 +82,7 @@ class SubjectCell: UITableViewCell {
     }
     
     private func setupIconImageViewConstrains() {
+        containerView.addSubview(iconImageView)
         NSLayoutConstraint.activate([
             iconImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Constants.IconImageView.topAnchor),
             iconImageView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: Constants.IconImageView.bottomAnchor),
@@ -94,6 +91,7 @@ class SubjectCell: UITableViewCell {
     }
     
     private func setupNameLabelConstraints() {
+        containerView.addSubview(nameLabel)
         NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: Constants.NameLabel.leadingAnchor),
             nameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Constants.NameLabel.topAnchor),
@@ -101,6 +99,7 @@ class SubjectCell: UITableViewCell {
     }
     
     private func setupDescriptionLabelConstraints() {
+        containerView.addSubview(descriptionLabel)
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: Constants.DescriptionLabel.topAnchor),
             descriptionLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: Constants.DescriptionLabel.leadingAnchor),
@@ -108,7 +107,8 @@ class SubjectCell: UITableViewCell {
         ])
     }
     
-    private func setupButtonConstraints() {
+    private func setupEllipseImageConstraints() {
+        containerView.addSubview(ellipseImage)
         NSLayoutConstraint.activate([
             ellipseImage.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Constants.Button.topAnchor),
             ellipseImage.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: Constants.Button.bottomAnchor),

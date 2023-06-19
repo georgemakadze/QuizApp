@@ -11,44 +11,40 @@ import UIKit
 class ScoreCell: UITableViewCell {
     
     //MARK: - Components
-    private lazy var containerView: UIView = {
+    private let containerView: UIView = {
         let containerView = UIView()
         containerView.backgroundColor = Constants.ContainerView.backgroundColor
         containerView.layer.cornerRadius = Constants.ContainerView.cornerRadius
         containerView.translatesAutoresizingMaskIntoConstraints = false
-        contentView.addSubview(containerView)
         return containerView
     }()
     
-    private lazy var iconImageView: UIImageView = {
+    private let iconImageView: UIImageView = {
         let iconImageView = UIImageView()
         iconImageView.contentMode = .scaleAspectFill
         iconImageView.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(iconImageView)
         return iconImageView
     }()
     
-    private lazy var nameLabel: UILabel = {
+    private let nameLabel: UILabel = {
         let nameLabel = UILabel()
         nameLabel.font = .systemFont(ofSize: Constants.NameLabel.font)
         nameLabel.backgroundColor = Constants.NameLabel.backgroundColor
         nameLabel.textColor = Constants.NameLabel.textColor
         nameLabel.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(nameLabel)
         return nameLabel
     }()
     
-    private lazy var descriptionLabel: UILabel = {
+    private let descriptionLabel: UILabel = {
         let descriptionLabel = UILabel()
         descriptionLabel.font = Constants.DescriptionLabel.font
         descriptionLabel.backgroundColor = Constants.DescriptionLabel.backgroundColor
         descriptionLabel.textColor = Constants.DescriptionLabel.textColor
         descriptionLabel.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(descriptionLabel)
         return descriptionLabel
     }()
     
-    private lazy var scoreLabel: UILabel = {
+    private let scoreLabel: UILabel = {
         let scoreLabel = UILabel()
         scoreLabel.text = Constants.ScoreLabel.text
         scoreLabel.textColor = Constants.ScoreLabel.textColor
@@ -58,7 +54,6 @@ class ScoreCell: UITableViewCell {
         scoreLabel.backgroundColor = Constants.ScoreLabel.backgroundColor
         scoreLabel.layer.cornerRadius = Constants.ScoreLabel.cornerRadius
         scoreLabel.translatesAutoresizingMaskIntoConstraints = false
-        containerView.addSubview(scoreLabel)
         return scoreLabel
     }()
     
@@ -82,6 +77,7 @@ class ScoreCell: UITableViewCell {
     
     // MARK: - Constraints Setup
     private func  setupContainerViewConstraints() {
+        contentView.addSubview(containerView)
         NSLayoutConstraint.activate([
             containerView.topAnchor.constraint(equalTo: contentView.topAnchor,constant: Constants.ContainerView.topAnchor),
             containerView.leadingAnchor.constraint(equalTo: contentView.leadingAnchor,constant: Constants.ContainerView.leadingAnchor),
@@ -92,6 +88,7 @@ class ScoreCell: UITableViewCell {
     }
     
     private func setupIconImageViewConstrains() {
+        containerView.addSubview(iconImageView)
         NSLayoutConstraint.activate([
             iconImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Constants.IconImageView.topAnchor),
             iconImageView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: Constants.IconImageView.bottomAnchor),
@@ -100,6 +97,7 @@ class ScoreCell: UITableViewCell {
     }
     
     private func setupNameLabelConstraints() {
+        containerView.addSubview(nameLabel)
         NSLayoutConstraint.activate([
             nameLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: Constants.NameLabel.leadingAnchor),
             nameLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Constants.NameLabel.topAnchor),
@@ -107,6 +105,7 @@ class ScoreCell: UITableViewCell {
     }
     
     private func setupDescriptionLabelConstraints() {
+        containerView.addSubview(descriptionLabel)
         NSLayoutConstraint.activate([
             descriptionLabel.topAnchor.constraint(equalTo: nameLabel.bottomAnchor, constant: Constants.DescriptionLabel.topAnchor),
             descriptionLabel.leadingAnchor.constraint(equalTo: iconImageView.trailingAnchor, constant: Constants.DescriptionLabel.leadingAnchor),
@@ -115,6 +114,7 @@ class ScoreCell: UITableViewCell {
     }
     
     private func setupScoreLabelConstraints() {
+        containerView.addSubview(scoreLabel)
         NSLayoutConstraint.activate([
             scoreLabel.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Constants.ScoreLabel.topAnchor),
             scoreLabel.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: Constants.ScoreLabel.bottomAnchor),

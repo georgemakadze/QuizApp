@@ -22,12 +22,11 @@ class GPADetailViewController: UIViewController {
         return tableView
     }()
 
-    private lazy var noPointsImage: UIImageView = {
+    private let noPointsImage: UIImageView = {
         let noPointsImage = UIImageView()
         noPointsImage.image = Constants.noPointsImage.image
         noPointsImage.contentMode = .scaleAspectFill
         noPointsImage.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(noPointsImage)
         return noPointsImage
     }()
     
@@ -69,6 +68,7 @@ class GPADetailViewController: UIViewController {
     }
 
     private func noPointsImageConstraints() {
+        view.addSubview(noPointsImage)
         NSLayoutConstraint.activate([
             noPointsImage.centerYAnchor.constraint(equalTo: view.centerYAnchor),
             noPointsImage.centerXAnchor.constraint(equalTo: view.centerXAnchor)

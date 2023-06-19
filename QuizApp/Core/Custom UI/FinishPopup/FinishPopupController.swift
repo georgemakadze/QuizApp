@@ -31,7 +31,7 @@ class FinishPopupController: UIViewController {
         return successIcon
     }()
     
-    private lazy var popupLabel: UILabel = {
+    private let popupLabel: UILabel = {
         let popupLabel = UILabel()
         popupLabel.text = Constants.PopupLabel.text
         popupLabel.backgroundColor = Constants.PopupLabel.backgroundColor
