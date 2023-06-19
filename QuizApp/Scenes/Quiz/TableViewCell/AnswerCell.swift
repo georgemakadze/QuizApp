@@ -64,8 +64,16 @@ class AnswerCell: UITableViewCell {
         ])
     }
     
-    func configure(with answer: String) {
-        answerLabel.text = answer
+    func configure(with answer: Answer) {
+        answerLabel.text = answer.text
+    }
+    
+    func setApperance(isCorrect: Bool) {
+        if isCorrect {
+            containerView.backgroundColor = .green
+        } else {
+            containerView.backgroundColor = .red
+        }
     }
 }
 

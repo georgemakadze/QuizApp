@@ -174,6 +174,7 @@ class HomeViewController: UIViewController {
     }
     
     private func setupScoreHeaderViewConstraints() {
+        view.addSubview(scoreHeaderView)
         NSLayoutConstraint.activate([
             scoreHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),
             scoreHeaderView.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.ScoreHeaderView.leadingAnchor),

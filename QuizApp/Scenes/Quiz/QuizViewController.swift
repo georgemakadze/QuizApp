@@ -54,10 +54,10 @@ class QuizViewController: UIViewController {
     let question: Question = Question(
         text: "რომელია ყველაზე პოპულარული პროგრამირების ენა?",
         answers: [
-            "Python",
-            "Java",
-            "C++",
-            "Kotlin"
+            Answer(text: "Python", isCorrect: false),
+            Answer(text: "Java", isCorrect: false),
+            Answer(text: "C++", isCorrect: true),
+            Answer(text: "Kotlin", isCorrect: false)
         ]
     )
     
@@ -171,6 +171,20 @@ extension QuizViewController: UITableViewDelegate {
         let distanceBetweenCells = Constants.TableViewCell.distanceBetweenCells
         let totalHeight = cellHeight + distanceBetweenCells
         return totalHeight
+    }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let isCorrect = question.answers[indexPath.row].isCorrect
+        
+        let cell = tableView.cellForRow(at: indexPath) as? AnswerCell
+        cell?.setApperance(isCorrect: isCorrect)
+        if !isCorrect {
+            guard let correctIndex = question.answers.firstIndex(where: { $0.isCorrect }) else {
+                return
+            }
+            let correctCell = tableView.cellForRow(at: IndexPath(row: correctIndex, section: 0)) as? AnswerCell
+            correctCell?.setApperance(isCorrect: true)
+        }
     }
 }
 
