@@ -28,6 +28,8 @@ class LoginViewController: UIViewController {
         loginTextView.textAlignment = .center
         loginTextView.placeholder = Constants.LoginTextView.text
         loginTextView.layer.cornerRadius = Constants.LoginTextView.cornerRadius
+        loginTextView.leftView = UIView(frame: CGRect(x: 0, y: 0, width: 20, height: loginTextView.frame.height))
+        loginTextView.leftViewMode = .always
         loginTextView.translatesAutoresizingMaskIntoConstraints = false
         return loginTextView
     }()

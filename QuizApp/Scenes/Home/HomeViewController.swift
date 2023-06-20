@@ -12,14 +12,14 @@ class HomeViewController: UIViewController {
     
     //MARK: - Components
     private lazy var subjectTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.separatorStyle = .none
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(SubjectCell.self, forCellReuseIdentifier: SubjectCell.reuseIdentifier)
-        view.addSubview(tableView)
-        return tableView
+        let subjectTableView = UITableView()
+        subjectTableView.separatorStyle = .none
+        subjectTableView.dataSource = self
+        subjectTableView.delegate = self
+        subjectTableView.translatesAutoresizingMaskIntoConstraints = false
+        subjectTableView.register(SubjectCell.self, forCellReuseIdentifier: SubjectCell.reuseIdentifier)
+    view.addSubview(subjectTableView)
+        return subjectTableView
     }()
     
     private lazy var scoreHeaderView: UIView = {
