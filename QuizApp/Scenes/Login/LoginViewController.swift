@@ -63,16 +63,20 @@ class LoginViewController: UIViewController {
     }()
     
     override var supportedInterfaceOrientations: UIInterfaceOrientationMask {
-         return .portrait
-     }
+        return .portrait
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        view.backgroundColor = Constants.View.backgroundColor
         loginTextView.delegate = self
         let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
         view.addGestureRecognizer(tap)
         
-        view.backgroundColor = Constants.View.backgroundColor
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
+        
         setupCoverImageViewConstraints()
         setupLoginTextViewConstraints()
         setupStartButton()
@@ -87,7 +91,26 @@ class LoginViewController: UIViewController {
     @objc func startButtonTapped() {
         let homeViewController = HomeViewController()
         let navVC = UINavigationController(rootViewController: homeViewController)
-         window?.rootViewController = navVC
+        window?.rootViewController = navVC
+    }
+    
+    @objc private func keyboardWillShow(notification: NSNotification) {
+        if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
+            let adjustedKeyboardFrame = view.convert(keyboardFrame, from: nil)
+            let intersection = adjustedKeyboardFrame.intersection(view.frame)
+            
+            let keyboardHeight = intersection.height
+                  
+                  view.frame.origin.y -= keyboardHeight
+        }
+    }
+    
+    @objc private func keyboardWillHide(notification: NSNotification) {
+        view.frame.origin.y = 0
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self)
     }
     
     // MARK: - Constraints Setup
@@ -147,7 +170,7 @@ extension LoginViewController: UITextFieldDelegate {
         textField.placeholder = nil
     }
 }
-   
+
 // MARK: - Constants
 private extension LoginViewController {
     enum Constants {
