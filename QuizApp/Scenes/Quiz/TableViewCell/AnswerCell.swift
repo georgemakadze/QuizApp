@@ -68,12 +68,8 @@ class AnswerCell: UITableViewCell {
         answerLabel.text = answer.text
     }
     
-    func setApperance(isCorrect: Bool) {
-        if isCorrect {
-            containerView.backgroundColor = .green
-        } else {
-            containerView.backgroundColor = .red
-        }
+    func changeBackgroundColor(isCorrect: Bool) {
+        containerView.backgroundColor = isCorrect ? .green : .red
     }
 }
 

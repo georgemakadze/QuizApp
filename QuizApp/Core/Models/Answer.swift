@@ -10,4 +10,9 @@ import Foundation
 struct Answer: Hashable {
     let text: String
     let isCorrect: Bool
+    
+    init(text: String, isCorrect: Bool = false) {
+    self.text = text
+    self.isCorrect = isCorrect
+    }
 }
