@@ -64,7 +64,6 @@ class FinishPopupController: UIViewController {
         closeButton.setTitle(Constants.CloseButton.title, for: .normal)
         closeButton.setTitleColor(Constants.CloseButton.titleColor, for: .normal)
         closeButton.addTarget(self, action: #selector(closeButtonTapped), for: .touchUpInside)
-        closeButton.translatesAutoresizingMaskIntoConstraints = false
         return closeButton
     }()
     
@@ -142,6 +141,7 @@ class FinishPopupController: UIViewController {
     
     private func setupCloseButtonConstraints() {
         popupView.addSubview(closeButton)
+        closeButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             closeButton.widthAnchor.constraint(equalToConstant: Constants.CloseButton.widthAnchor),
             closeButton.heightAnchor.constraint(equalToConstant: Constants.CloseButton.heightAnchor),

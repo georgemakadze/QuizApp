@@ -12,14 +12,12 @@ class GPADetailViewController: UIViewController {
     
     // MARK: - Components
     private lazy var subjectTableView: UITableView = {
-        let tableView = UITableView()
-        tableView.separatorStyle = .none
-        tableView.dataSource = self
-        tableView.delegate = self
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(ScoreCell.self, forCellReuseIdentifier: ScoreCell.reuseIdentifier)
-        view.addSubview(tableView)
-        return tableView
+        let subjectTableView = UITableView()
+        subjectTableView.separatorStyle = .none
+        subjectTableView.dataSource = self
+        subjectTableView.delegate = self
+        subjectTableView.register(ScoreCell.self, forCellReuseIdentifier: ScoreCell.reuseIdentifier)
+        return subjectTableView
     }()
 
     private let noPointsImage: UIImageView = {
@@ -63,6 +61,8 @@ class GPADetailViewController: UIViewController {
     
     // MARK: - Constraints Setup
     private func setupTableViewConstraints() {
+        view.addSubview(subjectTableView)
+        subjectTableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             subjectTableView.topAnchor.constraint(equalTo: view.topAnchor),
             subjectTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -141,6 +141,3 @@ private extension GPADetailViewController {
         }
     }
 }
-
-
-

@@ -98,10 +98,8 @@ class LoginViewController: UIViewController {
         if let keyboardFrame = notification.userInfo?[UIResponder.keyboardFrameEndUserInfoKey] as? CGRect {
             let adjustedKeyboardFrame = view.convert(keyboardFrame, from: nil)
             let intersection = adjustedKeyboardFrame.intersection(view.frame)
-            
             let keyboardHeight = intersection.height
-                  
-                  view.frame.origin.y -= keyboardHeight
+            view.frame.origin.y -= keyboardHeight
         }
     }
     

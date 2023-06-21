@@ -43,7 +43,6 @@ class PopupViewController: UIViewController {
         yesButton.setTitleColor(Constants.YesButton.titleColor, for: .normal)
         yesButton.layer.cornerRadius = Constants.YesButton.cornerRadius
         yesButton.addTarget(self, action: #selector(yesButtonTapped), for: .touchUpInside)
-        yesButton.translatesAutoresizingMaskIntoConstraints = false
         return yesButton
     }()
     
@@ -54,7 +53,6 @@ class PopupViewController: UIViewController {
         noButton.setTitleColor(Constants.NoButton.titleColor, for: .normal)
         noButton.layer.cornerRadius = Constants.NoButton.cornerRadius
         noButton.addTarget(self, action: #selector(noButtonTapped), for: .touchUpInside)
-        noButton.translatesAutoresizingMaskIntoConstraints = false
         return noButton
     }()
     
@@ -108,6 +106,7 @@ class PopupViewController: UIViewController {
     
     private func setupYesButtonConstraints() {
         popupView.addSubview(yesButton)
+        yesButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             yesButton.widthAnchor.constraint(equalToConstant: Constants.YesButton.widthAnchor),
             yesButton.heightAnchor.constraint(equalToConstant: Constants.YesButton.heightAnchor),
@@ -118,6 +117,7 @@ class PopupViewController: UIViewController {
     
     private func setupNoButtonConstraints() {
         popupView.addSubview(noButton)
+        noButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             noButton.widthAnchor.constraint(equalToConstant: Constants.NoButton.widthAnchor),
             noButton.heightAnchor.constraint(equalToConstant: Constants.NoButton.heightAnchor),

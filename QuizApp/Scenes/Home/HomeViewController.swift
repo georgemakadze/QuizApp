@@ -16,9 +16,7 @@ class HomeViewController: UIViewController {
         subjectTableView.separatorStyle = .none
         subjectTableView.dataSource = self
         subjectTableView.delegate = self
-        subjectTableView.translatesAutoresizingMaskIntoConstraints = false
         subjectTableView.register(SubjectCell.self, forCellReuseIdentifier: SubjectCell.reuseIdentifier)
-    view.addSubview(subjectTableView)
         return subjectTableView
     }()
     
@@ -27,10 +25,8 @@ class HomeViewController: UIViewController {
         scoreHeaderView.backgroundColor = Constants.ScoreHeaderView.backgroundColor
         scoreHeaderView.layer.cornerRadius = Constants.ScoreHeaderView.cornerRadius
         scoreHeaderView.isUserInteractionEnabled = true
-        scoreHeaderView.translatesAutoresizingMaskIntoConstraints = false
         let tapGesture = UITapGestureRecognizer(target: self, action: #selector(scoreHeaderViewTapped))
         scoreHeaderView.addGestureRecognizer(tapGesture)
-        view.addSubview(scoreHeaderView)
         return scoreHeaderView
     }()
     
@@ -94,8 +90,6 @@ class HomeViewController: UIViewController {
         logOutButton.setImage(Constants.LogOutButton.image, for: .normal)
         logOutButton.addTarget(self, action: #selector(logOutButtonTapped), for: .touchUpInside)
         logOutButton.layer.cornerRadius = Constants.LogOutButton.cornerRadius
-        logOutButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(logOutButton)
         return logOutButton
     }()
     
@@ -154,8 +148,9 @@ class HomeViewController: UIViewController {
     }
     
     // MARK: - Constraints Setup
-    
     private func setupTableViewConstraints() {
+        view.addSubview(subjectTableView)
+        subjectTableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             subjectTableView.topAnchor.constraint(equalTo: chooseSubjectLabel.bottomAnchor),
             subjectTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -165,6 +160,8 @@ class HomeViewController: UIViewController {
     }
     
     private func setupLogOutButtonConstraints() {
+        view.addSubview(logOutButton)
+        logOutButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             logOutButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.LogOutButton.bottomAnchor),
             logOutButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.LogOutButton.trailingAnchor),
@@ -174,6 +171,7 @@ class HomeViewController: UIViewController {
     }
     
     private func setupScoreHeaderViewConstraints() {
+        scoreHeaderView.translatesAutoresizingMaskIntoConstraints = false
         view.addSubview(scoreHeaderView)
         NSLayoutConstraint.activate([
             scoreHeaderView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor),

@@ -12,14 +12,12 @@ class QuizViewController: UIViewController {
     
     //MARK: - Components
     private lazy var subjectTableView: UITableView =  {
-        let tableView = UITableView()
-        tableView.separatorStyle = .none
-        tableView.delegate = self
-        tableView.dataSource = self
-        tableView.translatesAutoresizingMaskIntoConstraints = false
-        tableView.register(AnswerCell.self, forCellReuseIdentifier: AnswerCell.reuseIdentifier)
-        view.addSubview(tableView)
-        return tableView
+        let subjectTableView = UITableView()
+        subjectTableView.separatorStyle = .none
+        subjectTableView.delegate = self
+        subjectTableView.dataSource = self
+        subjectTableView.register(AnswerCell.self, forCellReuseIdentifier: AnswerCell.reuseIdentifier)
+        return subjectTableView
     }()
     
     private let questionBackground: UIImageView = {
@@ -46,8 +44,6 @@ class QuizViewController: UIViewController {
         let nextButton = UIButton()
         nextButton.setImage(Constants.NextButton.image, for: .normal)
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
-        nextButton.translatesAutoresizingMaskIntoConstraints = false
-        view.addSubview(nextButton)
         return nextButton
     }()
     
@@ -97,6 +93,8 @@ class QuizViewController: UIViewController {
     
     // MARK: - Constraints Setup
     private func setupTableViewConstraints() {
+        view.addSubview(subjectTableView)
+        subjectTableView.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             subjectTableView.topAnchor.constraint(equalTo: questionBackground.bottomAnchor, constant: Constants.TableView.topAnchor),
             subjectTableView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
@@ -105,6 +103,8 @@ class QuizViewController: UIViewController {
     }
     
     private func setupNextButtonConstraints() {
+        view.addSubview(nextButton)
+        nextButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
             nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.NextButton.leadingAnchor),
             nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.NextButton.trailingAnchor),
