@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		0EC0BD072A43509700B562C3 /* GPAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC0BD062A43509700B562C3 /* GPAView.swift */; };
+		0EC0BD0B2A4466C900B562C3 /* QuizProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC0BD0A2A4466C900B562C3 /* QuizProgressView.swift */; };
 		0EDD089A2A2A0B4E00FF282B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08992A2A0B4E00FF282B /* AppDelegate.swift */; };
 		0EDD089C2A2A0B4E00FF282B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD089B2A2A0B4E00FF282B /* SceneDelegate.swift */; };
 		0EDD089E2A2A0B4E00FF282B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD089D2A2A0B4E00FF282B /* LoginViewController.swift */; };
@@ -32,6 +33,7 @@
 
 /* Begin PBXFileReference section */
 		0EC0BD062A43509700B562C3 /* GPAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPAView.swift; sourceTree = "<group>"; };
+		0EC0BD0A2A4466C900B562C3 /* QuizProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizProgressView.swift; sourceTree = "<group>"; };
 		0EDD08962A2A0B4E00FF282B /* QuizApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EDD08992A2A0B4E00FF282B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0EDD089B2A2A0B4E00FF282B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -73,6 +75,14 @@
 				0EC0BD062A43509700B562C3 /* GPAView.swift */,
 			);
 			path = GPA;
+			sourceTree = "<group>";
+		};
+		0EC0BD092A4466A800B562C3 /* QuizProgress */ = {
+			isa = PBXGroup;
+			children = (
+				0EC0BD0A2A4466C900B562C3 /* QuizProgressView.swift */,
+			);
+			path = QuizProgress;
 			sourceTree = "<group>";
 		};
 		0EDD088D2A2A0B4E00FF282B = {
@@ -172,6 +182,7 @@
 		0EDD08B92A2DC4B300FF282B /* Custom UI */ = {
 			isa = PBXGroup;
 			children = (
+				0EC0BD092A4466A800B562C3 /* QuizProgress */,
 				0EC0BD082A43601C00B562C3 /* GPA */,
 				0EDD08D82A33251500FF282B /* FinishPopup */,
 				0EDD08D52A31C4D200FF282B /* LogOutPopup */,
@@ -344,6 +355,7 @@
 			files = (
 				0EDD08C72A2F133B00FF282B /* GPADetailViewController.swift in Sources */,
 				0EDD08DA2A33258700FF282B /* FinishPopupController.swift in Sources */,
+				0EC0BD0B2A4466C900B562C3 /* QuizProgressView.swift in Sources */,
 				0EDD089E2A2A0B4E00FF282B /* LoginViewController.swift in Sources */,
 				0EDD08E42A40C76800FF282B /* Answer.swift in Sources */,
 				0EDD08C92A2F26D600FF282B /* QuizViewController.swift in Sources */,

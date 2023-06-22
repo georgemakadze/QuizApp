@@ -11,6 +11,13 @@ import UIKit
 class QuizViewController: UIViewController {
     
     //MARK: - Components
+    private let quizProgressView: QuizProgressView = {
+        let quizProgressView = QuizProgressView()
+        quizProgressView.translatesAutoresizingMaskIntoConstraints = false
+        return quizProgressView
+    }()
+    
+    
     private lazy var subjectTableView: UITableView =  {
         let subjectTableView = UITableView()
         subjectTableView.separatorStyle = .none
@@ -19,11 +26,11 @@ class QuizViewController: UIViewController {
         subjectTableView.register(AnswerCell.self, forCellReuseIdentifier: AnswerCell.reuseIdentifier)
         return subjectTableView
     }()
-    
-    private let questionBackground: UIImageView = {
-        let questionBackground = UIImageView()
-        questionBackground.image = Constants.QuestionBackground.image
-        questionBackground.contentMode = .scaleToFill
+
+    private let questionBackground: UIView = {
+        let questionBackground = UIView()
+        questionBackground.backgroundColor = UIColor(hex: "C0D0F6")
+        questionBackground.layer.cornerRadius = 26
         questionBackground.translatesAutoresizingMaskIntoConstraints = false
         return questionBackground
     }()
@@ -66,6 +73,7 @@ class QuizViewController: UIViewController {
         setupTableViewConstraints()
         setupQuestionLabelConstraints()
         setupNextButtonConstraints()
+        setupQuizProgressViewConstraints()
     }
     
     // MARK: - Actions
@@ -102,6 +110,17 @@ class QuizViewController: UIViewController {
         ])
     }
     
+    private func setupQuizProgressViewConstraints() {
+        view.addSubview(quizProgressView)
+        NSLayoutConstraint.activate([
+            quizProgressView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
+            quizProgressView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
+            quizProgressView.bottomAnchor.constraint(equalTo: questionBackground.topAnchor, constant: -8),
+            quizProgressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
+            quizProgressView.heightAnchor.constraint(equalToConstant: 36)
+        ])
+    }
+    
     private func setupNextButtonConstraints() {
         view.addSubview(nextButton)
         nextButton.translatesAutoresizingMaskIntoConstraints = false
@@ -116,10 +135,10 @@ class QuizViewController: UIViewController {
     private func setupQuestionBackgroundConstrains() {
         view.addSubview(questionBackground)
         NSLayoutConstraint.activate([
-            questionBackground.topAnchor.constraint(equalTo: view.topAnchor),
-            questionBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor),
-            questionBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            questionBackground.heightAnchor.constraint(lessThanOrEqualToConstant: Constants.QuestionBackground.heightAnchor)
+            questionBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
+            questionBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
+            questionBackground.heightAnchor.constraint(equalToConstant: 103),
+            questionBackground.widthAnchor.constraint(equalToConstant: 343)
         ])
     }
     
@@ -131,6 +150,14 @@ class QuizViewController: UIViewController {
             questionLabel.trailingAnchor.constraint(equalTo: questionBackground.trailingAnchor, constant: Constants.QuestionLabel.trailingAnchor),
             questionLabel.bottomAnchor.constraint(equalTo: questionBackground.bottomAnchor, constant: Constants.QuestionLabel.bottomAnchor)
         ])
+    }
+    
+    func setCorrectCellAppearance() {
+        guard let correctIndex = question.answers.firstIndex(where: { $0.isCorrect }) else {
+            return
+        }
+        let correctCell = subjectTableView.cellForRow(at: IndexPath(row: correctIndex, section: 0)) as? AnswerCell
+        correctCell?.changeBackgroundColor(isCorrect: true)
     }
 }
 
@@ -178,11 +205,7 @@ extension QuizViewController: UITableViewDelegate {
         cell?.changeBackgroundColor(isCorrect: isCorrect)
         
         if !isCorrect {
-            guard let correctIndex = question.answers.firstIndex(where: { $0.isCorrect }) else {
-                return
-            }
-            let correctCell = tableView.cellForRow(at: IndexPath(row: correctIndex, section: 0)) as? AnswerCell
-            correctCell?.changeBackgroundColor(isCorrect: true)
+            setCorrectCellAppearance()
         }
     }
 }
@@ -201,11 +224,11 @@ private extension QuizViewController {
             static let backgroundColor: UIColor = .clear
             static let numberOfLines = 3
             static let font: CGFloat = 16
-            static let topAnchor: CGFloat = 64
-            static let leadingAnchor: CGFloat = 72
-            static let trailingAnchor: CGFloat = -72
+            static let topAnchor: CGFloat = 16
+            static let leadingAnchor: CGFloat = 50
+            static let trailingAnchor: CGFloat = -50
             static let widthAnchor: CGFloat = 200
-            static let bottomAnchor: CGFloat = -8
+            static let bottomAnchor: CGFloat = -16
         }
         
         enum NextButton {
