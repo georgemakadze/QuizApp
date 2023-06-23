@@ -28,6 +28,14 @@ class AnswerCell: UITableViewCell {
         return answerLabel
     }()
     
+     let scoreImage: UIImageView = {
+        let scoreImage = UIImageView()
+        scoreImage.image = UIImage(named: "score")
+        scoreImage.isHidden = true
+        scoreImage.translatesAutoresizingMaskIntoConstraints = false
+        return scoreImage
+    }()
+    
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
         selectionStyle = .none
@@ -41,6 +49,7 @@ class AnswerCell: UITableViewCell {
     private func setup() {
         setupContainerViewConstraints()
         setupAnswerLabelConstraints()
+        setupScoreImageConstraints()
     }
     
     // MARK: - Constraints Setup
@@ -64,8 +73,20 @@ class AnswerCell: UITableViewCell {
         ])
     }
     
+    private func setupScoreImageConstraints() {
+        containerView.addSubview(scoreImage)
+        NSLayoutConstraint.activate([
+            scoreImage.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
+            scoreImage.topAnchor.constraint(equalTo: containerView.topAnchor,constant: 20),
+            scoreImage.widthAnchor.constraint(equalToConstant: 32),
+            scoreImage.heightAnchor.constraint(equalToConstant: 18)
+        ])
+    }
+    
     func configure(with answer: Answer) {
         answerLabel.text = answer.text
+        containerView.backgroundColor = Constants.ContainerView.backgroundColor
+        scoreImage.isHidden = true
     }
     
     func changeBackgroundColor(isCorrect: Bool) {

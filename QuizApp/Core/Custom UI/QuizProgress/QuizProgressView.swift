@@ -18,19 +18,19 @@ class QuizProgressView: UIView {
         return container
     }()
     
-    private let progressView: UIProgressView = {
+     let progressView: UIProgressView = {
         let progressView = UIProgressView()
         progressView.contentMode = .scaleToFill
         progressView.tintColor = UIColor(hex: "537FE7")
-        progressView.progress = 0.1
+         progressView.progress = 0.0
         progressView.layer.cornerRadius = 20
         progressView.translatesAutoresizingMaskIntoConstraints = false
         return progressView
     }()
     
-    private let scoreLabel: UILabel = {
+     let scoreLabel: UILabel = {
         let scoreLabel = UILabel()
-        scoreLabel.text = "1/10"
+//        scoreLabel.text = "1/2"
         scoreLabel.textColor = .black
         scoreLabel.font = UIFont.boldSystemFont(ofSize: 16)
         scoreLabel.translatesAutoresizingMaskIntoConstraints = false

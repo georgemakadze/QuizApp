@@ -71,6 +71,22 @@ class QuizViewController: UIViewController {
                     Answer(text: "Swift", isCorrect: true),
                     Answer(text: "Java"),
                     Answer(text: "Kotlin")
+                  ]),
+        
+        Question (text: "რომელი პროგრამირების ენა გამოიყენება Android-ში?",
+                  answers: [
+                    Answer(text: "Objective-C"),
+                    Answer(text: "Swift"),
+                    Answer(text: "Java"),
+                    Answer(text: "Kotlin", isCorrect: true)
+                  ]),
+        
+        Question (text: "რომელი პროგრამირების ენა გამოიყენება Web-ში?",
+                  answers: [
+                    Answer(text: "Objective-C"),
+                    Answer(text: "Swift"),
+                    Answer(text: "JavaScript", isCorrect: true),
+                    Answer(text: "Kotlin")
                   ])
     ]
     
@@ -84,6 +100,7 @@ class QuizViewController: UIViewController {
         setupQuestionLabelConstraints()
         setupNextButtonConstraints()
         setupQuizProgressViewConstraints()
+        loadQuestion()
     }
     
     // MARK: - Actions
@@ -95,11 +112,31 @@ class QuizViewController: UIViewController {
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
     
+    func loadQuestion() {
+        guard currentQuestionIndex >= 0 && currentQuestionIndex < questions.count else {
+            return
+        }
+        
+        let question = questions[currentQuestionIndex]
+        questionLabel.text = question.text
+        quizProgressView.scoreLabel.text = "\(currentQuestionIndex + 1)/\(questions.count)"
+        
+        let progress = Float((currentQuestionIndex + 1)) / Float(questions.count)
+        quizProgressView.progressView.setProgress(progress, animated: true)
+        subjectTableView.reloadData()
+    }
+    
     @objc func nextButtonTapped() {
-        let finishPopupViewController = FinishPopupController()
-        finishPopupViewController.delegate = self
-        finishPopupViewController.modalPresentationStyle = .overCurrentContext
-        present(finishPopupViewController, animated: true, completion: nil)
+        currentQuestionIndex += 1
+        
+        if currentQuestionIndex == questions.count {
+            let finishPopupViewController = FinishPopupController()
+            finishPopupViewController.delegate = self
+            finishPopupViewController.modalPresentationStyle = .overCurrentContext
+            present(finishPopupViewController, animated: true, completion: nil)
+        } else {
+            loadQuestion()
+        }
     }
     
     @objc private func rightBarButtonTapped() {
@@ -214,7 +251,9 @@ extension QuizViewController: UITableViewDelegate {
         let cell = tableView.cellForRow(at: indexPath) as? AnswerCell
         cell?.changeBackgroundColor(isCorrect: isCorrect)
         
-        if !isCorrect {
+        if isCorrect {
+            cell?.scoreImage.isHidden = false
+        } else {
             setCorrectCellAppearance()
         }
     }
