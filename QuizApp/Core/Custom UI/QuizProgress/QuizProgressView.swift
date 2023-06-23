@@ -30,16 +30,15 @@ class QuizProgressView: UIView {
     
      let scoreLabel: UILabel = {
         let scoreLabel = UILabel()
-//        scoreLabel.text = "1/2"
         scoreLabel.textColor = .black
         scoreLabel.font = UIFont.boldSystemFont(ofSize: 16)
         scoreLabel.translatesAutoresizingMaskIntoConstraints = false
         return scoreLabel
     }()
     
-    private let currentScoreLabel: UILabel = {
+     let currentScoreLabel: UILabel = {
         let currentScoreLabel = UILabel()
-        currentScoreLabel.text = "მიმდინარე ქულა-1⭐️"
+        currentScoreLabel.text = "მიმდინარე ქულა -0 ⭐️"
         currentScoreLabel.textColor = UIColor(hex: "FFC44A")
         currentScoreLabel.font = .systemFont(ofSize: 16)
         currentScoreLabel.translatesAutoresizingMaskIntoConstraints = false

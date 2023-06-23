@@ -55,6 +55,7 @@ class QuizViewController: UIViewController {
     }()
     
     private var currentQuestionIndex: Int = 0
+    private var correctAnswer: Int = 0
     
     private let questions: [Question] = [
         Question (text: "რომელია ყველაზე პოპულარული პროგრამირების ენა?",
@@ -253,6 +254,8 @@ extension QuizViewController: UITableViewDelegate {
         
         if isCorrect {
             cell?.scoreImage.isHidden = false
+            correctAnswer += 1
+            quizProgressView.currentScoreLabel.text = "მიმდინარე ქულა - \(correctAnswer)⭐️"
         } else {
             setCorrectCellAppearance()
         }
