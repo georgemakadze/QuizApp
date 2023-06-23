@@ -108,10 +108,10 @@ class PopupViewController: UIViewController {
         popupView.addSubview(yesButton)
         yesButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            yesButton.widthAnchor.constraint(equalToConstant: Constants.YesButton.widthAnchor),
-            yesButton.heightAnchor.constraint(equalToConstant: Constants.YesButton.heightAnchor),
-            yesButton.topAnchor.constraint(equalTo: popupLabel.bottomAnchor, constant: Constants.YesButton.topAnchor),
-            yesButton.leadingAnchor.constraint(equalTo: popupView.leadingAnchor, constant: Constants.YesButton.leadingAnchor)
+            yesButton.widthAnchor.constraint(equalToConstant: Constants.NoButton.widthAnchor),
+            yesButton.heightAnchor.constraint(equalToConstant: Constants.NoButton.heightAnchor),
+            yesButton.topAnchor.constraint(equalTo: popupLabel.bottomAnchor, constant: Constants.NoButton.topAnchor),
+            yesButton.trailingAnchor.constraint(equalTo: popupView.trailingAnchor, constant: Constants.NoButton.trailingAnchor)
         ])
     }
     
@@ -119,10 +119,10 @@ class PopupViewController: UIViewController {
         popupView.addSubview(noButton)
         noButton.translatesAutoresizingMaskIntoConstraints = false
         NSLayoutConstraint.activate([
-            noButton.widthAnchor.constraint(equalToConstant: Constants.NoButton.widthAnchor),
-            noButton.heightAnchor.constraint(equalToConstant: Constants.NoButton.heightAnchor),
-            noButton.topAnchor.constraint(equalTo: popupLabel.bottomAnchor, constant: Constants.NoButton.topAnchor),
-            noButton.trailingAnchor.constraint(equalTo: popupView.trailingAnchor, constant: Constants.NoButton.trailingAnchor)
+            noButton.widthAnchor.constraint(equalToConstant: Constants.YesButton.widthAnchor),
+            noButton.heightAnchor.constraint(equalToConstant: Constants.YesButton.heightAnchor),
+            noButton.topAnchor.constraint(equalTo: popupLabel.bottomAnchor, constant: Constants.YesButton.topAnchor),
+            noButton.leadingAnchor.constraint(equalTo: popupView.leadingAnchor, constant: Constants.YesButton.leadingAnchor)
         ])
     }
 }

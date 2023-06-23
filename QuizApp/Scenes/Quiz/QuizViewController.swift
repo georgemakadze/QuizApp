@@ -26,7 +26,7 @@ class QuizViewController: UIViewController {
         subjectTableView.register(AnswerCell.self, forCellReuseIdentifier: AnswerCell.reuseIdentifier)
         return subjectTableView
     }()
-
+    
     private let questionBackground: UIView = {
         let questionBackground = UIView()
         questionBackground.backgroundColor = UIColor(hex: "C0D0F6")
@@ -54,20 +54,30 @@ class QuizViewController: UIViewController {
         return nextButton
     }()
     
-    let question: Question = Question(
-        text: "რომელია ყველაზე პოპულარული პროგრამირების ენა?",
-        answers: [
-            Answer(text: "Python"),
-            Answer(text: "Java"),
-            Answer(text: "C++", isCorrect: true),
-            Answer(text: "Kotlin")
-        ]
-    )
+    private var currentQuestionIndex: Int = 0
+    
+    private let questions: [Question] = [
+        Question (text: "რომელია ყველაზე პოპულარული პროგრამირების ენა?",
+                  answers: [
+                    Answer(text: "Python"),
+                    Answer(text: "Java"),
+                    Answer(text: "C++", isCorrect: true),
+                    Answer(text: "Kotlin")
+                  ]),
+        
+        Question (text: "რომელი პროგრამირების ენა გამოიყენება iOS-ში?",
+                  answers: [
+                    Answer(text: "Objective-C"),
+                    Answer(text: "Swift", isCorrect: true),
+                    Answer(text: "Java"),
+                    Answer(text: "Kotlin")
+                  ])
+    ]
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        questionLabel.text = question.text
+        questionLabel.text = questions[currentQuestionIndex].text
         setupNavigationController()
         setupQuestionBackgroundConstrains()
         setupTableViewConstraints()
@@ -153,7 +163,7 @@ class QuizViewController: UIViewController {
     }
     
     func setCorrectCellAppearance() {
-        guard let correctIndex = question.answers.firstIndex(where: { $0.isCorrect }) else {
+        guard let correctIndex = questions[currentQuestionIndex].answers.firstIndex(where: { $0.isCorrect }) else {
             return
         }
         let correctCell = subjectTableView.cellForRow(at: IndexPath(row: correctIndex, section: 0)) as? AnswerCell
@@ -180,12 +190,12 @@ extension QuizViewController: FinishPopupControllerDelegate {
 // MARK: - UITableViewDataSource
 extension QuizViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        question.answers.count
+        questions[currentQuestionIndex].answers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AnswerCell.reuseIdentifier, for: indexPath) as! AnswerCell
-        let currentAnswer = question.answers[indexPath.row]
+        let currentAnswer = questions[currentQuestionIndex].answers[indexPath.row]
         cell.configure(with: currentAnswer)
         return cell
     }
@@ -200,7 +210,7 @@ extension QuizViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let isCorrect = question.answers[indexPath.row].isCorrect
+        let isCorrect = questions[currentQuestionIndex].answers[indexPath.row].isCorrect
         let cell = tableView.cellForRow(at: indexPath) as? AnswerCell
         cell?.changeBackgroundColor(isCorrect: isCorrect)
         
