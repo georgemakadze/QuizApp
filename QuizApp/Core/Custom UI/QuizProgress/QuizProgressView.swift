@@ -13,34 +13,34 @@ class QuizProgressView: UIView {
     //MARK: - Components
     private let container: UIView = {
         let container = UIView()
-        container.backgroundColor = .clear
+        container.backgroundColor = Constants.Container.backgroundColor
         container.translatesAutoresizingMaskIntoConstraints = false
         return container
     }()
     
-     let progressView: UIProgressView = {
+    let progressView: UIProgressView = {
         let progressView = UIProgressView()
         progressView.contentMode = .scaleToFill
-        progressView.tintColor = UIColor(hex: "537FE7")
-         progressView.progress = 0.0
-        progressView.layer.cornerRadius = 20
+        progressView.tintColor = Constants.ProgressView.tintColor
+        progressView.progress = Float(Constants.ProgressView.progress)
+        progressView.layer.cornerRadius = Constants.ProgressView.cornerRadius
         progressView.translatesAutoresizingMaskIntoConstraints = false
         return progressView
     }()
     
-     let scoreLabel: UILabel = {
+    let scoreLabel: UILabel = {
         let scoreLabel = UILabel()
         scoreLabel.textColor = .black
-        scoreLabel.font = UIFont.boldSystemFont(ofSize: 16)
+        scoreLabel.font = Constants.ScoreLabel.font
         scoreLabel.translatesAutoresizingMaskIntoConstraints = false
         return scoreLabel
     }()
     
-     let currentScoreLabel: UILabel = {
+    let currentScoreLabel: UILabel = {
         let currentScoreLabel = UILabel()
-        currentScoreLabel.text = "მიმდინარე ქულა -0 ⭐️"
-        currentScoreLabel.textColor = UIColor(hex: "FFC44A")
-        currentScoreLabel.font = .systemFont(ofSize: 16)
+        currentScoreLabel.text = Constants.CurrentScoreLabel.text
+        currentScoreLabel.textColor = Constants.CurrentScoreLabel.textColor
+        currentScoreLabel.font = Constants.CurrentScoreLabel.font
         currentScoreLabel.translatesAutoresizingMaskIntoConstraints = false
         return currentScoreLabel
     }()
@@ -66,10 +66,10 @@ class QuizProgressView: UIView {
         self.addSubview(container)
         NSLayoutConstraint.activate([
             container.topAnchor.constraint(equalTo: self.safeAreaLayoutGuide.topAnchor),
-            container.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: 20),
-            container.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: -20),
-            container.widthAnchor.constraint(equalToConstant: 344),
-            container.heightAnchor.constraint(equalToConstant: 36)
+            container.leadingAnchor.constraint(equalTo: self.leadingAnchor, constant: Constants.Container.leadingAnchor),
+            container.trailingAnchor.constraint(equalTo: self.trailingAnchor, constant: Constants.Container.trailingAnchor),
+            container.widthAnchor.constraint(equalToConstant: Constants.Container.widthAnchor),
+            container.heightAnchor.constraint(equalToConstant: Constants.Container.heightAnchor)
         ])
     }
     
@@ -79,7 +79,7 @@ class QuizProgressView: UIView {
             progressView.leadingAnchor.constraint(equalTo: container.leadingAnchor),
             progressView.trailingAnchor.constraint(equalTo: container.trailingAnchor),
             progressView.bottomAnchor.constraint(equalTo: container.bottomAnchor),
-            progressView.heightAnchor.constraint(equalToConstant: 9)
+            progressView.heightAnchor.constraint(equalToConstant: Constants.ProgressView.heightAnchor)
         ])
     }
     
@@ -87,8 +87,8 @@ class QuizProgressView: UIView {
         container.addSubview(scoreLabel)
         NSLayoutConstraint.activate([
             scoreLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-            scoreLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: 2),
-            scoreLabel.bottomAnchor.constraint(equalTo: progressView.topAnchor, constant: -4)
+            scoreLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: Constants.ScoreLabel.topAnchor),
+            scoreLabel.bottomAnchor.constraint(equalTo: progressView.topAnchor, constant: Constants.ScoreLabel.bottomAnchor)
         ])
     }
     
@@ -96,8 +96,42 @@ class QuizProgressView: UIView {
         container.addSubview(currentScoreLabel)
         NSLayoutConstraint.activate([
             currentScoreLabel.trailingAnchor.constraint(equalTo: container.trailingAnchor),
-            currentScoreLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: 2),
-            currentScoreLabel.bottomAnchor.constraint(equalTo: progressView.topAnchor, constant: -4)
+            currentScoreLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: Constants.CurrentScoreLabel.topAnchor),
+            currentScoreLabel.bottomAnchor.constraint(equalTo: progressView.topAnchor, constant: Constants.CurrentScoreLabel.bottomAnchor)
         ])
+    }
+}
+
+extension QuizProgressView {
+    enum Constants {
+        
+        enum Container {
+            static let backgroundColor: UIColor = .clear
+            static let leadingAnchor: CGFloat = 20
+            static let trailingAnchor: CGFloat = -20
+            static let widthAnchor: CGFloat = 344
+            static let heightAnchor: CGFloat = 36
+        }
+        
+        enum ProgressView {
+            static let tintColor: UIColor = UIColor(hex: "537FE7")
+            static let progress = 0.0
+            static let cornerRadius: CGFloat = 20
+            static let heightAnchor: CGFloat = 9
+        }
+        
+        enum ScoreLabel {
+            static let font: UIFont = UIFont.boldSystemFont(ofSize: 16)
+            static let topAnchor: CGFloat = 2
+            static let bottomAnchor: CGFloat = -4
+        }
+        
+        enum CurrentScoreLabel {
+            static let text = "მიმდინარე ქულა -0 ⭐️"
+            static let textColor: UIColor = UIColor(hex: "FFC44A")
+            static let font: UIFont = .systemFont(ofSize: 16)
+            static let topAnchor: CGFloat = 2
+            static let bottomAnchor: CGFloat = -4
+        }
     }
 }

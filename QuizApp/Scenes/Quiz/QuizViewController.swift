@@ -31,8 +31,8 @@ class QuizViewController: UIViewController {
     
     private let questionBackground: UIView = {
         let questionBackground = UIView()
-        questionBackground.backgroundColor = UIColor(hex: "C0D0F6")
-        questionBackground.layer.cornerRadius = 26
+        questionBackground.backgroundColor = Constants.QuestionBackground.backgroundColor
+        questionBackground.layer.cornerRadius = Constants.QuestionBackground.cornerRadius
         questionBackground.translatesAutoresizingMaskIntoConstraints = false
         return questionBackground
     }()
@@ -55,7 +55,7 @@ class QuizViewController: UIViewController {
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return nextButton
     }()
-        
+    
     init(with viewModel: QuizViewModel) {
         quizViewModel = viewModel
         super.init(nibName: nil, bundle: nil)
@@ -137,9 +137,9 @@ class QuizViewController: UIViewController {
         NSLayoutConstraint.activate([
             quizProgressView.leadingAnchor.constraint(equalTo: view.leadingAnchor),
             quizProgressView.trailingAnchor.constraint(equalTo: view.trailingAnchor),
-            quizProgressView.bottomAnchor.constraint(equalTo: questionBackground.topAnchor, constant: -8),
-            quizProgressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: 16),
-            quizProgressView.heightAnchor.constraint(equalToConstant: 36)
+            quizProgressView.bottomAnchor.constraint(equalTo: questionBackground.topAnchor, constant: Constants.QuizProgressView.bottomAnchor),
+            quizProgressView.topAnchor.constraint(equalTo: view.safeAreaLayoutGuide.topAnchor, constant: Constants.QuizProgressView.topAnchor),
+            quizProgressView.heightAnchor.constraint(equalToConstant: Constants.QuizProgressView.heightAnchor)
         ])
     }
     
@@ -157,10 +157,10 @@ class QuizViewController: UIViewController {
     private func setupQuestionBackgroundConstrains() {
         view.addSubview(questionBackground)
         NSLayoutConstraint.activate([
-            questionBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: 16),
-            questionBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: -16),
-            questionBackground.heightAnchor.constraint(equalToConstant: 103),
-            questionBackground.widthAnchor.constraint(equalToConstant: 343)
+            questionBackground.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.QuestionBackground.leadingAnchor),
+            questionBackground.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.QuestionBackground.trailingAnchor),
+            questionBackground.heightAnchor.constraint(equalToConstant: Constants.QuestionBackground.heightAnchor),
+            questionBackground.widthAnchor.constraint(equalToConstant: Constants.QuestionBackground.widthAnchor)
         ])
     }
     
@@ -241,8 +241,12 @@ private extension QuizViewController {
     enum Constants {
         
         enum QuestionBackground {
-            static let image = UIImage(named: "Rectangle")
-            static let heightAnchor: CGFloat = 250
+            static let backgroundColor: UIColor = UIColor(hex: "C0D0F6")
+            static let cornerRadius: CGFloat = 26
+            static let heightAnchor: CGFloat = 103
+            static let leadingAnchor: CGFloat = 16
+            static let trailingAnchor: CGFloat = -16
+            static let widthAnchor: CGFloat = 343
         }
         
         enum QuestionLabel {
@@ -273,7 +277,11 @@ private extension QuizViewController {
             static let cellHeight: CGFloat = 60
             static let distanceBetweenCells: CGFloat = 12
         }
+        
+        enum QuizProgressView {
+            static let bottomAnchor: CGFloat = -8
+            static let topAnchor: CGFloat = 16
+            static let heightAnchor: CGFloat = 36
+        }
     }
 }
-
-// clone

@@ -9,10 +9,10 @@ import Foundation
 
 class QuizViewModel {
     
-       var currentQuestionIndex: Int = 0
-       var correctAnswer: Int = 0
+    var currentQuestionIndex: Int = 0
+    var correctAnswer: Int = 0
     
-     let questions: [Question] = [
+    let questions: [Question] = [
         Question (text: "რომელია ყველაზე პოპულარული პროგრამირების ენა?",
                   answers: [
                     Answer(text: "Python"),
@@ -45,6 +45,4 @@ class QuizViewModel {
                     Answer(text: "Kotlin")
                   ])
     ]
-    
-    
 }
