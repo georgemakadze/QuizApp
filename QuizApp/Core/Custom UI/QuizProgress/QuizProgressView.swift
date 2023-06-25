@@ -28,12 +28,12 @@ class QuizProgressView: UIView {
         return progressView
     }()
     
-    let scoreLabel: UILabel = {
-        let scoreLabel = UILabel()
-        scoreLabel.textColor = .black
-        scoreLabel.font = Constants.ScoreLabel.font
-        scoreLabel.translatesAutoresizingMaskIntoConstraints = false
-        return scoreLabel
+    let questionNumberLabel: UILabel = {
+        let questionNumberLabel = UILabel()
+        questionNumberLabel.textColor = .black
+        questionNumberLabel.font = Constants.ScoreLabel.font
+        questionNumberLabel.translatesAutoresizingMaskIntoConstraints = false
+        return questionNumberLabel
     }()
     
     let currentScoreLabel: UILabel = {
@@ -84,11 +84,11 @@ class QuizProgressView: UIView {
     }
     
     private func setupScoreLabelConstraints() {
-        container.addSubview(scoreLabel)
+        container.addSubview(questionNumberLabel)
         NSLayoutConstraint.activate([
-            scoreLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor),
-            scoreLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: Constants.ScoreLabel.topAnchor),
-            scoreLabel.bottomAnchor.constraint(equalTo: progressView.topAnchor, constant: Constants.ScoreLabel.bottomAnchor)
+            questionNumberLabel.leadingAnchor.constraint(equalTo: container.leadingAnchor),
+            questionNumberLabel.topAnchor.constraint(equalTo: container.topAnchor, constant: Constants.ScoreLabel.topAnchor),
+            questionNumberLabel.bottomAnchor.constraint(equalTo: progressView.topAnchor, constant: Constants.ScoreLabel.bottomAnchor)
         ])
     }
     

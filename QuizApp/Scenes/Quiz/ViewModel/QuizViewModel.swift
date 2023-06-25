@@ -9,8 +9,28 @@ import Foundation
 
 class QuizViewModel {
     
-    var currentQuestionIndex: Int = 0
-    var correctAnswer: Int = 0
+    private(set) var currentQuestionIndex: Int = 0 //private set var
+    private(set) var correctAnswer: Int = 0
+    var progress: Float {
+        Float((currentQuestionIndex + 1)) / Float(questions.count)
+    }
+    
+    var questionNumberLabel: String {
+        "\(currentQuestionIndex + 1)\(questions.count)"
+    }
+    var currentQuestion: Question {
+        questions[currentQuestionIndex]
+    }
+    
+    var shouldFinishQuiz: Bool {
+        currentQuestionIndex == questions.count
+    }
+    
+    var currentScoreText: String {
+      return  "მიმდინარე ქულა - \(correctAnswer)⭐️"
+    }
+    
+    
     
     let questions: [Question] = [
         Question (text: "რომელია ყველაზე პოპულარული პროგრამირების ენა?",
@@ -45,4 +65,20 @@ class QuizViewModel {
                     Answer(text: "Kotlin")
                   ])
     ]
+    
+    func loadNextQuestion() {
+        guard currentQuestionIndex >= 0 && currentQuestionIndex < questions.count else {
+            return
+        }
+        
+        currentQuestionIndex += 1
+    }
+    
+    func isCorrectAnswer(index: Int) -> Bool {
+        return questions[currentQuestionIndex].answers[index].isCorrect
+    }
+    
+    func incressScore() {
+       correctAnswer += 1
+    }
 }

@@ -88,23 +88,16 @@ class QuizViewController: UIViewController {
     }
     
     func loadQuestion() {
-        guard quizViewModel.currentQuestionIndex >= 0 && quizViewModel.currentQuestionIndex < quizViewModel.questions.count else {
-            return
-        }
-        
-        let question = quizViewModel.questions[quizViewModel.currentQuestionIndex]
-        questionLabel.text = question.text
-        quizProgressView.scoreLabel.text = "\(quizViewModel.currentQuestionIndex + 1)/\(quizViewModel.questions.count)"
-        
-        let progress = Float((quizViewModel.currentQuestionIndex + 1)) / Float(quizViewModel.questions.count)
-        quizProgressView.progressView.setProgress(progress, animated: true)
+        questionLabel.text = quizViewModel.currentQuestion.text
+        quizProgressView.questionNumberLabel.text = quizViewModel.questionNumberLabel
+        quizProgressView.progressView.setProgress(quizViewModel.progress, animated: true)
         subjectTableView.reloadData()
     }
     
     @objc func nextButtonTapped() {
-        quizViewModel.currentQuestionIndex += 1
+        quizViewModel.loadNextQuestion()
         
-        if quizViewModel.currentQuestionIndex == quizViewModel.questions.count {
+        if quizViewModel.shouldFinishQuiz {
             let finishPopupViewController = FinishPopupController()
             finishPopupViewController.delegate = self
             finishPopupViewController.modalPresentationStyle = .overCurrentContext
@@ -222,14 +215,14 @@ extension QuizViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let isCorrect = quizViewModel.questions[quizViewModel.currentQuestionIndex].answers[indexPath.row].isCorrect
+        let isCorrect = quizViewModel.isCorrectAnswer(index: indexPath.row)
         let cell = tableView.cellForRow(at: indexPath) as? AnswerCell
         cell?.changeBackgroundColor(isCorrect: isCorrect)
         
         if isCorrect {
             cell?.scoreImage.isHidden = false
-            quizViewModel.correctAnswer += 1
-            quizProgressView.currentScoreLabel.text = "მიმდინარე ქულა - \(quizViewModel.correctAnswer)⭐️"
+            quizViewModel.incressScore()
+            quizProgressView.currentScoreLabel.text = quizViewModel.currentScoreText
         } else {
             setCorrectCellAppearance()
         }
