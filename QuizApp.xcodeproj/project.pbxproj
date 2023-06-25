@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0EC0BD072A43509700B562C3 /* GPAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC0BD062A43509700B562C3 /* GPAView.swift */; };
 		0EC0BD0B2A4466C900B562C3 /* QuizProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC0BD0A2A4466C900B562C3 /* QuizProgressView.swift */; };
+		0EC0BD0E2A46E1CA00B562C3 /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC0BD0D2A46E1CA00B562C3 /* QuizViewModel.swift */; };
 		0EDD089A2A2A0B4E00FF282B /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08992A2A0B4E00FF282B /* AppDelegate.swift */; };
 		0EDD089C2A2A0B4E00FF282B /* SceneDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD089B2A2A0B4E00FF282B /* SceneDelegate.swift */; };
 		0EDD089E2A2A0B4E00FF282B /* LoginViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD089D2A2A0B4E00FF282B /* LoginViewController.swift */; };
@@ -34,6 +35,7 @@
 /* Begin PBXFileReference section */
 		0EC0BD062A43509700B562C3 /* GPAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPAView.swift; sourceTree = "<group>"; };
 		0EC0BD0A2A4466C900B562C3 /* QuizProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizProgressView.swift; sourceTree = "<group>"; };
+		0EC0BD0D2A46E1CA00B562C3 /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
 		0EDD08962A2A0B4E00FF282B /* QuizApp.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = QuizApp.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		0EDD08992A2A0B4E00FF282B /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		0EDD089B2A2A0B4E00FF282B /* SceneDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDelegate.swift; sourceTree = "<group>"; };
@@ -83,6 +85,14 @@
 				0EC0BD0A2A4466C900B562C3 /* QuizProgressView.swift */,
 			);
 			path = QuizProgress;
+			sourceTree = "<group>";
+		};
+		0EC0BD0C2A46E1AF00B562C3 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				0EC0BD0D2A46E1CA00B562C3 /* QuizViewModel.swift */,
+			);
+			path = ViewModel;
 			sourceTree = "<group>";
 		};
 		0EDD088D2A2A0B4E00FF282B = {
@@ -221,6 +231,7 @@
 		0EDD08CA2A2F2A7100FF282B /* Quiz */ = {
 			isa = PBXGroup;
 			children = (
+				0EC0BD0C2A46E1AF00B562C3 /* ViewModel */,
 				0EDD08DF2A3D931B00FF282B /* TableViewCell */,
 				0EDD08C82A2F26D600FF282B /* QuizViewController.swift */,
 			);
@@ -362,6 +373,7 @@
 				0EDD089A2A2A0B4E00FF282B /* AppDelegate.swift in Sources */,
 				0EC0BD072A43509700B562C3 /* GPAView.swift in Sources */,
 				0EDD08DD2A3B9A1100FF282B /* UIViewController+Extensions.swift in Sources */,
+				0EC0BD0E2A46E1CA00B562C3 /* QuizViewModel.swift in Sources */,
 				0EDD08A42A2A0B4E00FF282B /* QuizApp.xcdatamodeld in Sources */,
 				0EDD08BF2A2E021200FF282B /* SubjectCell.swift in Sources */,
 				0EDD08D12A2FB5E600FF282B /* ScoreCell.swift in Sources */,

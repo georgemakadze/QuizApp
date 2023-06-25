@@ -183,7 +183,7 @@ extension HomeViewController: UITableViewDataSource {
 extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let quizController = QuizViewController()
+        let quizController = QuizViewController(with: QuizViewModel())
         navigationController?.pushViewController(quizController, animated: true)
     }
     

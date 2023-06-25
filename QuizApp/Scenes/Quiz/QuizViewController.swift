@@ -11,6 +11,8 @@ import UIKit
 class QuizViewController: UIViewController {
     
     //MARK: - Components
+    private let quizViewModel: QuizViewModel
+    
     private let quizProgressView: QuizProgressView = {
         let quizProgressView = QuizProgressView()
         quizProgressView.translatesAutoresizingMaskIntoConstraints = false
@@ -53,48 +55,20 @@ class QuizViewController: UIViewController {
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return nextButton
     }()
+        
+    init(with viewModel: QuizViewModel) {
+        quizViewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
     
-    private var currentQuestionIndex: Int = 0
-    private var correctAnswer: Int = 0
-    
-    private let questions: [Question] = [
-        Question (text: "რომელია ყველაზე პოპულარული პროგრამირების ენა?",
-                  answers: [
-                    Answer(text: "Python"),
-                    Answer(text: "Java"),
-                    Answer(text: "C++", isCorrect: true),
-                    Answer(text: "Kotlin")
-                  ]),
-        
-        Question (text: "რომელი პროგრამირების ენა გამოიყენება iOS-ში?",
-                  answers: [
-                    Answer(text: "Objective-C"),
-                    Answer(text: "Swift", isCorrect: true),
-                    Answer(text: "Java"),
-                    Answer(text: "Kotlin")
-                  ]),
-        
-        Question (text: "რომელი პროგრამირების ენა გამოიყენება Android-ში?",
-                  answers: [
-                    Answer(text: "Objective-C"),
-                    Answer(text: "Swift"),
-                    Answer(text: "Java"),
-                    Answer(text: "Kotlin", isCorrect: true)
-                  ]),
-        
-        Question (text: "რომელი პროგრამირების ენა გამოიყენება Web-ში?",
-                  answers: [
-                    Answer(text: "Objective-C"),
-                    Answer(text: "Swift"),
-                    Answer(text: "JavaScript", isCorrect: true),
-                    Answer(text: "Kotlin")
-                  ])
-    ]
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        questionLabel.text = questions[currentQuestionIndex].text
+        questionLabel.text = quizViewModel.questions[quizViewModel.currentQuestionIndex].text
         setupNavigationController()
         setupQuestionBackgroundConstrains()
         setupTableViewConstraints()
@@ -114,23 +88,23 @@ class QuizViewController: UIViewController {
     }
     
     func loadQuestion() {
-        guard currentQuestionIndex >= 0 && currentQuestionIndex < questions.count else {
+        guard quizViewModel.currentQuestionIndex >= 0 && quizViewModel.currentQuestionIndex < quizViewModel.questions.count else {
             return
         }
         
-        let question = questions[currentQuestionIndex]
+        let question = quizViewModel.questions[quizViewModel.currentQuestionIndex]
         questionLabel.text = question.text
-        quizProgressView.scoreLabel.text = "\(currentQuestionIndex + 1)/\(questions.count)"
+        quizProgressView.scoreLabel.text = "\(quizViewModel.currentQuestionIndex + 1)/\(quizViewModel.questions.count)"
         
-        let progress = Float((currentQuestionIndex + 1)) / Float(questions.count)
+        let progress = Float((quizViewModel.currentQuestionIndex + 1)) / Float(quizViewModel.questions.count)
         quizProgressView.progressView.setProgress(progress, animated: true)
         subjectTableView.reloadData()
     }
     
     @objc func nextButtonTapped() {
-        currentQuestionIndex += 1
+        quizViewModel.currentQuestionIndex += 1
         
-        if currentQuestionIndex == questions.count {
+        if quizViewModel.currentQuestionIndex == quizViewModel.questions.count {
             let finishPopupViewController = FinishPopupController()
             finishPopupViewController.delegate = self
             finishPopupViewController.modalPresentationStyle = .overCurrentContext
@@ -201,7 +175,7 @@ class QuizViewController: UIViewController {
     }
     
     func setCorrectCellAppearance() {
-        guard let correctIndex = questions[currentQuestionIndex].answers.firstIndex(where: { $0.isCorrect }) else {
+        guard let correctIndex = quizViewModel.questions[quizViewModel.currentQuestionIndex].answers.firstIndex(where: { $0.isCorrect }) else {
             return
         }
         let correctCell = subjectTableView.cellForRow(at: IndexPath(row: correctIndex, section: 0)) as? AnswerCell
@@ -228,12 +202,12 @@ extension QuizViewController: FinishPopupControllerDelegate {
 // MARK: - UITableViewDataSource
 extension QuizViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        questions[currentQuestionIndex].answers.count
+        quizViewModel.questions[quizViewModel.currentQuestionIndex].answers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AnswerCell.reuseIdentifier, for: indexPath) as! AnswerCell
-        let currentAnswer = questions[currentQuestionIndex].answers[indexPath.row]
+        let currentAnswer = quizViewModel.questions[quizViewModel.currentQuestionIndex].answers[indexPath.row]
         cell.configure(with: currentAnswer)
         return cell
     }
@@ -248,14 +222,14 @@ extension QuizViewController: UITableViewDelegate {
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let isCorrect = questions[currentQuestionIndex].answers[indexPath.row].isCorrect
+        let isCorrect = quizViewModel.questions[quizViewModel.currentQuestionIndex].answers[indexPath.row].isCorrect
         let cell = tableView.cellForRow(at: indexPath) as? AnswerCell
         cell?.changeBackgroundColor(isCorrect: isCorrect)
         
         if isCorrect {
             cell?.scoreImage.isHidden = false
-            correctAnswer += 1
-            quizProgressView.currentScoreLabel.text = "მიმდინარე ქულა - \(correctAnswer)⭐️"
+            quizViewModel.correctAnswer += 1
+            quizProgressView.currentScoreLabel.text = "მიმდინარე ქულა - \(quizViewModel.correctAnswer)⭐️"
         } else {
             setCorrectCellAppearance()
         }
