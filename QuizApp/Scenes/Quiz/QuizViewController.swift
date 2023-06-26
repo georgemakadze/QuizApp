@@ -221,7 +221,7 @@ extension QuizViewController: UITableViewDelegate {
         
         if isCorrect {
             cell?.scoreImage.isHidden = false
-            quizViewModel.incressScore()
+            quizViewModel.increaseScore()
             quizProgressView.currentScoreLabel.text = quizViewModel.currentScoreText
         } else {
             setCorrectCellAppearance()

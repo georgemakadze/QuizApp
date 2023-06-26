@@ -28,9 +28,9 @@ class AnswerCell: UITableViewCell {
         return answerLabel
     }()
     
-     let scoreImage: UIImageView = {
+    let scoreImage: UIImageView = {
         let scoreImage = UIImageView()
-        scoreImage.image = UIImage(named: "score")
+        scoreImage.image = Constants.ScoreImage.image
         scoreImage.isHidden = true
         scoreImage.translatesAutoresizingMaskIntoConstraints = false
         return scoreImage
@@ -76,10 +76,10 @@ class AnswerCell: UITableViewCell {
     private func setupScoreImageConstraints() {
         containerView.addSubview(scoreImage)
         NSLayoutConstraint.activate([
-            scoreImage.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: -20),
-            scoreImage.topAnchor.constraint(equalTo: containerView.topAnchor,constant: 20),
-            scoreImage.widthAnchor.constraint(equalToConstant: 32),
-            scoreImage.heightAnchor.constraint(equalToConstant: 18)
+            scoreImage.trailingAnchor.constraint(equalTo: containerView.trailingAnchor, constant: Constants.ScoreImage.trailingAnchor),
+            scoreImage.topAnchor.constraint(equalTo: containerView.topAnchor,constant: Constants.ScoreImage.topAnchor),
+            scoreImage.widthAnchor.constraint(equalToConstant: Constants.ScoreImage.widthAnchor),
+            scoreImage.heightAnchor.constraint(equalToConstant: Constants.ScoreImage.heightAnchor)
         ])
     }
     
@@ -96,7 +96,9 @@ class AnswerCell: UITableViewCell {
 
 //MARK: - Constants
 private extension AnswerCell {
+    
     enum Constants {
+        
         enum ContainerView {
             static let backgroundColor = UIColor(hex: "F6F6F6")
             static let cornerRadius: CGFloat = 22
@@ -106,6 +108,7 @@ private extension AnswerCell {
             static let widthAnchor: CGFloat = 340
             static let heightAnchor: CGFloat = 60
         }
+        
         enum AnswerLabel {
             static let backgroundColor: UIColor = .clear
             static let textColor: UIColor = .black
@@ -113,6 +116,14 @@ private extension AnswerCell {
             static let topAnchor: CGFloat = 16
             static let bottomAnchor: CGFloat = -16
             static let leadingAnchor: CGFloat = 30
+        }
+        
+        enum ScoreImage {
+            static let image = UIImage(named: "score")
+            static let trailingAnchor: CGFloat = -20
+            static let topAnchor: CGFloat = 20
+            static let widthAnchor: CGFloat = 32
+            static let heightAnchor: CGFloat = 18
         }
     }
 }

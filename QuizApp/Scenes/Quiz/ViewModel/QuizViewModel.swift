@@ -47,7 +47,7 @@ class QuizViewModel {
         return questions[currentQuestionIndex].answers[index].isCorrect
     }
     
-    func incressScore() {
+    func increaseScore() {
         correctAnswer += 1
     }
 }
