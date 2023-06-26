@@ -11,6 +11,8 @@ import UIKit
 class HomeViewController: UIViewController {
     
     //MARK: - Components
+    private let homeViewModel: HomeViewModel
+    
     private lazy var gpaView: GPAView = {
         let gpaView = GPAView()
         gpaView.isUserInteractionEnabled = true
@@ -54,12 +56,14 @@ class HomeViewController: UIViewController {
         return logOutButton
     }()
     
-    let subjects: [Subject] = [
-        Subject(icon: "programming", name: "პროგრამირება", description: "აღწერა"),
-        Subject(icon: "Book", name: "ისტორია", description: "აღწერა"),
-        Subject(icon: "Atom", name: "ფიზიკა", description: "აღწერა"),
-        Subject(icon: "Globe", name: "გეოგრაფია", description: "აღწერა")
-    ]
+    init(with viewModel: HomeViewModel) {
+        homeViewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -168,12 +172,12 @@ extension HomeViewController: PopupViewControllerDelegate {
 extension HomeViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        subjects.count
+        homeViewModel.subjects.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: SubjectCell.reuseIdentifier, for: indexPath) as! SubjectCell
-        let subject = subjects[indexPath.row]
+        let subject = homeViewModel.subjects[indexPath.row]
         cell.configure(with: subject)
         return cell
     }
@@ -183,7 +187,9 @@ extension HomeViewController: UITableViewDataSource {
 extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        let quizController = QuizViewController(with: QuizViewModel())
+        let selectedSubject = homeViewModel.subjects[indexPath.row]
+        let quizViewModel = QuizViewModel(questions: selectedSubject.question)
+        let quizController = QuizViewController(with: quizViewModel)
         navigationController?.pushViewController(quizController, animated: true)
     }
     

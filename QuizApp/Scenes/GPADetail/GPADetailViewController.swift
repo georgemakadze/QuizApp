@@ -28,11 +28,11 @@ class GPADetailViewController: UIViewController {
         return noPointsImage
     }()
     
-    let subjects: [Subject] = [
-        Subject(icon: "programming", name: "პროგრამირება", description: "აღწერა"),
-        Subject(icon: "Book", name: "ისტორია", description: "აღწერა"),
-        Subject(icon: "Atom", name: "ფიზიკა", description: "აღწერა"),
-        Subject(icon: "Globe", name: "გეოგრაფია", description: "აღწერა")
+    let subjects: [SubjectResult] = [
+        SubjectResult(icon: "programming", name: "პროგრამირება", description: "აღწერა"),
+        SubjectResult(icon: "Book", name: "ისტორია", description: "აღწერა"),
+        SubjectResult(icon: "Atom", name: "ფიზიკა", description: "აღწერა"),
+        SubjectResult(icon: "Globe", name: "გეოგრაფია", description: "აღწერა")
     ]
     
     override func viewDidLoad() {

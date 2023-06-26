@@ -124,7 +124,7 @@ class ScoreCell: UITableViewCell {
         ])
     }
     
-    func configure(with subject: Subject) {
+    func configure(with subject: SubjectResult) {
         iconImageView.image = UIImage(named: subject.icon)
         nameLabel.text = subject.name
         descriptionLabel.text = subject.description

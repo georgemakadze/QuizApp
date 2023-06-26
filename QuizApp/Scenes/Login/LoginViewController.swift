@@ -89,7 +89,7 @@ class LoginViewController: UIViewController {
     }
     
     @objc func startButtonTapped() {
-        let homeViewController = HomeViewController()
+        let homeViewController = HomeViewController(with: HomeViewModel())
         let navVC = UINavigationController(rootViewController: homeViewController)
         window?.rootViewController = navVC
     }

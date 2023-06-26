@@ -9,14 +9,19 @@ import Foundation
 
 class QuizViewModel {
     
-    private(set) var currentQuestionIndex: Int = 0 //private set var
+    private(set) var currentQuestionIndex: Int = 0
     private(set) var correctAnswer: Int = 0
+    private(set) var questions: [Question]
+    
+    init(questions: [Question]) {
+        self.questions = questions
+    }
     var progress: Float {
         Float((currentQuestionIndex + 1)) / Float(questions.count)
     }
     
     var questionNumberLabel: String {
-        "\(currentQuestionIndex + 1)\(questions.count)"
+        "\(currentQuestionIndex + 1)/\(questions.count)"
     }
     var currentQuestion: Question {
         questions[currentQuestionIndex]
@@ -27,44 +32,8 @@ class QuizViewModel {
     }
     
     var currentScoreText: String {
-      return  "მიმდინარე ქულა - \(correctAnswer)⭐️"
+        return  "მიმდინარე ქულა - \(correctAnswer)⭐️"
     }
-    
-    
-    
-    let questions: [Question] = [
-        Question (text: "რომელია ყველაზე პოპულარული პროგრამირების ენა?",
-                  answers: [
-                    Answer(text: "Python"),
-                    Answer(text: "Java"),
-                    Answer(text: "C++", isCorrect: true),
-                    Answer(text: "Kotlin")
-                  ]),
-        
-        Question (text: "რომელი პროგრამირების ენა გამოიყენება iOS-ში?",
-                  answers: [
-                    Answer(text: "Objective-C"),
-                    Answer(text: "Swift", isCorrect: true),
-                    Answer(text: "Java"),
-                    Answer(text: "Kotlin")
-                  ]),
-        
-        Question (text: "რომელი პროგრამირების ენა გამოიყენება Android-ში?",
-                  answers: [
-                    Answer(text: "Objective-C"),
-                    Answer(text: "Swift"),
-                    Answer(text: "Java"),
-                    Answer(text: "Kotlin", isCorrect: true)
-                  ]),
-        
-        Question (text: "რომელი პროგრამირების ენა გამოიყენება Web-ში?",
-                  answers: [
-                    Answer(text: "Objective-C"),
-                    Answer(text: "Swift"),
-                    Answer(text: "JavaScript", isCorrect: true),
-                    Answer(text: "Kotlin")
-                  ])
-    ]
     
     func loadNextQuestion() {
         guard currentQuestionIndex >= 0 && currentQuestionIndex < questions.count else {
@@ -79,6 +48,6 @@ class QuizViewModel {
     }
     
     func incressScore() {
-       correctAnswer += 1
+        correctAnswer += 1
     }
 }

@@ -110,8 +110,8 @@ private extension AnswerCell {
             static let backgroundColor: UIColor = .clear
             static let textColor: UIColor = .black
             static let font: CGFloat = 16
-            static let topAnchor: CGFloat = 22
-            static let bottomAnchor: CGFloat = -22
+            static let topAnchor: CGFloat = 16
+            static let bottomAnchor: CGFloat = -16
             static let leadingAnchor: CGFloat = 30
         }
     }
