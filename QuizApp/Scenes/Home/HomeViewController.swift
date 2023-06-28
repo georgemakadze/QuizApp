@@ -188,7 +188,7 @@ extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedSubject = homeViewModel.subjects[indexPath.row]
-        let quizViewModel = QuizViewModel(questions: selectedSubject.question)
+        let quizViewModel = QuizViewModel(questions: selectedSubject.questions)
         let quizController = QuizViewController(with: quizViewModel)
         navigationController?.pushViewController(quizController, animated: true)
     }

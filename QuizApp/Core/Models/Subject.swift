@@ -9,7 +9,8 @@ import Foundation
 
 struct Subject: Hashable {
     var icon: String
-    var name: String
-    var description: String
-    var question: [Question]
+    var quizTitle: String
+    var quizDescription: String
+    var quizQuestionCount: Int
+    var questions: [Question]
 }

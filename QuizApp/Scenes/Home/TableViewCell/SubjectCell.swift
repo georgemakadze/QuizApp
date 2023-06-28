@@ -118,8 +118,8 @@ class SubjectCell: UITableViewCell {
     
     func configure(with subject: Subject) {
         iconImageView.image = UIImage(named: subject.icon)
-        nameLabel.text = subject.name
-        descriptionLabel.text = subject.description
+        nameLabel.text = subject.quizTitle
+        descriptionLabel.text = subject.quizDescription
     }
 }
 

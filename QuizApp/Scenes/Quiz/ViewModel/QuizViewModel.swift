@@ -16,6 +16,7 @@ class QuizViewModel {
     init(questions: [Question]) {
         self.questions = questions
     }
+    
     var progress: Float {
         Float((currentQuestionIndex + 1)) / Float(questions.count)
     }
@@ -39,12 +40,13 @@ class QuizViewModel {
         guard currentQuestionIndex >= 0 && currentQuestionIndex < questions.count else {
             return
         }
-        
         currentQuestionIndex += 1
     }
     
     func isCorrectAnswer(index: Int) -> Bool {
-        return questions[currentQuestionIndex].answers[index].isCorrect
+        let selectedAnswer = questions[currentQuestionIndex].answers[index]
+          let correctAnswer = questions[currentQuestionIndex].correctAnswer
+          return selectedAnswer == correctAnswer
     }
     
     func increaseScore() {

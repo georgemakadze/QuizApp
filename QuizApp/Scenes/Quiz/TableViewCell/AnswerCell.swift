@@ -83,8 +83,8 @@ class AnswerCell: UITableViewCell {
         ])
     }
     
-    func configure(with answer: Answer) {
-        answerLabel.text = answer.text
+    func configure(with answer: String) {
+        answerLabel.text = answer
         containerView.backgroundColor = Constants.ContainerView.backgroundColor
         scoreImage.isHidden = true
     }

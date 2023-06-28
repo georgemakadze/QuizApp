@@ -68,7 +68,7 @@ class QuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        questionLabel.text = quizViewModel.questions[quizViewModel.currentQuestionIndex].text
+        questionLabel.text = quizViewModel.questions[quizViewModel.currentQuestionIndex].questionTitle
         setupNavigationController()
         setupQuestionBackgroundConstrains()
         setupTableViewConstraints()
@@ -88,7 +88,7 @@ class QuizViewController: UIViewController {
     }
     
     func loadQuestion() {
-        questionLabel.text = quizViewModel.currentQuestion.text
+        questionLabel.text = quizViewModel.currentQuestion.questionTitle
         quizProgressView.questionNumberLabel.text = quizViewModel.questionNumberLabel
         quizProgressView.progressView.setProgress(quizViewModel.progress, animated: true)
         subjectTableView.reloadData()
@@ -168,7 +168,7 @@ class QuizViewController: UIViewController {
     }
     
     func setCorrectCellAppearance() {
-        guard let correctIndex = quizViewModel.questions[quizViewModel.currentQuestionIndex].answers.firstIndex(where: { $0.isCorrect }) else {
+        guard let correctIndex = quizViewModel.questions[quizViewModel.currentQuestionIndex].answers.firstIndex(where: { $0 == quizViewModel.currentQuestion.correctAnswer  }) else {
             return
         }
         let correctCell = subjectTableView.cellForRow(at: IndexPath(row: correctIndex, section: 0)) as? AnswerCell
@@ -200,7 +200,8 @@ extension QuizViewController: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AnswerCell.reuseIdentifier, for: indexPath) as! AnswerCell
-        let currentAnswer = quizViewModel.questions[quizViewModel.currentQuestionIndex].answers[indexPath.row]
+        let currentQuestion = quizViewModel.questions[quizViewModel.currentQuestionIndex]
+        let currentAnswer = currentQuestion.answers[indexPath.row]
         cell.configure(with: currentAnswer)
         return cell
     }

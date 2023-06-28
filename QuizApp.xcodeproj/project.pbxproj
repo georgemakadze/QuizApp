@@ -31,7 +31,6 @@
 		0EDD08D72A31C4F800FF282B /* PopupViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08D62A31C4F800FF282B /* PopupViewController.swift */; };
 		0EDD08DA2A33258700FF282B /* FinishPopupController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08D92A33258700FF282B /* FinishPopupController.swift */; };
 		0EDD08DD2A3B9A1100FF282B /* UIViewController+Extensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08DC2A3B9A1100FF282B /* UIViewController+Extensions.swift */; };
-		0EDD08E42A40C76800FF282B /* Answer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EDD08E32A40C76800FF282B /* Answer.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -61,7 +60,6 @@
 		0EDD08D62A31C4F800FF282B /* PopupViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PopupViewController.swift; sourceTree = "<group>"; };
 		0EDD08D92A33258700FF282B /* FinishPopupController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FinishPopupController.swift; sourceTree = "<group>"; };
 		0EDD08DC2A3B9A1100FF282B /* UIViewController+Extensions.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+Extensions.swift"; sourceTree = "<group>"; };
-		0EDD08E32A40C76800FF282B /* Answer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Answer.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -227,7 +225,6 @@
 			children = (
 				0EDD08C32A2E469000FF282B /* Subject.swift */,
 				0EDD08CE2A2F499700FF282B /* Question.swift */,
-				0EDD08E32A40C76800FF282B /* Answer.swift */,
 				0E7FA3B72A49962700FC4DCB /* SubjectResult.swift */,
 			);
 			path = Models;
@@ -383,7 +380,6 @@
 				0EDD08DA2A33258700FF282B /* FinishPopupController.swift in Sources */,
 				0EC0BD0B2A4466C900B562C3 /* QuizProgressView.swift in Sources */,
 				0EDD089E2A2A0B4E00FF282B /* LoginViewController.swift in Sources */,
-				0EDD08E42A40C76800FF282B /* Answer.swift in Sources */,
 				0EDD08C92A2F26D600FF282B /* QuizViewController.swift in Sources */,
 				0EDD089A2A2A0B4E00FF282B /* AppDelegate.swift in Sources */,
 				0EC0BD072A43509700B562C3 /* GPAView.swift in Sources */,
