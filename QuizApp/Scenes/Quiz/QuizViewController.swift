@@ -257,10 +257,10 @@ private extension QuizViewController {
         
         enum NextButton {
             static let image = UIImage(named: "Next")
-            static let topAnchor: CGFloat = 32
+            static let topAnchor: CGFloat = 22
             static let leadingAnchor: CGFloat = 16
             static let trailingAnchor: CGFloat = -16
-            static let bottomAnchor: CGFloat = -50
+            static let bottomAnchor: CGFloat = -40
         }
         
         enum TableView {
