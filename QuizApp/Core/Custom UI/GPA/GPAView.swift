@@ -64,9 +64,9 @@ class GPAView: UIView {
     }()
     
     init() {
-            super.init(frame: .zero)
-            setupView()
-        }
+        super.init(frame: .zero)
+        setupView()
+    }
     
     required init?(coder: NSCoder) {
         fatalError("error!")
@@ -80,7 +80,7 @@ class GPAView: UIView {
         setupScoreViewDetailLabelConstraints()
         setupScoreViewDetailImageViewConstraints()
     }
-
+    
     // MARK: - Constraints Setup
     private func setupScoreHeaderViewConstraints() {
         self.addSubview(scoreHeaderView)

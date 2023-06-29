@@ -33,7 +33,7 @@ class QuizViewModel {
     }
     
     var currentScoreText: String {
-        return  "მიმდინარე ქულა - \(correctAnswer)⭐️"
+        "მიმდინარე ქულა - \(correctAnswer)⭐️"
     }
     
     func loadNextQuestion() {
@@ -45,8 +45,8 @@ class QuizViewModel {
     
     func isCorrectAnswer(index: Int) -> Bool {
         let selectedAnswer = questions[currentQuestionIndex].answers[index]
-          let correctAnswer = questions[currentQuestionIndex].correctAnswer
-          return selectedAnswer == correctAnswer
+        let correctAnswer = questions[currentQuestionIndex].correctAnswer
+        return selectedAnswer == correctAnswer
     }
     
     func increaseScore() {

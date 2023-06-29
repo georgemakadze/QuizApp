@@ -70,13 +70,8 @@ class LoginViewController: UIViewController {
         super.viewDidLoad()
         view.backgroundColor = Constants.View.backgroundColor
         loginTextView.delegate = self
-        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
-        view.addGestureRecognizer(tap)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
-        
+        setupTapGestureRecognizer()
+        registerKeyboardNotifications()
         setupCoverImageViewConstraints()
         setupLoginTextViewConstraints()
         setupStartButton()
@@ -86,6 +81,17 @@ class LoginViewController: UIViewController {
     
     @objc func dismissKeyboard() {
         view.endEditing(true)
+    }
+    
+    private func setupTapGestureRecognizer() {
+        let tap: UITapGestureRecognizer = UITapGestureRecognizer(target: self, action: #selector(self.dismissKeyboard))
+        view.addGestureRecognizer(tap)
+    }
+    
+    private func registerKeyboardNotifications() {
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow(notification:)), name: UIResponder.keyboardWillShowNotification, object: nil)
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide(notification:)), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
     
     @objc func startButtonTapped() {
@@ -166,6 +172,15 @@ extension LoginViewController: UITextFieldDelegate {
         textField.textAlignment = .left
         textField.textColor = .black
         textField.placeholder = nil
+    }
+    
+    func textFieldDidChangeSelection(_ textField: UITextField) {
+        if textField.text?.isEmpty ?? true {
+            textField.placeholder = Constants.LoginTextView.text
+            textField.textAlignment = .center
+        } else {
+            textField.textAlignment = .left
+        }
     }
 }
 

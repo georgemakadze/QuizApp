@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct SubjectResult: Hashable {
+struct SubjectResult {
     var icon: String
     var name: String
     var description: String

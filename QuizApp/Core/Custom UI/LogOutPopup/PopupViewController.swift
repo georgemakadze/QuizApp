@@ -10,6 +10,7 @@ import UIKit
 
 protocol PopupViewControllerDelegate: AnyObject {
     func didTapYesButton()
+    func didTapNoButton()
 }
 
 class PopupViewController: UIViewController {
@@ -81,6 +82,7 @@ class PopupViewController: UIViewController {
     }
     
     @objc func noButtonTapped() {
+        delegate?.didTapNoButton()
         dismiss(animated: true, completion: nil)
     }
     

@@ -19,7 +19,6 @@ class QuizViewController: UIViewController {
         return quizProgressView
     }()
     
-    
     private lazy var subjectTableView: UITableView =  {
         let subjectTableView = UITableView()
         subjectTableView.separatorStyle = .none
@@ -81,8 +80,8 @@ class QuizViewController: UIViewController {
     // MARK: - Actions
     func setupNavigationController() {
         navigationItem.setHidesBackButton(true, animated: false)
-        navigationItem.title = "პროგრამირება"
-        let rightBarButtonItem = UIBarButtonItem(title: "X", style: .plain, target: self, action: #selector(rightBarButtonTapped))
+        navigationItem.title = Constants.NavigationItem.title
+        let rightBarButtonItem = UIBarButtonItem(title: Constants.NavigationItem.button, style: .plain, target: self, action: #selector(rightBarButtonTapped))
         rightBarButtonItem.tintColor = .black
         navigationItem.rightBarButtonItem = rightBarButtonItem
     }
@@ -182,6 +181,9 @@ extension QuizViewController: PopupViewControllerDelegate {
         dismiss(animated: true, completion: nil)
         navigationController?.popViewController(animated: true)
     }
+    func didTapNoButton() {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 // MARK: - FinishPopupControllerDelegate
@@ -276,6 +278,11 @@ private extension QuizViewController {
             static let bottomAnchor: CGFloat = -8
             static let topAnchor: CGFloat = 16
             static let heightAnchor: CGFloat = 36
+        }
+        
+        enum NavigationItem {
+            static let title = "პროგრამირება"
+            static let button = "X"
         }
     }
 }

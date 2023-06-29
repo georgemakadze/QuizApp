@@ -166,6 +166,9 @@ extension HomeViewController: PopupViewControllerDelegate {
     func didTapYesButton() {
         window?.rootViewController = LoginViewController()
     }
+    func didTapNoButton() {
+        dismiss(animated: true, completion: nil)
+    }
 }
 
 // MARK: - UITableViewDataSource
