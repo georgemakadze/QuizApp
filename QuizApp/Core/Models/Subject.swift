@@ -7,10 +7,10 @@
 
 import Foundation
 
-struct Subject {
-    var icon: String
+struct Subject: Decodable {
+    var id: String
     var quizTitle: String
     var quizDescription: String
-    var quizQuestionCount: Int
+    var questionsCount: Int
     var questions: [Question]
 }

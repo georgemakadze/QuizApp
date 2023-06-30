@@ -12,7 +12,6 @@ class QuizViewController: UIViewController {
     
     //MARK: - Components
     private let quizViewModel: QuizViewModel
-    
     private let quizProgressView: QuizProgressView = {
         let quizProgressView = QuizProgressView()
         quizProgressView.translatesAutoresizingMaskIntoConstraints = false

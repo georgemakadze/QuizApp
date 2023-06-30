@@ -9,12 +9,14 @@ import Foundation
 
 class QuizViewModel {
     
+    private(set) var subjects: [Subject]
     private(set) var currentQuestionIndex: Int = 0
     private(set) var correctAnswer: Int = 0
     private(set) var questions: [Question]
     
-    init(questions: [Question]) {
+    init(questions: [Question], subjects: [Subject]) {
         self.questions = questions
+        self.subjects = subjects
     }
     
     var progress: Float {

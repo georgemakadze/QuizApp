@@ -74,6 +74,7 @@ class HomeViewController: UIViewController {
         setupTableViewConstraints()
         setupLogOutButtonConstraints()
         setupDividerViewConstraints()
+        homeViewModel.readJSONFile()
     }
     
     func setupNavigationController() {
@@ -191,7 +192,7 @@ extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedSubject = homeViewModel.subjects[indexPath.row]
-        let quizViewModel = QuizViewModel(questions: selectedSubject.questions)
+        let quizViewModel = QuizViewModel(questions: selectedSubject.questions, subjects: homeViewModel.subjects)
         let quizController = QuizViewController(with: quizViewModel)
         navigationController?.pushViewController(quizController, animated: true)
     }

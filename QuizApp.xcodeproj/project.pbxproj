@@ -9,6 +9,7 @@
 /* Begin PBXBuildFile section */
 		0E7FA3B62A4979A100FC4DCB /* HomeViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7FA3B52A4979A100FC4DCB /* HomeViewModel.swift */; };
 		0E7FA3B82A49962700FC4DCB /* SubjectResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7FA3B72A49962700FC4DCB /* SubjectResult.swift */; };
+		0E7FA3BC2A4DAF8F00FC4DCB /* quizzes.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E7FA3BB2A4D9ED000FC4DCB /* quizzes.json */; };
 		0EC0BD072A43509700B562C3 /* GPAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC0BD062A43509700B562C3 /* GPAView.swift */; };
 		0EC0BD0B2A4466C900B562C3 /* QuizProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC0BD0A2A4466C900B562C3 /* QuizProgressView.swift */; };
 		0EC0BD0E2A46E1CA00B562C3 /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC0BD0D2A46E1CA00B562C3 /* QuizViewModel.swift */; };
@@ -36,6 +37,7 @@
 /* Begin PBXFileReference section */
 		0E7FA3B52A4979A100FC4DCB /* HomeViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeViewModel.swift; sourceTree = "<group>"; };
 		0E7FA3B72A49962700FC4DCB /* SubjectResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectResult.swift; sourceTree = "<group>"; };
+		0E7FA3BB2A4D9ED000FC4DCB /* quizzes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = quizzes.json; sourceTree = "<group>"; };
 		0EC0BD062A43509700B562C3 /* GPAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPAView.swift; sourceTree = "<group>"; };
 		0EC0BD0A2A4466C900B562C3 /* QuizProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizProgressView.swift; sourceTree = "<group>"; };
 		0EC0BD0D2A46E1CA00B562C3 /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
@@ -136,6 +138,7 @@
 		0EDD08B02A2B211700FF282B /* Resource */ = {
 			isa = PBXGroup;
 			children = (
+				0E7FA3BB2A4D9ED000FC4DCB /* quizzes.json */,
 				0EDD08A52A2A0B5000FF282B /* Assets.xcassets */,
 			);
 			path = Resource;
@@ -365,6 +368,7 @@
 			files = (
 				0EDD08A92A2A0B5000FF282B /* LaunchScreen.storyboard in Resources */,
 				0EDD08A62A2A0B5000FF282B /* Assets.xcassets in Resources */,
+				0E7FA3BC2A4DAF8F00FC4DCB /* quizzes.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

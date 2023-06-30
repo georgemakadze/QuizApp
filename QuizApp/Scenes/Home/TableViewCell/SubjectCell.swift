@@ -117,7 +117,7 @@ class SubjectCell: UITableViewCell {
     }
     
     func configure(with subject: Subject) {
-        iconImageView.image = UIImage(named: subject.icon)
+        //iconImageView.image = UIImage(named: subject.icon)
         nameLabel.text = subject.quizTitle
         descriptionLabel.text = subject.quizDescription
     }
