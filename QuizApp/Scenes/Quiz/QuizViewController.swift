@@ -79,7 +79,7 @@ class QuizViewController: UIViewController {
     // MARK: - Actions
     func setupNavigationController() {
         navigationItem.setHidesBackButton(true, animated: false)
-        navigationItem.title = Constants.NavigationItem.title
+        navigationItem.title = quizViewModel.subject.quizTitle
         let rightBarButtonItem = UIBarButtonItem(title: Constants.NavigationItem.button, style: .plain, target: self, action: #selector(rightBarButtonTapped))
         rightBarButtonItem.tintColor = .black
         navigationItem.rightBarButtonItem = rightBarButtonItem
