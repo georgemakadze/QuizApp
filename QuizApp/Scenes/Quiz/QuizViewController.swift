@@ -96,6 +96,7 @@ class QuizViewController: UIViewController {
         quizViewModel.loadNextQuestion()
         
         if quizViewModel.shouldFinishQuiz {
+            nextButton.setImage(Constants.NextButton.finishImage, for: .normal)
             let finishPopupViewController = FinishPopupController()
             finishPopupViewController.delegate = self
             finishPopupViewController.modalPresentationStyle = .overCurrentContext
@@ -258,6 +259,7 @@ private extension QuizViewController {
         
         enum NextButton {
             static let image = UIImage(named: "Next")
+            static let finishImage = UIImage(named: "finishButton")
             static let topAnchor: CGFloat = 22
             static let leadingAnchor: CGFloat = 16
             static let trailingAnchor: CGFloat = -16
