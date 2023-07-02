@@ -103,7 +103,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc func logOutButtonTapped() {
-        let popupViewController = PopupViewController()
+        let popupViewController = PopupViewController(withText: Constants.Popup.text)
         popupViewController.delegate = self
         popupViewController.modalPresentationStyle = .overCurrentContext
         present(popupViewController, animated: true, completion: nil)
@@ -256,6 +256,10 @@ private extension HomeViewController {
             static let backgroundColor = UIColor(hex: "F1F1F1")
             static let bottomAnchor: CGFloat = -4
             static let heightAnchor: CGFloat = 1
+        }
+        
+        enum Popup {
+            static let text = "ნამდვილად გსურს გასვლა?"
         }
     }
 }

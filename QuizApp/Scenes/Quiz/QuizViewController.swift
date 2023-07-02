@@ -106,7 +106,7 @@ class QuizViewController: UIViewController {
     }
     
     @objc private func rightBarButtonTapped() {
-        let popupViewController = PopupViewController()
+        let popupViewController = PopupViewController(withText: Constants.Popup.text)
         popupViewController.delegate = self
         popupViewController.modalPresentationStyle = .overCurrentContext
         present(popupViewController, animated: true, completion: nil)
@@ -282,6 +282,10 @@ private extension QuizViewController {
         enum NavigationItem {
             static let title = "პროგრამირება"
             static let button = "X"
+        }
+        
+        enum Popup {
+            static let text = "ნამდვილად გსურს ქვიზის შეწყვეტა?"
         }
     }
 }
