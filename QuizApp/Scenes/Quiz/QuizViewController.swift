@@ -66,7 +66,7 @@ class QuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        questionLabel.text = quizViewModel.questions[quizViewModel.currentQuestionIndex].questionTitle
+        questionLabel.text = quizViewModel.subject.questions[quizViewModel.currentQuestionIndex].questionTitle
         setupNavigationController()
         setupQuestionBackgroundConstrains()
         setupTableViewConstraints()
@@ -166,7 +166,7 @@ class QuizViewController: UIViewController {
     }
     
     func setCorrectCellAppearance() {
-        guard let correctIndex = quizViewModel.questions[quizViewModel.currentQuestionIndex].answers.firstIndex(where: { $0 == quizViewModel.currentQuestion.correctAnswer  }) else {
+        guard let correctIndex = quizViewModel.subject.questions[quizViewModel.currentQuestionIndex].answers.firstIndex(where: { $0 == quizViewModel.currentQuestion.correctAnswer  }) else {
             return
         }
         let correctCell = subjectTableView.cellForRow(at: IndexPath(row: correctIndex, section: 0)) as? AnswerCell
@@ -196,12 +196,12 @@ extension QuizViewController: FinishPopupControllerDelegate {
 // MARK: - UITableViewDataSource
 extension QuizViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        quizViewModel.questions[quizViewModel.currentQuestionIndex].answers.count
+        quizViewModel.subject.questions[quizViewModel.currentQuestionIndex].answers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AnswerCell.reuseIdentifier, for: indexPath) as! AnswerCell
-        let currentQuestion = quizViewModel.questions[quizViewModel.currentQuestionIndex]
+        let currentQuestion = quizViewModel.subject.questions[quizViewModel.currentQuestionIndex]
         let currentAnswer = currentQuestion.answers[indexPath.row]
         cell.configure(with: currentAnswer)
         return cell

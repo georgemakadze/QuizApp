@@ -12,26 +12,25 @@ class QuizViewModel {
     private(set) var subject: Subject
     private(set) var currentQuestionIndex: Int = 0
     private(set) var correctAnswer: Int = 0
-    private(set) var questions: [Question]
     
-    init(questions: [Question], subject: Subject) {
-        self.questions = questions
+    init(subject: Subject) {
+        
         self.subject = subject
     }
     
     var progress: Float {
-        Float((currentQuestionIndex + 1)) / Float(questions.count)
+        Float((currentQuestionIndex + 1)) / Float(subject.questionsCount)
     }
     
     var questionNumberLabel: String {
-        "\(currentQuestionIndex + 1)/\(questions.count)"
+        "\(currentQuestionIndex + 1)/\(subject.questionsCount)"
     }
     var currentQuestion: Question {
-        questions[currentQuestionIndex]
+        subject.questions[currentQuestionIndex]
     }
     
     var shouldFinishQuiz: Bool {
-        currentQuestionIndex == questions.count
+        currentQuestionIndex == subject.questionsCount
     }
     
     var currentScoreText: String {
@@ -39,15 +38,15 @@ class QuizViewModel {
     }
     
     func loadNextQuestion() {
-        guard currentQuestionIndex >= 0 && currentQuestionIndex < questions.count else {
+        guard currentQuestionIndex >= 0 && currentQuestionIndex < subject.questionsCount else {
             return
         }
         currentQuestionIndex += 1
     }
     
     func isCorrectAnswer(index: Int) -> Bool {
-        let selectedAnswer = questions[currentQuestionIndex].answers[index]
-        let correctAnswer = questions[currentQuestionIndex].correctAnswer
+        let selectedAnswer = subject.questions[currentQuestionIndex].answers[index]
+        let correctAnswer = subject.questions[currentQuestionIndex].correctAnswer
         return selectedAnswer == correctAnswer
     }
     
