@@ -49,7 +49,10 @@ class QuizViewController: UIViewController {
     
     private lazy var nextButton: UIButton = {
         let nextButton = UIButton()
-        nextButton.setImage(Constants.NextButton.image, for: .normal)
+        nextButton.setTitle(Constants.NextButton.title, for: .normal)
+        nextButton.backgroundColor = Constants.NextButton.backgroundColor
+        nextButton.titleLabel?.font = Constants.NextButton.font
+        nextButton.layer.cornerRadius = Constants.NextButton.cornerRadius
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return nextButton
     }()
@@ -96,7 +99,6 @@ class QuizViewController: UIViewController {
         quizViewModel.loadNextQuestion()
         
         if quizViewModel.shouldFinishQuiz {
-            nextButton.setImage(Constants.NextButton.finishImage, for: .normal)
             let finishPopupViewController = FinishPopupController()
             finishPopupViewController.delegate = self
             finishPopupViewController.modalPresentationStyle = .overCurrentContext
@@ -142,7 +144,8 @@ class QuizViewController: UIViewController {
             nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.NextButton.leadingAnchor),
             nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.NextButton.trailingAnchor),
             nextButton.topAnchor.constraint(equalTo: subjectTableView.bottomAnchor, constant: Constants.NextButton.topAnchor),
-            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.NextButton.bottomAnchor)
+            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.NextButton.bottomAnchor),
+            nextButton.heightAnchor.constraint(equalToConstant: Constants.NextButton.heightAnchor)
         ])
     }
     
@@ -258,12 +261,15 @@ private extension QuizViewController {
         }
         
         enum NextButton {
-            static let image = UIImage(named: "Next")
-            static let finishImage = UIImage(named: "finishButton")
+            static let title = "შემდეგი"
+            static let font = UIFont.boldSystemFont(ofSize: 16)
+            static let backgroundColor = UIColor(hex: "FFC44A")
+            static let cornerRadius: CGFloat = 22
             static let topAnchor: CGFloat = 22
             static let leadingAnchor: CGFloat = 16
             static let trailingAnchor: CGFloat = -16
             static let bottomAnchor: CGFloat = -40
+            static let heightAnchor: CGFloat = 60
         }
         
         enum TableView {
