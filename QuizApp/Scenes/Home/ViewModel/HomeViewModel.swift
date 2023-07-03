@@ -8,9 +8,24 @@
 import Foundation
 
 class HomeViewModel {
-    
     var subjects: [Subject] = []
-    func loadJSONFile() {
-        self.subjects = JSONLoader.loadSubjectsFromJSONFile()
+    
+    func loadJSONFile(completion: (() -> Void)? = nil) {
+        JSONLoader.loadJSONData { [weak self] (data) in
+            guard let data = data else {
+                return
+            }
+            
+            do {
+                let decoder = JSONDecoder()
+                let subjects = try decoder.decode([Subject].self, from: data)
+                DispatchQueue.main.async {
+                    self?.subjects = subjects
+                    completion?()
+                }
+            } catch {
+                
+            }
+        }
     }
 }

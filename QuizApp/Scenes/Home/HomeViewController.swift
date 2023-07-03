@@ -74,7 +74,10 @@ class HomeViewController: UIViewController {
         setupTableViewConstraints()
         setupLogOutButtonConstraints()
         setupDividerViewConstraints()
-        homeViewModel.loadJSONFile()
+        homeViewModel.loadJSONFile() { [weak self] in
+            self?.subjectTableView.reloadData()
+            
+        }
     }
     
     func setupNavigationController() {

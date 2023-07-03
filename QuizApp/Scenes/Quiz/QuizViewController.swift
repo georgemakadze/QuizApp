@@ -93,6 +93,7 @@ class QuizViewController: UIViewController {
         quizProgressView.questionNumberLabel.text = quizViewModel.questionNumberLabel
         quizProgressView.progressView.setProgress(quizViewModel.progress, animated: true)
         subjectTableView.reloadData()
+        nextButton.isEnabled = false
     }
     
     @objc func nextButtonTapped() {
@@ -236,6 +237,7 @@ extension QuizViewController: UITableViewDelegate {
         } else {
             setCorrectCellAppearance()
         }
+        nextButton.isEnabled = true
     }
 }
 

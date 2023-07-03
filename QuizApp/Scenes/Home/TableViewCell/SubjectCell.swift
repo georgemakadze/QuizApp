@@ -50,7 +50,7 @@ class SubjectCell: UITableViewCell {
         ellipseImage.translatesAutoresizingMaskIntoConstraints = false
         return ellipseImage
     }()
-
+    
     
     override init(style: UITableViewCell.CellStyle, reuseIdentifier: String?) {
         super.init(style: style, reuseIdentifier: reuseIdentifier)
@@ -86,7 +86,9 @@ class SubjectCell: UITableViewCell {
         NSLayoutConstraint.activate([
             iconImageView.topAnchor.constraint(equalTo: containerView.topAnchor, constant: Constants.IconImageView.topAnchor),
             iconImageView.bottomAnchor.constraint(equalTo: containerView.bottomAnchor, constant: Constants.IconImageView.bottomAnchor),
-            iconImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: Constants.IconImageView.leadingAnchor)
+            iconImageView.leadingAnchor.constraint(equalTo: containerView.leadingAnchor, constant: Constants.IconImageView.leadingAnchor),
+            iconImageView.widthAnchor.constraint(equalToConstant: Constants.IconImageView.widthAnchor),
+            iconImageView.heightAnchor.constraint(equalToConstant: Constants.IconImageView.heightAnchor)
         ])
     }
     
@@ -117,7 +119,14 @@ class SubjectCell: UITableViewCell {
     }
     
     func configure(with subject: Subject) {
-        //iconImageView.image = UIImage(named: subject.icon)
+        if let url = URL(string: subject.quizIcon) {
+            ImageDownloader.downloadImage(from: url) { [weak self] (image) in
+                DispatchQueue.main.async {
+                    self?.iconImageView.image = image
+                }
+            }
+        }
+        
         nameLabel.text = subject.quizTitle
         descriptionLabel.text = subject.quizDescription
     }
@@ -142,6 +151,8 @@ private extension SubjectCell {
             static let topAnchor: CGFloat = 22
             static let bottomAnchor: CGFloat = -22
             static let leadingAnchor: CGFloat = 29.5
+            static let widthAnchor: CGFloat = 62
+            static let heightAnchor: CGFloat = 53
         }
         
         enum NameLabel {

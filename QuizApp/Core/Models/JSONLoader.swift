@@ -8,22 +8,23 @@
 import Foundation
 
 struct JSONLoader {
-    
-    static func loadSubjectsFromJSONFile() -> [Subject] {
-        var subjects: [Subject] = []
-        
-        if let url = Bundle.main.url(forResource: "quizzes", withExtension: "json") {
-            do {
-                let data = try Data(contentsOf: url)
-                let decoder = JSONDecoder()
-                subjects = try decoder.decode([Subject].self, from: data)
-            } catch {
-                print("Error decoding JSON: \(error)")
-            }
-        } else {
-            print("JSON file not found")
+    static func loadJSONData(completion: @escaping (Data?) -> Void) {
+        let mockyURLString = "https://run.mocky.io/v3/8ade4e0b-bee1-4eae-a98b-47edeea68324"
+        guard let url = URL(string: mockyURLString) else {
+            completion(nil)
+            return
         }
         
-        return subjects
+        let session = URLSession.shared
+        let task = session.dataTask(with: url) { (data, response, error) in
+            guard let data = data else {
+                completion(nil)
+                return
+            }
+            
+            completion(data)
+        }
+        
+        task.resume()
     }
 }

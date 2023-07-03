@@ -13,4 +13,5 @@ struct Subject: Decodable {
     var quizDescription: String
     var questionsCount: Int
     var questions: [Question]
+    var quizIcon: String
 }

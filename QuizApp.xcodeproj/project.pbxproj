@@ -11,6 +11,7 @@
 		0E7FA3B82A49962700FC4DCB /* SubjectResult.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7FA3B72A49962700FC4DCB /* SubjectResult.swift */; };
 		0E7FA3BC2A4DAF8F00FC4DCB /* quizzes.json in Resources */ = {isa = PBXBuildFile; fileRef = 0E7FA3BB2A4D9ED000FC4DCB /* quizzes.json */; };
 		0E7FA3E12A500D1A00FC4DCB /* JSONLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7FA3E02A500D1A00FC4DCB /* JSONLoader.swift */; };
+		0E7FA3E32A53107300FC4DCB /* ImageDownloader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0E7FA3E22A53107300FC4DCB /* ImageDownloader.swift */; };
 		0EC0BD072A43509700B562C3 /* GPAView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC0BD062A43509700B562C3 /* GPAView.swift */; };
 		0EC0BD0B2A4466C900B562C3 /* QuizProgressView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC0BD0A2A4466C900B562C3 /* QuizProgressView.swift */; };
 		0EC0BD0E2A46E1CA00B562C3 /* QuizViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0EC0BD0D2A46E1CA00B562C3 /* QuizViewModel.swift */; };
@@ -40,6 +41,7 @@
 		0E7FA3B72A49962700FC4DCB /* SubjectResult.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SubjectResult.swift; sourceTree = "<group>"; };
 		0E7FA3BB2A4D9ED000FC4DCB /* quizzes.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = quizzes.json; sourceTree = "<group>"; };
 		0E7FA3E02A500D1A00FC4DCB /* JSONLoader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = JSONLoader.swift; sourceTree = "<group>"; };
+		0E7FA3E22A53107300FC4DCB /* ImageDownloader.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageDownloader.swift; sourceTree = "<group>"; };
 		0EC0BD062A43509700B562C3 /* GPAView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GPAView.swift; sourceTree = "<group>"; };
 		0EC0BD0A2A4466C900B562C3 /* QuizProgressView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizProgressView.swift; sourceTree = "<group>"; };
 		0EC0BD0D2A46E1CA00B562C3 /* QuizViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuizViewModel.swift; sourceTree = "<group>"; };
@@ -232,6 +234,7 @@
 				0EDD08CE2A2F499700FF282B /* Question.swift */,
 				0E7FA3B72A49962700FC4DCB /* SubjectResult.swift */,
 				0E7FA3E02A500D1A00FC4DCB /* JSONLoader.swift */,
+				0E7FA3E22A53107300FC4DCB /* ImageDownloader.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -392,6 +395,7 @@
 				0EC0BD072A43509700B562C3 /* GPAView.swift in Sources */,
 				0EDD08DD2A3B9A1100FF282B /* UIViewController+Extensions.swift in Sources */,
 				0EC0BD0E2A46E1CA00B562C3 /* QuizViewModel.swift in Sources */,
+				0E7FA3E32A53107300FC4DCB /* ImageDownloader.swift in Sources */,
 				0EDD08A42A2A0B4E00FF282B /* QuizApp.xcdatamodeld in Sources */,
 				0EDD08BF2A2E021200FF282B /* SubjectCell.swift in Sources */,
 				0E7FA3B82A49962700FC4DCB /* SubjectResult.swift in Sources */,
@@ -543,6 +547,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "QuizApp/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
@@ -569,6 +574,7 @@
 				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
 				CODE_SIGN_STYLE = Automatic;
 				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = "";
 				GENERATE_INFOPLIST_FILE = YES;
 				INFOPLIST_FILE = "QuizApp/Supporting Files/Info.plist";
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
