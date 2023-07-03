@@ -98,6 +98,10 @@ class QuizViewController: UIViewController {
     @objc func nextButtonTapped() {
         quizViewModel.loadNextQuestion()
         
+        if quizViewModel.lastQuestion {
+            nextButton.setTitle(Constants.NextButton.finishTitle, for: .normal)
+        }
+        
         if quizViewModel.shouldFinishQuiz {
             let finishPopupViewController = FinishPopupController()
             finishPopupViewController.delegate = self
@@ -262,6 +266,7 @@ private extension QuizViewController {
         
         enum NextButton {
             static let title = "შემდეგი"
+            static let finishTitle = "დასრულება"
             static let font = UIFont.boldSystemFont(ofSize: 16)
             static let backgroundColor = UIColor(hex: "FFC44A")
             static let cornerRadius: CGFloat = 22

@@ -12,10 +12,15 @@ class QuizViewModel {
     private(set) var subject: Subject
     private(set) var currentQuestionIndex: Int = 0
     private(set) var correctAnswer: Int = 0
+    private(set) var lastPreviousQuestionIndex: Int = -1
     
     init(subject: Subject) {
         
         self.subject = subject
+    }
+    
+    var lastQuestion: Bool {
+        (currentQuestionIndex + 1) == subject.questionsCount
     }
     
     var progress: Float {
