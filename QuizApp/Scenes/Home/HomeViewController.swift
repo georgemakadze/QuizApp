@@ -76,13 +76,12 @@ class HomeViewController: UIViewController {
         setupDividerViewConstraints()
         homeViewModel.loadJSONFile() { [weak self] in
             self?.subjectTableView.reloadData()
-            
         }
     }
     
     func setupNavigationController() {
         let titleLabel = UILabel()
-        titleLabel.text = Constants.TitleLabel.text
+        titleLabel.text = "გამარჯობა,\(homeViewModel.username)"
         titleLabel.font = Constants.TitleLabel.font
         titleLabel.textColor = Constants.TitleLabel.textColor
         
@@ -250,8 +249,7 @@ private extension HomeViewController {
         }
         
         enum TitleLabel {
-            static let text = "გამარჯობა,ირაკლი"
-            static let font: UIFont = .systemFont(ofSize: 16)
+            static let font = UIFont.boldSystemFont(ofSize: 16)
             static let textColor = UIColor(hex: "FFC44A")
         }
         

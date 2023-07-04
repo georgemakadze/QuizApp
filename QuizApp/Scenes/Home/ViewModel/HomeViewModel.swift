@@ -9,6 +9,15 @@ import Foundation
 
 class HomeViewModel {
     var subjects: [Subject] = []
+    var username: String
+    
+    init(username: String) {
+        self.username = username
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     func loadJSONFile(completion: (() -> Void)? = nil) {
         JSONLoader.loadJSONData { [weak self] (data) in
