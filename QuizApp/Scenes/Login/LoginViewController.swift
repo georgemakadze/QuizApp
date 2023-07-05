@@ -10,6 +10,8 @@ import UIKit
 class LoginViewController: UIViewController {
     
     //MARK: - Components
+    private let loginViewModel = LoginViewModel()
+    
     private let coverImageView: UIImageView = {
         let coverImageView = UIImageView()
         coverImageView.image = Constants.CoverImageView.image
@@ -95,9 +97,20 @@ class LoginViewController: UIViewController {
     }
     
     @objc func startButtonTapped() {
-        let homeViewController = HomeViewController(with: HomeViewModel())
-        let navVC = UINavigationController(rootViewController: homeViewController)
-        window?.rootViewController = navVC
+        guard let username = loginTextView.text else {
+            return
+        }
+        
+        if loginViewModel.validateUsername(username) {
+            let homeViewModel = HomeViewModel(username: username)
+            let homeViewController = HomeViewController(with: homeViewModel)
+            let navVC = UINavigationController(rootViewController: homeViewController)
+            window?.rootViewController = navVC
+        } else {
+            let alertController = UIAlertController(title: "არასწორი მომხმარებლის სახელი", message: "Გთხოვთ შეიყვანოთ სწორი მომხმარებლის სახელი.", preferredStyle: .alert)
+            alertController.addAction(UIAlertAction(title: "OK", style: .default, handler: nil))
+            present(alertController, animated: true, completion: nil)
+        }
     }
     
     @objc private func keyboardWillShow(notification: NSNotification) {

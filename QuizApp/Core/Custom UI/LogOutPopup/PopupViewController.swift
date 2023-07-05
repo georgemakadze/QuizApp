@@ -26,7 +26,6 @@ class PopupViewController: UIViewController {
     
     private let popupLabel: UILabel = {
         let popupLabel = UILabel()
-        popupLabel.text = Constants.PopupLabel.text
         popupLabel.textAlignment = .center
         popupLabel.backgroundColor = Constants.PopupLabel.backgroundColor
         popupLabel.numberOfLines = Constants.PopupLabel.numberOfLines
@@ -72,9 +71,10 @@ class PopupViewController: UIViewController {
         fatalError("error!")
     }
     
-    init() {
-        super.init(nibName: nil, bundle: nil)
-    }
+    init(withText text: String) {
+           super.init(nibName: nil, bundle: nil)
+           popupLabel.text = text
+       }
     
     @objc func yesButtonTapped() {
         delegate?.didTapYesButton()

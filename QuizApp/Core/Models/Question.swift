@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Question {
+struct Question: Decodable {
     let questionTitle : String
     let answers: [String]
     let correctAnswer: String

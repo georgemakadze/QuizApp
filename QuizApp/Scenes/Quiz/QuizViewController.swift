@@ -12,7 +12,6 @@ class QuizViewController: UIViewController {
     
     //MARK: - Components
     private let quizViewModel: QuizViewModel
-    
     private let quizProgressView: QuizProgressView = {
         let quizProgressView = QuizProgressView()
         quizProgressView.translatesAutoresizingMaskIntoConstraints = false
@@ -50,7 +49,10 @@ class QuizViewController: UIViewController {
     
     private lazy var nextButton: UIButton = {
         let nextButton = UIButton()
-        nextButton.setImage(Constants.NextButton.image, for: .normal)
+        nextButton.setTitle(Constants.NextButton.title, for: .normal)
+        nextButton.backgroundColor = Constants.NextButton.backgroundColor
+        nextButton.titleLabel?.font = Constants.NextButton.font
+        nextButton.layer.cornerRadius = Constants.NextButton.cornerRadius
         nextButton.addTarget(self, action: #selector(nextButtonTapped), for: .touchUpInside)
         return nextButton
     }()
@@ -67,7 +69,7 @@ class QuizViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         view.backgroundColor = .white
-        questionLabel.text = quizViewModel.questions[quizViewModel.currentQuestionIndex].questionTitle
+        questionLabel.text = quizViewModel.subject.questions[quizViewModel.currentQuestionIndex].questionTitle
         setupNavigationController()
         setupQuestionBackgroundConstrains()
         setupTableViewConstraints()
@@ -80,7 +82,7 @@ class QuizViewController: UIViewController {
     // MARK: - Actions
     func setupNavigationController() {
         navigationItem.setHidesBackButton(true, animated: false)
-        navigationItem.title = Constants.NavigationItem.title
+        navigationItem.title = quizViewModel.subject.quizTitle
         let rightBarButtonItem = UIBarButtonItem(title: Constants.NavigationItem.button, style: .plain, target: self, action: #selector(rightBarButtonTapped))
         rightBarButtonItem.tintColor = .black
         navigationItem.rightBarButtonItem = rightBarButtonItem
@@ -91,10 +93,15 @@ class QuizViewController: UIViewController {
         quizProgressView.questionNumberLabel.text = quizViewModel.questionNumberLabel
         quizProgressView.progressView.setProgress(quizViewModel.progress, animated: true)
         subjectTableView.reloadData()
+        nextButton.isEnabled = false
     }
     
     @objc func nextButtonTapped() {
         quizViewModel.loadNextQuestion()
+        
+        if quizViewModel.lastQuestion {
+            nextButton.setTitle(Constants.NextButton.finishTitle, for: .normal)
+        }
         
         if quizViewModel.shouldFinishQuiz {
             let finishPopupViewController = FinishPopupController()
@@ -107,7 +114,7 @@ class QuizViewController: UIViewController {
     }
     
     @objc private func rightBarButtonTapped() {
-        let popupViewController = PopupViewController()
+        let popupViewController = PopupViewController(withText: Constants.Popup.text)
         popupViewController.delegate = self
         popupViewController.modalPresentationStyle = .overCurrentContext
         present(popupViewController, animated: true, completion: nil)
@@ -142,7 +149,8 @@ class QuizViewController: UIViewController {
             nextButton.leadingAnchor.constraint(equalTo: view.leadingAnchor, constant: Constants.NextButton.leadingAnchor),
             nextButton.trailingAnchor.constraint(equalTo: view.trailingAnchor, constant: Constants.NextButton.trailingAnchor),
             nextButton.topAnchor.constraint(equalTo: subjectTableView.bottomAnchor, constant: Constants.NextButton.topAnchor),
-            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.NextButton.bottomAnchor)
+            nextButton.bottomAnchor.constraint(equalTo: view.bottomAnchor, constant: Constants.NextButton.bottomAnchor),
+            nextButton.heightAnchor.constraint(equalToConstant: Constants.NextButton.heightAnchor)
         ])
     }
     
@@ -167,7 +175,7 @@ class QuizViewController: UIViewController {
     }
     
     func setCorrectCellAppearance() {
-        guard let correctIndex = quizViewModel.questions[quizViewModel.currentQuestionIndex].answers.firstIndex(where: { $0 == quizViewModel.currentQuestion.correctAnswer  }) else {
+        guard let correctIndex = quizViewModel.subject.questions[quizViewModel.currentQuestionIndex].answers.firstIndex(where: { $0 == quizViewModel.currentQuestion.correctAnswer  }) else {
             return
         }
         let correctCell = subjectTableView.cellForRow(at: IndexPath(row: correctIndex, section: 0)) as? AnswerCell
@@ -197,12 +205,12 @@ extension QuizViewController: FinishPopupControllerDelegate {
 // MARK: - UITableViewDataSource
 extension QuizViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        quizViewModel.questions[quizViewModel.currentQuestionIndex].answers.count
+        quizViewModel.subject.questions[quizViewModel.currentQuestionIndex].answers.count
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: AnswerCell.reuseIdentifier, for: indexPath) as! AnswerCell
-        let currentQuestion = quizViewModel.questions[quizViewModel.currentQuestionIndex]
+        let currentQuestion = quizViewModel.subject.questions[quizViewModel.currentQuestionIndex]
         let currentAnswer = currentQuestion.answers[indexPath.row]
         cell.configure(with: currentAnswer)
         return cell
@@ -229,6 +237,7 @@ extension QuizViewController: UITableViewDelegate {
         } else {
             setCorrectCellAppearance()
         }
+        nextButton.isEnabled = true
     }
 }
 
@@ -258,11 +267,16 @@ private extension QuizViewController {
         }
         
         enum NextButton {
-            static let image = UIImage(named: "Next")
+            static let title = "შემდეგი"
+            static let finishTitle = "დასრულება"
+            static let font = UIFont.boldSystemFont(ofSize: 16)
+            static let backgroundColor = UIColor(hex: "FFC44A")
+            static let cornerRadius: CGFloat = 22
             static let topAnchor: CGFloat = 22
             static let leadingAnchor: CGFloat = 16
             static let trailingAnchor: CGFloat = -16
             static let bottomAnchor: CGFloat = -40
+            static let heightAnchor: CGFloat = 60
         }
         
         enum TableView {
@@ -283,6 +297,10 @@ private extension QuizViewController {
         enum NavigationItem {
             static let title = "პროგრამირება"
             static let button = "X"
+        }
+        
+        enum Popup {
+            static let text = "ნამდვილად გსურს ქვიზის შეწყვეტა?"
         }
     }
 }

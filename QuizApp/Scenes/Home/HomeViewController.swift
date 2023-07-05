@@ -74,11 +74,14 @@ class HomeViewController: UIViewController {
         setupTableViewConstraints()
         setupLogOutButtonConstraints()
         setupDividerViewConstraints()
+        homeViewModel.loadJSONFile() { [weak self] in
+            self?.subjectTableView.reloadData()
+        }
     }
     
     func setupNavigationController() {
         let titleLabel = UILabel()
-        titleLabel.text = Constants.TitleLabel.text
+        titleLabel.text = "გამარჯობა,\(homeViewModel.username)"
         titleLabel.font = Constants.TitleLabel.font
         titleLabel.textColor = Constants.TitleLabel.textColor
         
@@ -102,7 +105,7 @@ class HomeViewController: UIViewController {
     }
     
     @objc func logOutButtonTapped() {
-        let popupViewController = PopupViewController()
+        let popupViewController = PopupViewController(withText: Constants.Popup.text)
         popupViewController.delegate = self
         popupViewController.modalPresentationStyle = .overCurrentContext
         present(popupViewController, animated: true, completion: nil)
@@ -191,7 +194,7 @@ extension HomeViewController: UITableViewDelegate {
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let selectedSubject = homeViewModel.subjects[indexPath.row]
-        let quizViewModel = QuizViewModel(questions: selectedSubject.questions)
+        let quizViewModel = QuizViewModel(subject: selectedSubject)
         let quizController = QuizViewController(with: quizViewModel)
         navigationController?.pushViewController(quizController, animated: true)
     }
@@ -246,8 +249,7 @@ private extension HomeViewController {
         }
         
         enum TitleLabel {
-            static let text = "გამარჯობა,ირაკლი"
-            static let font: UIFont = .systemFont(ofSize: 16)
+            static let font = UIFont.boldSystemFont(ofSize: 16)
             static let textColor = UIColor(hex: "FFC44A")
         }
         
@@ -255,6 +257,10 @@ private extension HomeViewController {
             static let backgroundColor = UIColor(hex: "F1F1F1")
             static let bottomAnchor: CGFloat = -4
             static let heightAnchor: CGFloat = 1
+        }
+        
+        enum Popup {
+            static let text = "ნამდვილად გსურს გასვლა?"
         }
     }
 }
